@@ -1,0 +1,15 @@
+language: "ja"
+reviews:
+  profile: "chill"
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  path_instructions:
+    - path: "demos/**/*.php"
+      instructions: |
+        This is a Be Framework demo. Review for:
+        - Proper use of Input/Being/Moment/Final pattern
+        - Stateless Reason classes
+        - Moment's be() method for self-completion
+        - Clear separation of concerns
