@@ -6,7 +6,7 @@ Be Frameworkにおける「Moment」の哲学的概念とコードでの役割�
 
 Momentは三つの側面を持つ：
 
-```
+```text
 Moment
   │
   ├── デュナミス（δύναμις）── 実現可能な潜在力
@@ -27,7 +27,7 @@ Moment
 
 ヘーゲル的な意味での「Moment」。全体を構成する必要不可欠な要素。
 
-```
+```text
 OrderConfirmed (Final/全体)
     ├── InventoryReserved  (Moment/契機)
     ├── PaymentCompleted   (Moment/契機)
@@ -40,7 +40,7 @@ OrderConfirmed (Final/全体)
 
 Momentは外部の存在ではなく、**Finalの内なる部分**。
 
-```
+```text
 Final ≠ 司令官 → 兵士（命令）
 Final = 全体が自身の部分を通じて自己完成する
 ```
@@ -68,7 +68,7 @@ final readonly class OrderConfirmed
 
 ### 人の例え：「話す」
 
-```
+```text
 「話す」という全体（Final）
     │
     ├── 呼吸（Moment）─── 自分の一部、発声の潜在力
@@ -85,7 +85,7 @@ final readonly class OrderConfirmed
 
 Momentの`be()`は同時に成立する必要がある。
 
-```
+```text
 在庫確保 ─┐
 決済完了 ─┼── 全て揃わないと「注文」として存在できない
 配送手配 ─┘
@@ -129,7 +129,7 @@ final readonly class CustomerInfo
 
 ## ライフサイクル
 
-```
+```text
 生まれて        → Reasonから生成される
 目的が与えられ  → クラス名が本質を定義
 成る            → be()で実現（Finalの自己完成の一環として）

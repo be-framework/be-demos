@@ -8,7 +8,7 @@ An ontological programming demo for order processing.
 
 Traditional object-oriented programming centers on "what to do" (Do). Be Framework centers on "what to be" (Be).
 
-```
+```text
 Traditional: OrderService.processOrder()  ← Verb (Do)
 Be:          OrderInput → OrderConfirmed  ← Noun transformation (Be)
 ```
@@ -34,7 +34,7 @@ Details: [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md)
 
 Order processing follows a "Diamond Metamorphosis" pattern where three parallel pipelines converge into one:
 
-```
+```text
                     OrderInput
                         │
         ┌───────────────┼───────────────┐
@@ -64,7 +64,7 @@ $moment->be();  // From potential to actual
 
 An essential constituent of the whole. Meaningless in isolation.
 
-```
+```text
 Inventory reservation alone is not an order
 Payment alone is not an order
 Shipping arrangement alone is not an order
@@ -189,7 +189,7 @@ composer install
 
 ## Directory Structure
 
-```
+```text
 src/
 ├── Input/           Intention (Dynamis)
 ├── Being/           Becoming (Dasein)

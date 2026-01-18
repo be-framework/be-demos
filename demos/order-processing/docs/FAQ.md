@@ -51,7 +51,7 @@ final class PaymentGateway
 
 Be Frameworkでは状態を巻き戻すのではなく、Momentの`be()`が呼ばれなければ実現されません。
 
-```
+```text
 Moment生成 → 仮の状態（デュナミス）
 be()呼び出し → 実現（エネルゲイア）
 be()呼ばれず → 実現されない（自然消滅）
@@ -160,7 +160,7 @@ final readonly class CustomerInfo
 
 Be Frameworkは自己生成のフレームワーク。Finalの`be()`呼び出しは命令ではなく自己完成です。
 
-```
+```text
 Final ≠ 司令官 → 兵士（命令）
 Final = 全体が自身の部分を通じて自己完成する
 ```

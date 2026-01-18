@@ -10,7 +10,7 @@ use Be\Framework\Attribute\Validate;
 /**
  * Card CVV/CVC
  *
- * @link https://schema.org/accountId
+ * @link https://schema.org/cvvCardSecurityCode
  */
 final class CardCvv
 {

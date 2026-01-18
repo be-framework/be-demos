@@ -113,14 +113,37 @@
         ]
       },
 
-      {"id": "doOrder", "type": "unsafe", "title": "Place Order", "tag": "choreography",
-        "rt": "#StockLocated #CardValidated #AddressValidated",
+      {"id": "doOrder", "type": "unsafe", "title": "Place Order (initiates parallel pipelines)", "tag": "choreography",
+        "doc": {"value": "Diamond Metamorphosis: initiates three parallel pipelines - inventory, payment, and shipping. See doLocateStock, doValidateCard, doValidateAddress for individual transitions."},
+        "rt": "#OrderConfirmed",
         "descriptor": [
           {"href": "#cartId"},
           {"href": "#customerId"},
           {"href": "#cardNumber"},
           {"href": "#cardExpiry"},
           {"href": "#cardCvv"},
+          {"href": "#postalCode"},
+          {"href": "#streetAddress"}
+        ]
+      },
+
+      {"id": "doLocateStock", "type": "unsafe", "title": "Locate Stock", "tag": "choreography inventory",
+        "rt": "#StockLocated",
+        "descriptor": [
+          {"href": "#productId"}
+        ]
+      },
+      {"id": "doValidateCard", "type": "unsafe", "title": "Validate Card", "tag": "choreography payment",
+        "rt": "#CardValidated",
+        "descriptor": [
+          {"href": "#cardNumber"},
+          {"href": "#cardExpiry"},
+          {"href": "#cardCvv"}
+        ]
+      },
+      {"id": "doValidateAddress", "type": "unsafe", "title": "Validate Address", "tag": "choreography shipping",
+        "rt": "#AddressValidated",
+        "descriptor": [
           {"href": "#postalCode"},
           {"href": "#streetAddress"}
         ]

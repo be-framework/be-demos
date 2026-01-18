@@ -4,7 +4,7 @@
 
 This demo showcases Be Framework's ability to handle complex, parallel processing pipelines that converge into a single final state - what we call **Diamond Metamorphosis**.
 
-```
+```text
                     OrderInput
                         │
                     doOrder
@@ -51,7 +51,7 @@ See: [docs/comparison/After_BeFramework.php](comparison/After_BeFramework.php)
 
 ## Directory Structure
 
-```
+```text
 src/
 ├── Input/           意図 (Intention)
 │   └── OrderInput.php

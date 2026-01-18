@@ -6,9 +6,6 @@ namespace Be\App\Semantic;
 
 use Be\Framework\Attribute\Validate;
 use Be\App\Exception\EmptyNameException;
-use Be\App\Exception\InvalidNameFormatException;
-use Be\App\Tag\English;
-use function preg_match;
 use function trim;
 
 /**

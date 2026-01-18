@@ -17,7 +17,7 @@ final class CardNumber
     #[Validate]
     public function validate(string $cardNumber): void
     {
-        $cleaned = preg_replace('/\D/', '', $cardNumber);
+        $cleaned = preg_replace('/\D/', '', $cardNumber) ?? '';
 
         if (strlen($cleaned) < 13 || strlen($cleaned) > 19) {
             throw new InvalidCardNumberException();

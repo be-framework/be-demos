@@ -23,7 +23,6 @@ final class CardExpiry
         }
 
         // Check if not expired
-        [$month, $year] = explode('/', $cardExpiry);
         $expiryDate = \DateTime::createFromFormat('m/y', $cardExpiry);
         $expiryDate->modify('last day of this month');
 

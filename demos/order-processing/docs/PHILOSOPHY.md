@@ -121,7 +121,7 @@ Reason classes embody *raison d'être* - the reason for being. Each encapsulates
 
 The Diamond Metamorphosis represents a synthesis of these philosophical concepts:
 
-```
+```text
      Dynamis (Input)
           │
     ┌─────┼─────┐
