@@ -1,0 +1,189 @@
+{
+  "$schema": "https://alps-io.github.io/schemas/alps.json",
+  "alps": {
+    "version": "1.0",
+    "title": "Order Processing - Diamond Metamorphosis Demo",
+    "doc": {"value": "Demonstrates parallel pipelines converging to a single Final state"},
+
+    "descriptor": [
+
+      {"id": "cartId", "type": "semantic", "title": "Cart ID", "def": "https://schema.org/identifier"},
+      {"id": "customerId", "type": "semantic", "title": "Customer ID", "def": "https://schema.org/identifier"},
+      {"id": "quantity", "type": "semantic", "title": "Quantity", "def": "https://schema.org/quantity"},
+      {"id": "productId", "type": "semantic", "title": "Product ID", "def": "https://schema.org/identifier"},
+      {"id": "cardNumber", "type": "semantic", "title": "Card Number"},
+      {"id": "cardExpiry", "type": "semantic", "title": "Card Expiry Date"},
+      {"id": "cardCvv", "type": "semantic", "title": "Card CVV"},
+      {"id": "postalCode", "type": "semantic", "title": "Postal Code", "def": "https://schema.org/postalCode"},
+      {"id": "streetAddress", "type": "semantic", "title": "Street Address", "def": "https://schema.org/streetAddress"},
+      {"id": "warehouseId", "type": "semantic", "title": "Warehouse ID"},
+      {"id": "carrierId", "type": "semantic", "title": "Carrier ID"},
+      {"id": "trackingNumber", "type": "semantic", "title": "Tracking Number"},
+      {"id": "authorizationCode", "type": "semantic", "title": "Payment Authorization Code"},
+      {"id": "reservationId", "type": "semantic", "title": "Inventory Reservation ID"},
+      {"id": "shippingRate", "type": "semantic", "title": "Shipping Rate", "def": "https://schema.org/price"},
+      {"id": "amount", "type": "semantic", "title": "Payment Amount", "def": "https://schema.org/price"},
+
+      {"id": "OrderInput", "type": "semantic", "title": "Order Input", "tag": "input state",
+        "descriptor": [
+          {"href": "#cartId"},
+          {"href": "#customerId"},
+          {"href": "#cardNumber"},
+          {"href": "#cardExpiry"},
+          {"href": "#cardCvv"},
+          {"href": "#postalCode"},
+          {"href": "#streetAddress"},
+          {"href": "#doOrder"}
+        ]
+      },
+
+      {"id": "StockLocated", "type": "semantic", "title": "Stock Located", "tag": "inventory being state",
+        "descriptor": [
+          {"href": "#productId"},
+          {"href": "#warehouseId"},
+          {"href": "#doCheckQuantity"}
+        ]
+      },
+      {"id": "QuantityChecked", "type": "semantic", "title": "Quantity Checked", "tag": "inventory being state",
+        "descriptor": [
+          {"href": "#productId"},
+          {"href": "#quantity"},
+          {"href": "#warehouseId"},
+          {"href": "#doReserveInventory"}
+        ]
+      },
+      {"id": "InventoryReserved", "type": "semantic", "title": "Inventory Reserved", "tag": "inventory moment state",
+        "descriptor": [
+          {"href": "#reservationId"},
+          {"href": "#productId"},
+          {"href": "#quantity"},
+          {"href": "#warehouseId"}
+        ]
+      },
+
+      {"id": "CardValidated", "type": "semantic", "title": "Card Validated", "tag": "payment being state",
+        "descriptor": [
+          {"href": "#cardNumber"},
+          {"href": "#cardExpiry"},
+          {"href": "#doAuthorizePayment"}
+        ]
+      },
+      {"id": "PaymentAuthorized", "type": "semantic", "title": "Payment Authorized", "tag": "payment being state",
+        "descriptor": [
+          {"href": "#authorizationCode"},
+          {"href": "#amount"},
+          {"href": "#doCapturePayment"}
+        ]
+      },
+      {"id": "PaymentCompleted", "type": "semantic", "title": "Payment Completed", "tag": "payment moment state",
+        "descriptor": [
+          {"href": "#authorizationCode"},
+          {"href": "#amount"}
+        ]
+      },
+
+      {"id": "AddressValidated", "type": "semantic", "title": "Address Validated", "tag": "shipping being state",
+        "descriptor": [
+          {"href": "#postalCode"},
+          {"href": "#streetAddress"},
+          {"href": "#doSelectCarrier"}
+        ]
+      },
+      {"id": "CarrierSelected", "type": "semantic", "title": "Carrier Selected", "tag": "shipping being state",
+        "descriptor": [
+          {"href": "#carrierId"},
+          {"href": "#postalCode"},
+          {"href": "#doArrangeShipping"}
+        ]
+      },
+      {"id": "ShippingArranged", "type": "semantic", "title": "Shipping Arranged", "tag": "shipping moment state",
+        "descriptor": [
+          {"href": "#carrierId"},
+          {"href": "#trackingNumber"},
+          {"href": "#shippingRate"}
+        ]
+      },
+
+      {"id": "OrderConfirmed", "type": "semantic", "title": "Order Confirmed", "tag": "final state",
+        "descriptor": [
+          {"href": "#InventoryReserved"},
+          {"href": "#PaymentCompleted"},
+          {"href": "#ShippingArranged"},
+          {"href": "#goOrderDetails"}
+        ]
+      },
+
+      {"id": "doOrder", "type": "unsafe", "title": "Place Order", "tag": "choreography",
+        "rt": "#StockLocated #CardValidated #AddressValidated",
+        "descriptor": [
+          {"href": "#cartId"},
+          {"href": "#customerId"},
+          {"href": "#cardNumber"},
+          {"href": "#cardExpiry"},
+          {"href": "#cardCvv"},
+          {"href": "#postalCode"},
+          {"href": "#streetAddress"}
+        ]
+      },
+
+      {"id": "doCheckQuantity", "type": "unsafe", "title": "Check Quantity", "tag": "choreography inventory",
+        "rt": "#QuantityChecked",
+        "descriptor": [
+          {"href": "#productId"},
+          {"href": "#quantity"}
+        ]
+      },
+      {"id": "doReserveInventory", "type": "unsafe", "title": "Reserve Inventory", "tag": "choreography inventory",
+        "rt": "#InventoryReserved",
+        "descriptor": [
+          {"href": "#productId"},
+          {"href": "#quantity"},
+          {"href": "#warehouseId"}
+        ]
+      },
+
+      {"id": "doAuthorizePayment", "type": "unsafe", "title": "Authorize Payment", "tag": "choreography payment",
+        "rt": "#PaymentAuthorized",
+        "descriptor": [
+          {"href": "#cardNumber"},
+          {"href": "#amount"}
+        ]
+      },
+      {"id": "doCapturePayment", "type": "unsafe", "title": "Capture Payment", "tag": "choreography payment",
+        "rt": "#PaymentCompleted",
+        "descriptor": [
+          {"href": "#authorizationCode"},
+          {"href": "#amount"}
+        ]
+      },
+
+      {"id": "doSelectCarrier", "type": "unsafe", "title": "Select Carrier", "tag": "choreography shipping",
+        "rt": "#CarrierSelected",
+        "descriptor": [
+          {"href": "#postalCode"}
+        ]
+      },
+      {"id": "doArrangeShipping", "type": "unsafe", "title": "Arrange Shipping", "tag": "choreography shipping",
+        "rt": "#ShippingArranged",
+        "descriptor": [
+          {"href": "#carrierId"},
+          {"href": "#postalCode"},
+          {"href": "#streetAddress"}
+        ]
+      },
+
+      {"id": "doConfirmOrder", "type": "unsafe", "title": "Confirm Order", "tag": "choreography convergence",
+        "rt": "#OrderConfirmed",
+        "descriptor": [
+          {"href": "#InventoryReserved"},
+          {"href": "#PaymentCompleted"},
+          {"href": "#ShippingArranged"}
+        ]
+      },
+
+      {"id": "goOrderDetails", "type": "safe", "title": "View Order Details", "tag": "choreography",
+        "rt": "#OrderConfirmed"
+      }
+    ]
+  }
+}
