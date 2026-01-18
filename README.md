@@ -40,7 +40,7 @@ Be Framework implements concepts from six philosophers:
 |---------|-------------|-------------------|
 | δύναμις (Potentiality) | Aristotle | Input |
 | Dasein (Being-there) | Heidegger | Being |
-| Moment (契機) | Hegel | Moment |
+| Moment (Aspect of whole) | Hegel | Moment |
 | ἐνέργεια (Actuality) | Aristotle | Final |
 | Sinn (Sense) | Frege | Semantic |
 | Sufficient Reason | Leibniz | Reason |
