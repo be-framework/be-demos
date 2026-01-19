@@ -14,7 +14,6 @@ use Be\App\Attribute\WarehouseId;
 use Be\App\Reason\AddressValidator;
 use Be\App\Reason\CardValidator;
 use Be\App\Reason\CarrierSelector;
-use Be\App\Reason\Greeting;
 use Be\App\Reason\InventoryChecker;
 use Be\App\Reason\InventoryReserver;
 use Be\App\Reason\InventoryReserverInterface;
@@ -29,9 +28,6 @@ final class AppModule extends AbstractModule
 {
     protected function configure(): void
     {
-        // Hello demo
-        $this->bind(Greeting::class);
-
         // Order processing - Reason bindings (via interfaces for testability)
         $this->bind(WarehouseLocator::class);
         $this->bind(InventoryChecker::class);
