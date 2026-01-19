@@ -1,0 +1,2 @@
+# Mark comparison files as documentation (not counted in language stats)
+docs/comparison/*.php linguist-documentation
