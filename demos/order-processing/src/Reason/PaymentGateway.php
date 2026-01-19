@@ -34,6 +34,6 @@ final class PaymentGateway implements PaymentGatewayInterface
     {
         // External system call to capture payment
         // In production: return $this->api->capture($authorizationCode, $amount);
-        return sprintf('TXN-%s-%s', date('YmdHis'), substr(md5($authorizationCode), 0, 6));
+        return sprintf('TXN-%s-%d-%s', date('YmdHis'), $amount, substr(md5($authorizationCode), 0, 6));
     }
 }
