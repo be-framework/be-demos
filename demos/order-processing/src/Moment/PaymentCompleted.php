@@ -7,7 +7,7 @@ namespace Be\App\Moment;
 use Be\App\Attribute\Amount;
 use Be\App\Attribute\CardNumber;
 use Be\App\Moment\Potential\PaymentCapture;
-use Be\App\Reason\PaymentGateway;
+use Be\App\Reason\PaymentGatewayInterface;
 use Ray\Di\Di\Inject;
 
 /**
@@ -22,7 +22,7 @@ final readonly class PaymentCompleted implements MomentInterface
     public function __construct(
         #[CardNumber] public string $cardNumber,
         #[Amount] public int $amount,
-        #[Inject] PaymentGateway $gateway,
+        #[Inject] PaymentGatewayInterface $gateway,
     ) {
         // Born: create potential (authorize payment)
         $this->capture = $gateway->authorize($cardNumber, $amount);

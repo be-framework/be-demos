@@ -17,8 +17,11 @@ use Be\App\Reason\CarrierSelector;
 use Be\App\Reason\Greeting;
 use Be\App\Reason\InventoryChecker;
 use Be\App\Reason\InventoryReserver;
+use Be\App\Reason\InventoryReserverInterface;
 use Be\App\Reason\PaymentGateway;
+use Be\App\Reason\PaymentGatewayInterface;
 use Be\App\Reason\ShippingArranger;
+use Be\App\Reason\ShippingArrangerInterface;
 use Be\App\Reason\WarehouseLocator;
 use Ray\Di\AbstractModule;
 
@@ -29,15 +32,15 @@ final class AppModule extends AbstractModule
         // Hello demo
         $this->bind(Greeting::class);
 
-        // Order processing - Reason bindings
+        // Order processing - Reason bindings (via interfaces for testability)
         $this->bind(WarehouseLocator::class);
         $this->bind(InventoryChecker::class);
-        $this->bind(InventoryReserver::class);
+        $this->bind(InventoryReserverInterface::class)->to(InventoryReserver::class);
         $this->bind(CardValidator::class);
-        $this->bind(PaymentGateway::class);
+        $this->bind(PaymentGatewayInterface::class)->to(PaymentGateway::class);
         $this->bind(AddressValidator::class);
         $this->bind(CarrierSelector::class);
-        $this->bind(ShippingArranger::class);
+        $this->bind(ShippingArrangerInterface::class)->to(ShippingArranger::class);
 
         // Inventory parameters (demo values)
         $this->bind()->annotatedWith(ProductId::class)->toInstance('PROD-001');

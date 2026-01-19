@@ -7,7 +7,7 @@ namespace Be\App\Moment;
 use Be\App\Attribute\Address;
 use Be\App\Attribute\CarrierId;
 use Be\App\Moment\Potential\ShippingDispatch;
-use Be\App\Reason\ShippingArranger;
+use Be\App\Reason\ShippingArrangerInterface;
 use Ray\Di\Di\Inject;
 
 /**
@@ -22,7 +22,7 @@ final readonly class ShippingArranged implements MomentInterface
     public function __construct(
         #[CarrierId] public string $carrierId,
         #[Address] public string $address,
-        #[Inject] ShippingArranger $arranger,
+        #[Inject] ShippingArrangerInterface $arranger,
     ) {
         // Born: create potential (prepare shipping label)
         $this->dispatch = $arranger->prepare($carrierId, $address);

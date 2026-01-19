@@ -11,7 +11,7 @@ use Be\App\Moment\Potential\InventoryReservation;
  *
  * Creates InventoryReservation moments that can be realized.
  */
-final class InventoryReserver
+final class InventoryReserver implements InventoryReserverInterface
 {
     public function lock(string $warehouseId, string $productId, int $quantity): InventoryReservation
     {

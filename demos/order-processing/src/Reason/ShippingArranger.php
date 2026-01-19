@@ -11,7 +11,7 @@ use Be\App\Moment\Potential\ShippingDispatch;
  *
  * Creates ShippingDispatch moments that can be realized.
  */
-final class ShippingArranger
+final class ShippingArranger implements ShippingArrangerInterface
 {
     public function prepare(string $carrierId, string $address): ShippingDispatch
     {

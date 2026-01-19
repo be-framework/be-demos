@@ -8,7 +8,7 @@ use Be\App\Attribute\ProductId;
 use Be\App\Attribute\Quantity;
 use Be\App\Attribute\WarehouseId;
 use Be\App\Moment\Potential\InventoryReservation;
-use Be\App\Reason\InventoryReserver;
+use Be\App\Reason\InventoryReserverInterface;
 use Ray\Di\Di\Inject;
 
 /**
@@ -24,7 +24,7 @@ final readonly class InventoryReserved implements MomentInterface
         #[ProductId] public string $productId,
         #[Quantity] public int $quantity,
         #[WarehouseId] public string $warehouseId,
-        #[Inject] InventoryReserver $reserver,
+        #[Inject] InventoryReserverInterface $reserver,
     ) {
         // Born: create potential (lock inventory temporarily)
         $this->reservation = $reserver->lock($warehouseId, $productId, $quantity);

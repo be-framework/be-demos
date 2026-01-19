@@ -11,7 +11,7 @@ use Be\App\Moment\Potential\PaymentCapture;
  *
  * Creates PaymentCapture moments that can be realized.
  */
-final class PaymentGateway
+final class PaymentGateway implements PaymentGatewayInterface
 {
     public function authorize(string $cardNumber, int $amount): PaymentCapture
     {
