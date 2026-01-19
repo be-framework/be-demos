@@ -1,64 +1,64 @@
 # Moment
 
-Be Frameworkにおける「Moment」の哲学的概念とコードでの役割。
+The philosophical concept and code role of "Moment" in Be Framework.
 
-## 三位一体
+## The Trinity
 
-Momentは三つの側面を持つ：
+A Moment has three aspects:
 
 ```text
 Moment
   │
-  ├── デュナミス（δύναμις）── 実現可能な潜在力
+  ├── Dynamis (δύναμις) ─── Realizable potential
   │
-  ├── 契機（モーメント）──── 全体の成立に必要な要素
+  ├── Moment (Aspect) ───── Essential element for the whole
   │
-  └── 自己の一部 ─────────── 外部ではなく内なるもの
+  └── Part of Self ──────── Inner part, not external
 ```
 
-### 1. デュナミス（潜在態）
+### 1. Dynamis (Potentiality)
 
-アリストテレス的な意味での「δύναμις」。実現を待つ可能態。
+Aristotelian "δύναμις" - the state awaiting actualization.
 
-- Moment = 潜在態（できる状態）
-- `be()` = 現実態への移行（ἐνέργεια）
+- Moment = Potentiality (capable state)
+- `be()` = Transition to actuality (ἐνέργεια)
 
-### 2. 契機
+### 2. Moment (Essential Aspect)
 
-ヘーゲル的な意味での「Moment」。全体を構成する必要不可欠な要素。
+Hegelian "Moment" - an indispensable element constituting the whole.
 
 ```text
-OrderConfirmed (Final/全体)
-    ├── InventoryReserved  (Moment/契機)
-    ├── PaymentCompleted   (Moment/契機)
-    └── ShippingArranged   (Moment/契機)
+OrderConfirmed (Final/Whole)
+    ├── InventoryReserved  (Moment/Aspect)
+    ├── PaymentCompleted   (Moment/Aspect)
+    └── ShippingArranged   (Moment/Aspect)
 ```
 
-全ての契機が揃わなければ、全体は成立しない。
+The whole cannot exist unless all aspects are present.
 
-### 3. 自己の一部
+### 3. Part of Self
 
-Momentは外部の存在ではなく、**Finalの内なる部分**。
+A Moment is not external but an **inner part of Final**.
 
 ```text
-Final ≠ 司令官 → 兵士（命令）
-Final = 全体が自身の部分を通じて自己完成する
+Final ≠ Commander → Soldier (command)
+Final = The whole completes itself through its parts
 ```
 
-## 自己生成としてのbe()
+## be() as Self-Completion
 
-Be Frameworkは自己生成のフレームワーク。Momentへの`be()`呼び出しは**命令ではなく自己完成**。
+Be Framework is a framework of self-generation. Calling `be()` on a Moment is **not a command but self-completion**.
 
 ```php
 final readonly class OrderConfirmed
 {
     public function __construct(
-        public InventoryReserved $inventory,  // 自分の一部
-        public PaymentCompleted $payment,     // 自分の一部
-        public ShippingArranged $shipping,    // 自分の一部
+        public InventoryReserved $inventory,  // Part of self
+        public PaymentCompleted $payment,     // Part of self
+        public ShippingArranged $shipping,    // Part of self
     ) {
-        // 外部への命令ではない
-        // 自分自身の完成
+        // Not commands to external entities
+        // Self-completion
         $this->inventory->be();
         $this->payment->be();
         $this->shipping->be();
@@ -66,50 +66,50 @@ final readonly class OrderConfirmed
 }
 ```
 
-### 人の例え：「話す」
+### Analogy: Speaking
 
 ```text
-「話す」という全体（Final）
+"Speaking" as a whole (Final)
     │
-    ├── 呼吸（Moment）─── 自分の一部、発声の潜在力
-    ├── 声帯（Moment）─── 自分の一部、音の潜在力
-    └── 舌唇（Moment）─── 自分の一部、言葉の潜在力
+    ├── Breath (Moment) ─── Part of self, potential for vocalization
+    ├── Vocal cords (Moment) ─── Part of self, potential for sound
+    └── Tongue/lips (Moment) ─── Part of self, potential for words
 
-    └── 全てが同時にbe() → 「話す」が成立
+    └── All be() simultaneously → "Speaking" is realized
 ```
 
-呼吸・声帯・舌唇は外部ではなく自分自身の一部。
-「話す」は外部への命令ではなく、自己の部分の協調による自己実現。
+Breath, vocal cords, and tongue are not external but parts of yourself.
+"Speaking" is not a command to external entities but self-realization through coordination of one's parts.
 
-## 同時成立
+## Simultaneous Realization
 
-Momentの`be()`は同時に成立する必要がある。
+All Moment `be()` calls must succeed together.
 
 ```text
-在庫確保 ─┐
-決済完了 ─┼── 全て揃わないと「注文」として存在できない
-配送手配 ─┘
+Inventory reserved ─┐
+Payment completed ──┼── Cannot exist as "Order" without all three
+Shipping arranged ──┘
 ```
 
-どれか一つが欠けると、全体（Final）は存在できない。
-部分的な実現は全体の不在を意味する。
+If any one is missing, the whole (Final) cannot exist.
+Partial realization means absence of the whole.
 
-## Being と Moment の違い
+## Difference Between Being and Moment
 
 | | Being | Moment |
 |---|-------|--------|
-| 役割 | 変容の途中経過 | Finalの部分（契機）|
-| デュナミス | なし | あり得る |
-| `be()` | なし | オプション |
+| Role | Intermediate transformation | Part of Final (aspect) |
+| Dynamis | None | Possible |
+| `be()` | None | Optional |
 
 ```php
-// Being - 変容の途中経過
+// Being - Intermediate transformation
 final readonly class PaymentAuthorized
 {
-    // コンストラクタで変容完了
+    // Transformation completed in constructor
 }
 
-// Moment（Potentialあり）- be()を持つ
+// Moment (with Potential) - has be()
 final readonly class PaymentCompleted implements MomentInterface
 {
     public function be(): void
@@ -118,29 +118,29 @@ final readonly class PaymentCompleted implements MomentInterface
     }
 }
 
-// Moment（Potentialなし）- be()不要
+// Moment (without Potential) - no be() needed
 final readonly class CustomerInfo
 {
-    // 純粋なデータ部分、be()なし
+    // Pure data part, no be()
 }
 ```
 
-**MomentInterfaceはオプション。** Potentialを持つMomentだけが実装する。
+**MomentInterface is optional.** Only Moments with Potential implement it.
 
-## ライフサイクル
+## Lifecycle
 
 ```text
-生まれて        → Reasonから生成される
-目的が与えられ  → クラス名が本質を定義
-成る            → be()で実現（Finalの自己完成の一環として）
+Born            → Generated from Reason
+Given purpose   → Class name defines essence
+Becomes         → Realized via be() (as part of Final's self-completion)
 ```
 
-**「存在が実現に先立つ」**
+**"Existence precedes realization"**
 
-Momentは存在する。目的（本質）はクラス名で定義されている。
-しかしまだ実現していない。Finalの生成時に`be()`で初めて現実になる。
+A Moment exists. Its purpose (essence) is defined by the class name.
+But it has not yet been realized. Only when Final is generated does `be()` make it actual.
 
-## コードでの表現
+## Code Representation
 
 ### MomentInterface
 
@@ -151,9 +151,9 @@ interface MomentInterface
 }
 ```
 
-`be()` - たった一つのメソッドで「実現する」を表現。
+`be()` - A single method expressing "to become realized."
 
-### Momentクラス
+### Moment Class
 
 ```php
 final readonly class InventoryReserved implements MomentInterface
@@ -176,20 +176,20 @@ final readonly class InventoryReserved implements MomentInterface
 }
 ```
 
-## 状態管理
+## State Management
 
-状態は変数に格納されない。**オブジェクトの存在そのもの**が状態を表現する。
+State is not stored in variables. **The existence of objects itself** represents state.
 
-- Momentが存在する = 準備完了（潜在態）
-- Finalが存在する = 実現完了（現実態）
+- Moment exists = Ready (potentiality)
+- Final exists = Realized (actuality)
 
-## まとめ
+## Summary
 
-| 概念 | 意味 | コード |
-|------|------|--------|
-| Moment | 契機 + デュナミス + 自己の一部 | `implements MomentInterface` |
-| be() | 自己完成 | Finalの生成時に呼ばれる |
-| Final | 全体の自己実現 | 全Momentの`be()`で完成 |
+| Concept | Meaning | Code |
+|---------|---------|------|
+| Moment | Aspect + Dynamis + Part of Self | `implements MomentInterface` |
+| be() | Self-completion | Called when Final is generated |
+| Final | Self-realization of the whole | Completed by all Moments' `be()` |
 
-Be Frameworkにおいて、Momentは外部への命令対象ではない。
-**自己の一部であり、全体の自己実現における契機**。
+In Be Framework, a Moment is not a target of external commands.
+**It is a part of self and an essential aspect in the whole's self-realization**.

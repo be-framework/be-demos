@@ -1,28 +1,28 @@
 # FAQ
 
-Be Frameworkに関するよくある質問と回答。
+Frequently asked questions about Be Framework.
 
-## 設計に関する質問
+## Design Questions
 
-### Q: Reasonに状態を持たせるべきですか？
+### Q: Should Reason hold state?
 
-**A: いいえ。Reasonはステートレスであるべきです。**
+**A: No. Reason should be stateless.**
 
-Reasonは「超越への門」であり、状態を保持しません。状態はMomentが持ちます。
+Reason is a "gate to transcendence" and does not hold state. State belongs to Moment.
 
 ```php
-// NG: Reasonが状態を持つ
+// NG: Reason holds state
 final class PaymentGateway
 {
     private array $authorizations = [];
 
     public function authorize(...): string
     {
-        $this->authorizations[$authCode] = [...];  // 状態保持
+        $this->authorizations[$authCode] = [...];  // Holds state
     }
 }
 
-// OK: Momentが状態を持つ
+// OK: Moment holds state
 final class PaymentGateway
 {
     public function authorize(...): PaymentCapture
@@ -34,66 +34,66 @@ final class PaymentGateway
 
 ---
 
-### Q: 仮の状態（provisional state）はどこにあるべきですか？
+### Q: Where should provisional state be?
 
-**A: Momentの存在自体が仮の状態です。**
+**A: The existence of Moment itself is the provisional state.**
 
-「仮予約」「仮決済」などの状態は、変数やフラグではなく**オブジェクトの存在**で表現します。
+States like "provisional reservation" or "provisional payment" are expressed by **object existence**, not variables or flags.
 
-- Momentが存在する = 準備完了（潜在態）
-- Finalが存在する = 実現完了（現実態）
+- Moment exists = Ready (potentiality)
+- Final exists = Realized (actuality)
 
 ---
 
-### Q: ロールバック処理はどう実装しますか？
+### Q: How do I implement rollback?
 
-**A: ロールバックではなく、「仮状態 → 実現」のパターンを使います。**
+**A: Use the "provisional state → realization" pattern instead of rollback.**
 
-Be Frameworkでは状態を巻き戻すのではなく、Momentの`be()`が呼ばれなければ実現されません。
+In Be Framework, state is not rolled back - if Moment's `be()` is not called, it simply isn't realized.
 
 ```text
-Moment生成 → 仮の状態（デュナミス）
-be()呼び出し → 実現（エネルゲイア）
-be()呼ばれず → 実現されない（自然消滅）
+Moment created → Provisional state (dynamis)
+be() called → Realized (energeia)
+be() not called → Not realized (naturally expires)
 ```
 
 ---
 
-### Q: `#[Input]`と`#[Inject]`の違いは何ですか？
+### Q: What's the difference between `#[Input]` and `#[Inject]`?
 
-**A: データの出所が違います。**
+**A: The source of the data differs.**
 
-| 属性 | 出所 | 意味 |
-|------|------|------|
-| `#[Input]` | ソースオブジェクト | イマナンス（内在）からの流入 |
-| `#[Inject]` | DIコンテナ | 超越（Reason等）の注入 |
+| Attribute | Source | Meaning |
+|-----------|--------|---------|
+| `#[Input]` | Source object | Flows from immanence (internal) |
+| `#[Inject]` | DI container | Injection of transcendence (Reason, etc.) |
 
 ```php
 final readonly class PaymentCompleted
 {
     public function __construct(
-        #[Input] public string $cardNumber,   // Inputから流れてくる
-        #[Input] public int $amount,          // Inputから流れてくる
-        #[Inject] PaymentGateway $gateway,    // DIコンテナから注入
+        #[Input] public string $cardNumber,   // Flows from Input
+        #[Input] public int $amount,          // Flows from Input
+        #[Inject] PaymentGateway $gateway,    // Injected from DI container
     ) { }
 }
 ```
 
 ---
 
-### Q: ALPSは制約を強制しますか？
+### Q: Does ALPS enforce constraints?
 
-**A: いいえ。ALPSはセマンティクスを定義します。制約ではありません。**
+**A: No. ALPS defines semantics, not constraints.**
 
-ALPSは語彙と関係性を定義するオントロジー。制約やバリデーションは別のレイヤーで行います。
+ALPS is an ontology that defines vocabulary and relationships. Constraints and validation are handled in a separate layer.
 
 ---
 
-### Q: 遅延評価はどう実装しますか？
+### Q: How do I implement lazy evaluation?
 
-**A: Momentとして表現します。**
+**A: Express it as a Moment.**
 
-遅延評価したい処理をMomentとして表現し、`be()`で実行します。
+Express the processing you want to lazily evaluate as a Moment and execute it with `be()`.
 
 ```php
 final class LazyComputation implements MomentInterface
@@ -114,107 +114,107 @@ final class LazyComputation implements MomentInterface
 
 ---
 
-## 概念に関する質問
+## Conceptual Questions
 
-### Q: BeingとMomentの違いは何ですか？
+### Q: What's the difference between Being and Moment?
 
-**A: Momentはデュナミス（潜在力）を持ちうる存在です。**
+**A: Moment can have dynamis (potential).**
 
 | | Being | Moment |
 |---|-------|--------|
-| デュナミス | なし | あり得る |
-| `be()` | なし | オプション |
-| 性質 | 純粋な変容 | Finalの部分 |
+| Dynamis | None | Possible |
+| `be()` | None | Optional |
+| Nature | Pure transformation | Part of Final |
 
-Beingは変容の途中経過。MomentはFinalの部分（契機）であり、Potentialを持つ場合は`be()`で実現できます。
+Being is an intermediate step in transformation. Moment is a part (aspect) of Final, and if it has Potential, it can be realized via `be()`.
 
 ---
 
-### Q: MomentInterfaceは必須ですか？
+### Q: Is MomentInterface required?
 
-**A: いいえ。オプションです。**
+**A: No. It's optional.**
 
-Potentialを持つMomentだけがMomentInterfaceを実装します。
+Only Moments with Potential implement MomentInterface.
 
 ```php
-// Potentialを持つMoment → MomentInterface実装
+// Moment with Potential → implements MomentInterface
 final readonly class InventoryReserved implements MomentInterface
 {
     public function be(): void { ... }
 }
 
-// Potentialを持たないMoment → インターフェース不要
+// Moment without Potential → no interface needed
 final readonly class CustomerInfo
 {
-    // be()なし - 純粋なデータ部分
+    // No be() - pure data part
 }
 ```
 
-全てのMomentが`be()`を必要とするわけではありません。
+Not all Moments need `be()`.
 
 ---
 
-### Q: Momentは外部への命令ですか？
+### Q: Is Moment a command to external entities?
 
-**A: いいえ。Momentは自己の一部です。**
+**A: No. Moment is a part of self.**
 
-Be Frameworkは自己生成のフレームワーク。Finalの`be()`呼び出しは命令ではなく自己完成です。
+Be Framework is a framework of self-generation. Final's `be()` call is not a command but self-completion.
 
 ```text
-Final ≠ 司令官 → 兵士（命令）
-Final = 全体が自身の部分を通じて自己完成する
+Final ≠ Commander → Soldier (command)
+Final = The whole completes itself through its parts
 ```
 
-「話す」時に呼吸・声帯・舌は外部ではなく自分自身の一部。同様に、OrderConfirmedにとってInventory・Payment・Shippingは自己の一部です。
+When speaking, breath, vocal cords, and tongue are not external but parts of yourself. Similarly, for OrderConfirmed, Inventory, Payment, and Shipping are parts of itself.
 
 ---
 
-### Q: なぜ`be()`という名前ですか？
+### Q: Why the name `be()`?
 
-**A: 「存在する」「成る」を一語で表現するためです。**
+**A: To express "to exist" and "to become" in a single word.**
 
-- クラス名が「何になるか」を定義（PaymentCapture = 決済を確定する存在）
-- `be()`は「それになれ」を命じる
+- The class name defines "what to become" (PaymentCapture = existence that confirms payment)
+- `be()` commands "become that"
 
 ```php
-$payment->capture->be();  // 決済確定として「成れ」
+$payment->capture->be();  // "Become" as payment confirmation
 ```
 
-「存在が実現に先立つ」- 生まれて、目的が与えられ、そして成る。
+"Existence precedes realization" - born, given purpose, and then becomes.
 
 ---
 
-### Q: Reasonの命名規則は？
+### Q: What are the naming conventions for Reason?
 
-**A: 役割に応じて選択します。**
+**A: Choose based on role.**
 
-| 役割 | パターン | 例 |
-|------|----------|-----|
-| 外部API接続 | Gateway, Client | PaymentGateway |
-| 判定・評価 | Protocol, Policy | JTASProtocol |
-| 変換・計算 | Calculator, Resolver | TaxCalculator |
-| 検証 | Validator | AddressValidator |
+| Role | Pattern | Example |
+|------|---------|---------|
+| External API connection | Gateway, Client | PaymentGateway |
+| Judgment/Evaluation | Protocol, Policy | JTASProtocol |
+| Conversion/Calculation | Calculator, Resolver | TaxCalculator |
+| Validation | Validator | AddressValidator |
 
-統一するより、役割を表す名前が適切です。
+Names that express the role are more appropriate than unified naming.
 
 ---
 
-## テストに関する質問
+## Testing Questions
 
-### Q: テスタビリティは大丈夫ですか？
+### Q: Is testability okay?
 
-**A: Reasonはインターフェースでバインドされ、モック可能です。**
+**A: Reason is bound via interfaces and can be mocked.**
 
 ```php
-// インターフェース定義
+// Interface definition
 interface PaymentGatewayInterface
 {
     public function authorize(...): PaymentCapture;
 }
 
-// テスト時
+// In tests
 $mock = $this->createMock(PaymentGatewayInterface::class);
 $mock->method('authorize')->willReturn(new PaymentCapture(...));
 ```
 
-Being/Moment/FinalはReasonに依存し、Reasonはインターフェースでバインドされるため、テスト時に差し替え可能です。
+Being/Moment/Final depend on Reason, and Reason is bound via interfaces, so they can be replaced in tests.

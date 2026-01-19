@@ -1,89 +1,89 @@
 # Reason
 
-Be Frameworkにおける「Reason」の役割と設計指針。
+The role and design guidelines for "Reason" in Be Framework.
 
-## Reasonとは
+## What is Reason?
 
-Reasonは**イマナンス（内在）が出会う超越**。システム内部のデータが外部世界と接触する点。
+Reason is **where immanence meets transcendence** - the point where internal system data contacts the external world.
 
 ```text
-イマナンス（内在）          超越
-─────────────────────────────────────
-システム内部のデータ    ←→    外部システム / ドメインルール
-#[Input]で流入          │
+Immanence (Internal)           Transcendence
+─────────────────────────────────────────────
+Internal system data    ←→    External systems / Domain rules
+Flows in via #[Input]   │
 cardNumber, amount      │
                         │
                      Reason
-                    （門）
+                     (Gate)
 ```
 
-## 二種類の超越
+## Two Types of Transcendence
 
-Reasonが接続する「超越」には二種類ある。
+Reason connects to two types of "transcendence":
 
-### 1. 外部システム
+### 1. External Systems
 
-システムの「外側」にある技術的境界。
+Technical boundaries "outside" the system.
 
 ```php
-final class PaymentGateway        // 決済API
-final class InventoryReserver     // 在庫管理システム
-final class ShippingArranger      // 配送業者API
+final class PaymentGateway        // Payment API
+final class InventoryReserver     // Inventory management system
+final class ShippingArranger      // Shipping carrier API
 ```
 
-### 2. ドメインルール
+### 2. Domain Rules
 
-個別インスタンスから独立して存在する普遍的規則。
+Universal rules that exist independently of individual instances.
 
 ```php
-final class JTASProtocol          // 医療トリアージプロトコル
-final class TaxCalculator         // 税計算ルール
-final class CreditPolicy          // 与信ポリシー
+final class JTASProtocol          // Medical triage protocol
+final class TaxCalculator         // Tax calculation rules
+final class CreditPolicy          // Credit policy
 ```
 
-## 命名パターン
+## Naming Patterns
 
-役割に応じた命名を推奨：
+Role-based naming is recommended:
 
-| 役割 | パターン | 例 |
-|------|----------|-----|
-| 外部API接続 | Gateway, Client | PaymentGateway, InventoryClient |
-| 判定・評価 | Protocol, Policy, Evaluator | JTASProtocol, CreditPolicy |
-| 変換・計算 | Calculator, Resolver, Converter | TaxCalculator, AddressResolver |
-| 検証 | Validator | AddressValidator |
+| Role | Pattern | Example |
+|------|---------|---------|
+| External API connection | Gateway, Client | PaymentGateway, InventoryClient |
+| Judgment/Evaluation | Protocol, Policy, Evaluator | JTASProtocol, CreditPolicy |
+| Conversion/Calculation | Calculator, Resolver, Converter | TaxCalculator, AddressResolver |
+| Validation | Validator | AddressValidator |
 
-**統一するより、役割を表す名前**が適切。
+**Names that express the role are more appropriate than unified naming.**
 
-## 設計原則
+## Design Principles
 
-### 1. ステートレス
+### 1. Stateless
 
-Reasonは状態を持たない。状態はMomentが持つ。
+Reason holds no state. State belongs to Moment.
 
 ```php
-// 良い例 - ステートレス
+// Good - Stateless
 final class PaymentGateway
 {
     public function authorize(string $cardNumber, int $amount): PaymentCapture
     {
-        // 状態を持たない
-        // Momentを返す
+        // No state
+        // Returns a Moment
     }
 }
 
-// 悪い例 - 状態を持つ
+// Bad - Holds state
 final class PaymentGateway
 {
-    private array $authorizations = [];  // NG: 状態
+    private array $authorizations = [];  // NG: State
 
     public function authorize(...): string { ... }
     public function capture(string $authCode): string { ... }
 }
 ```
 
-### 2. Momentを返す
+### 2. Returns Moment
 
-外部システムとの対話の結果として、Momentを返す。
+Returns a Moment as the result of interaction with external systems.
 
 ```php
 public function authorize(string $cardNumber, int $amount): PaymentCapture
@@ -98,31 +98,31 @@ public function authorize(string $cardNumber, int $amount): PaymentCapture
 }
 ```
 
-Momentには`be()`のためのコールバックが含まれる。
+The Moment contains a callback for `be()`.
 
-### 3. インターフェースでバインド
+### 3. Bind via Interface
 
-テスタビリティのため、インターフェースを経由してDIコンテナでバインド。
+For testability, bind through interfaces in the DI container.
 
 ```php
-// インターフェース
+// Interface
 interface PaymentGatewayInterface
 {
     public function authorize(string $cardNumber, int $amount): PaymentCapture;
 }
 
-// 実装
+// Implementation
 final class PaymentGateway implements PaymentGatewayInterface { ... }
 
-// バインド
+// Binding
 $this->bind(PaymentGatewayInterface::class)->to(PaymentGateway::class);
 
-// テストではモックに差し替え可能
+// Can be replaced with mock in tests
 ```
 
 ## Type Match
 
-Reasonはドメインロジックによる型決定にも使われる。
+Reason is also used for type determination by domain logic.
 
 ```php
 final class JTASProtocol
@@ -137,31 +137,31 @@ final class JTASProtocol
 }
 ```
 
-戻り値の型が次のBeingの型を決定する（Type IS Capability）。
+The return type determines the type of the next Being (Type IS Capability).
 
-## Reasonの位置づけ
+## Position of Reason
 
 ```text
 Input
   │
-  ├── Being ← Reasonを注入（変容に必要なロジック）
+  ├── Being ← Reason injected (logic needed for transformation)
   │     │
-  │     └── Moment ← Reasonから生成（潜在態）
+  │     └── Moment ← Generated from Reason (potentiality)
   │           │
-  └───────────┴── Final ← Momentのbe()で完成
+  └───────────┴── Final ← Completed by Moment's be()
 ```
 
-- **Being**: Reasonを使って変容
-- **Moment**: Reasonから生まれる（Reasonのメソッドが返す）
+- **Being**: Transforms using Reason
+- **Moment**: Born from Reason (returned by Reason's methods)
 
-## まとめ
+## Summary
 
-| 特性 | 説明 |
-|------|------|
-| 役割 | イマナンスと超越の接点 |
-| 状態 | ステートレス |
-| 戻り値 | Moment（潜在態） |
-| バインド | インターフェース経由 |
-| 命名 | 役割に応じて選択 |
+| Property | Description |
+|----------|-------------|
+| Role | Junction of immanence and transcendence |
+| State | Stateless |
+| Return value | Moment (potentiality) |
+| Binding | Via interface |
+| Naming | Choose based on role |
 
-Reasonは「門」であり、内と外を繋ぐ。しかし自身は何も保持しない。
+Reason is a "gate" connecting inside and outside. But it holds nothing itself.
