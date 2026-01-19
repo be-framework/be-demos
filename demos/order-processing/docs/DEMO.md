@@ -93,7 +93,7 @@ src/
 
 ## ALPS Ontology
 
-The semantic structure is defined in [alps/alps.xml](../alps/alps.xml), following the three-layer ALPS model:
+The semantic structure is defined in [docs/alps.xml](alps.xml), following the three-layer ALPS model:
 
 1. **Ontology** - Atomic semantic fields (cartId, cardNumber, etc.)
 2. **Taxonomy** - States with their available data and transitions
