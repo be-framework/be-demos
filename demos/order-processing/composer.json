@@ -1,15 +1,14 @@
 {
-    "name": "be-framework/demo-hello-world",
-    "description": "Be Framework Hello World Demo - The simplest transformation",
+    "name": "be-framework/app",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Be\\Demo\\Hello\\": "src/"
+            "Be\\App\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Be\\Demo\\Hello\\Tests\\": "tests/"
+            "Be\\App\\Tests\\": "tests/"
         }
     },
     "require": {

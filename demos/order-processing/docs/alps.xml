@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alps version="1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://alps-io.github.io/schemas/alps.xsd">
+
+    <title>Order Processing - Diamond Metamorphosis Demo</title>
+    <doc>Demonstrates parallel pipelines converging to a single Final state</doc>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         ONTOLOGY - Semantic Descriptors
+         ═══════════════════════════════════════════════════════════════════════ -->
+
+    <descriptor id="cartId" title="Cart ID" def="https://schema.org/identifier"/>
+    <descriptor id="customerId" title="Customer ID" def="https://schema.org/identifier"/>
+    <descriptor id="quantity" title="Quantity" def="https://schema.org/quantity"/>
+    <descriptor id="productId" title="Product ID" def="https://schema.org/identifier"/>
+    <descriptor id="cardNumber" title="Card Number"/>
+    <descriptor id="cardExpiry" title="Card Expiry Date"/>
+    <descriptor id="cardCvv" title="Card CVV"/>
+    <descriptor id="postalCode" title="Postal Code" def="https://schema.org/postalCode"/>
+    <descriptor id="streetAddress" title="Street Address" def="https://schema.org/streetAddress"/>
+    <descriptor id="warehouseId" title="Warehouse ID"/>
+    <descriptor id="carrierId" title="Carrier ID"/>
+    <descriptor id="trackingNumber" title="Tracking Number"/>
+    <descriptor id="authorizationCode" title="Payment Authorization Code"/>
+    <descriptor id="reservationId" title="Inventory Reservation ID"/>
+    <descriptor id="shippingRate" title="Shipping Rate" def="https://schema.org/price"/>
+    <descriptor id="amount" title="Payment Amount" def="https://schema.org/price"/>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         TAXONOMY - State Descriptors
+         ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Input State -->
+    <descriptor id="OrderInput" title="Order Input" tag="input state">
+        <descriptor href="#cartId"/>
+        <descriptor href="#customerId"/>
+        <descriptor href="#cardNumber"/>
+        <descriptor href="#cardExpiry"/>
+        <descriptor href="#cardCvv"/>
+        <descriptor href="#postalCode"/>
+        <descriptor href="#streetAddress"/>
+        <descriptor href="#doOrder"/>
+    </descriptor>
+
+    <!-- Inventory Pipeline (Being States) -->
+    <descriptor id="StockLocated" title="Stock Located" tag="inventory being state">
+        <descriptor href="#productId"/>
+        <descriptor href="#warehouseId"/>
+        <descriptor href="#doCheckQuantity"/>
+    </descriptor>
+
+    <descriptor id="QuantityChecked" title="Quantity Checked" tag="inventory being state">
+        <descriptor href="#productId"/>
+        <descriptor href="#quantity"/>
+        <descriptor href="#warehouseId"/>
+        <descriptor href="#doReserveInventory"/>
+    </descriptor>
+
+    <descriptor id="InventoryReserved" title="Inventory Reserved" tag="inventory moment state">
+        <doc>Moment: Inventory locked provisionally until order confirmation</doc>
+        <descriptor href="#reservationId"/>
+        <descriptor href="#productId"/>
+        <descriptor href="#quantity"/>
+        <descriptor href="#warehouseId"/>
+    </descriptor>
+
+    <!-- Payment Pipeline (Being States) -->
+    <descriptor id="CardValidated" title="Card Validated" tag="payment being state">
+        <descriptor href="#cardNumber"/>
+        <descriptor href="#cardExpiry"/>
+        <descriptor href="#doAuthorizePayment"/>
+    </descriptor>
+
+    <descriptor id="PaymentAuthorized" title="Payment Authorized" tag="payment being state">
+        <descriptor href="#authorizationCode"/>
+        <descriptor href="#amount"/>
+        <descriptor href="#doCapturePayment"/>
+    </descriptor>
+
+    <descriptor id="PaymentCompleted" title="Payment Completed" tag="payment moment state">
+        <doc>Moment: Payment captured provisionally until order confirmation</doc>
+        <descriptor href="#authorizationCode"/>
+        <descriptor href="#amount"/>
+    </descriptor>
+
+    <!-- Shipping Pipeline (Being States) -->
+    <descriptor id="AddressValidated" title="Address Validated" tag="shipping being state">
+        <descriptor href="#postalCode"/>
+        <descriptor href="#streetAddress"/>
+        <descriptor href="#doSelectCarrier"/>
+    </descriptor>
+
+    <descriptor id="CarrierSelected" title="Carrier Selected" tag="shipping being state">
+        <descriptor href="#carrierId"/>
+        <descriptor href="#postalCode"/>
+        <descriptor href="#doArrangeShipping"/>
+    </descriptor>
+
+    <descriptor id="ShippingArranged" title="Shipping Arranged" tag="shipping moment state">
+        <doc>Moment: Shipping arranged provisionally until order confirmation</doc>
+        <descriptor href="#carrierId"/>
+        <descriptor href="#trackingNumber"/>
+        <descriptor href="#shippingRate"/>
+    </descriptor>
+
+    <!-- Final State -->
+    <descriptor id="OrderConfirmed" title="Order Confirmed" tag="final state">
+        <doc>Final: All three Moments converge here - the diamond completes</doc>
+        <descriptor href="#InventoryReserved"/>
+        <descriptor href="#PaymentCompleted"/>
+        <descriptor href="#ShippingArranged"/>
+        <descriptor href="#goOrderDetails"/>
+    </descriptor>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         CHOREOGRAPHY - Transition Descriptors
+         ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Main Entry Point -->
+    <descriptor id="doOrder" type="unsafe" rt="#OrderConfirmed" title="Place Order" tag="choreography">
+        <doc>Diamond Metamorphosis: initiates three parallel pipelines - inventory, payment, and shipping</doc>
+        <descriptor href="#cartId"/>
+        <descriptor href="#customerId"/>
+        <descriptor href="#cardNumber"/>
+        <descriptor href="#cardExpiry"/>
+        <descriptor href="#cardCvv"/>
+        <descriptor href="#postalCode"/>
+        <descriptor href="#streetAddress"/>
+    </descriptor>
+
+    <!-- Inventory Pipeline Transitions -->
+    <descriptor id="doLocateStock" type="unsafe" rt="#StockLocated" title="Locate Stock" tag="choreography inventory">
+        <doc>Find warehouse with available stock for the product</doc>
+        <descriptor href="#productId"/>
+    </descriptor>
+
+    <descriptor id="doCheckQuantity" type="unsafe" rt="#QuantityChecked" title="Check Quantity" tag="choreography inventory">
+        <doc>Verify sufficient quantity available in the warehouse</doc>
+        <descriptor href="#productId"/>
+        <descriptor href="#quantity"/>
+    </descriptor>
+
+    <descriptor id="doReserveInventory" type="unsafe" rt="#InventoryReserved" title="Reserve Inventory" tag="choreography inventory">
+        <doc>Lock inventory provisionally - becomes permanent on order confirmation</doc>
+        <descriptor href="#productId"/>
+        <descriptor href="#quantity"/>
+        <descriptor href="#warehouseId"/>
+    </descriptor>
+
+    <!-- Payment Pipeline Transitions -->
+    <descriptor id="doValidateCard" type="unsafe" rt="#CardValidated" title="Validate Card" tag="choreography payment">
+        <doc>Validate card number, expiry, and CVV</doc>
+        <descriptor href="#cardNumber"/>
+        <descriptor href="#cardExpiry"/>
+        <descriptor href="#cardCvv"/>
+    </descriptor>
+
+    <descriptor id="doAuthorizePayment" type="unsafe" rt="#PaymentAuthorized" title="Authorize Payment" tag="choreography payment">
+        <doc>Authorize payment amount with the card issuer</doc>
+        <descriptor href="#cardNumber"/>
+        <descriptor href="#amount"/>
+    </descriptor>
+
+    <descriptor id="doCapturePayment" type="unsafe" rt="#PaymentCompleted" title="Capture Payment" tag="choreography payment">
+        <doc>Capture authorized payment - becomes permanent on order confirmation</doc>
+        <descriptor href="#authorizationCode"/>
+        <descriptor href="#amount"/>
+    </descriptor>
+
+    <!-- Shipping Pipeline Transitions -->
+    <descriptor id="doValidateAddress" type="unsafe" rt="#AddressValidated" title="Validate Address" tag="choreography shipping">
+        <doc>Validate shipping address format and deliverability</doc>
+        <descriptor href="#postalCode"/>
+        <descriptor href="#streetAddress"/>
+    </descriptor>
+
+    <descriptor id="doSelectCarrier" type="unsafe" rt="#CarrierSelected" title="Select Carrier" tag="choreography shipping">
+        <doc>Select optimal carrier based on destination</doc>
+        <descriptor href="#postalCode"/>
+    </descriptor>
+
+    <descriptor id="doArrangeShipping" type="unsafe" rt="#ShippingArranged" title="Arrange Shipping" tag="choreography shipping">
+        <doc>Arrange shipping with carrier - becomes permanent on order confirmation</doc>
+        <descriptor href="#carrierId"/>
+        <descriptor href="#postalCode"/>
+        <descriptor href="#streetAddress"/>
+    </descriptor>
+
+    <!-- Convergence Transition -->
+    <descriptor id="doConfirmOrder" type="unsafe" rt="#OrderConfirmed" title="Confirm Order" tag="choreography convergence">
+        <doc>Converge all three Moments into Final - triggers be() on each Moment</doc>
+        <descriptor href="#InventoryReserved"/>
+        <descriptor href="#PaymentCompleted"/>
+        <descriptor href="#ShippingArranged"/>
+    </descriptor>
+
+    <!-- Navigation -->
+    <descriptor id="goOrderDetails" type="safe" rt="#OrderConfirmed" title="View Order Details" tag="choreography">
+        <doc>View confirmed order details</doc>
+    </descriptor>
+
+</alps>
