@@ -22,7 +22,8 @@ try {
     assert($hello instanceof Final\Hello);
     echo $hello->greeting . PHP_EOL;
 } catch (SemanticVariableException $e) {
-    $errorMessage = $e->getErrors()->getMessages('ja')[0];
+    $messages = $e->getErrors()->getMessages('ja');
+    $errorMessage = $messages[0] ?? $e->getMessage();
     echo $errorMessage . PHP_EOL;
 }
 

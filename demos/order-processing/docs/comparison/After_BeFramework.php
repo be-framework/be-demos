@@ -82,6 +82,8 @@ final class Semantic\Quantity
 
 final readonly class Being\Inventory\StockLocated
 {
+    public string $warehouseId;
+
     public function __construct(
         #[Input] public string $productId,
         #[Inject] Reason\WarehouseLocator $locator,
@@ -159,7 +161,7 @@ final readonly class Moment\ShippingArranged
 final readonly class Final\OrderConfirmed
 {
     public string $orderId;
-    public string $status = 'confirmed';
+    public string $status;
 
     public function __construct(
         #[Moment] public Moment\InventoryReserved $inventory,
@@ -167,6 +169,7 @@ final readonly class Final\OrderConfirmed
         #[Moment] public Moment\ShippingArranged $shipping,
     ) {
         $this->orderId = 'ORD-' . date('Ymd') . '-' . bin2hex(random_bytes(4));
+        $this->status = 'confirmed';
     }
 }
 

@@ -172,7 +172,6 @@ class OrderService
         // SHIPPING PIPELINE - even more rollback complexity
         // ═══════════════════════════════════════════════════════════════
 
-        $shippingArranged = false;
         $trackingNumber = null;
         $carrierId = null;
 
@@ -205,7 +204,6 @@ class OrderService
                 throw new ShippingException('Shipping arrangement failed');
             }
             $trackingNumber = $shippingResult['tracking_number'];
-            $shippingArranged = true;
             $this->logger->info('Shipping arranged', ['tracking' => $trackingNumber]);
 
         } catch (ShippingException $e) {
