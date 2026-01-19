@@ -27,7 +27,7 @@ jobs:
           node-version: '20'
 
       - name: Install app-state-diagram
-        run: npm install -g @anthropic/app-state-diagram
+        run: npm install -g @alps-asd/app-state-diagram
 
       - name: Generate ALPS HTML
         run: |
