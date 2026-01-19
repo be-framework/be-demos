@@ -32,6 +32,10 @@ final class PaymentCapture implements MomentInterface
 
     public function be(): void
     {
+        if ($this->transactionId !== null) {
+            return; // Already realized - idempotent
+        }
+
         $this->transactionId = ($this->realize)();
     }
 

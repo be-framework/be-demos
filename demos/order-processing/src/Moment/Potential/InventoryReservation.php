@@ -17,6 +17,8 @@ final class InventoryReservation implements MomentInterface
     /** @var callable(): void */
     private $realize;
 
+    private bool $realized = false;
+
     /**
      * @param callable(): void $realize
      */
@@ -29,6 +31,11 @@ final class InventoryReservation implements MomentInterface
 
     public function be(): void
     {
+        if ($this->realized) {
+            return; // Already realized - idempotent
+        }
+
+        $this->realized = true;
         ($this->realize)();
     }
 }
