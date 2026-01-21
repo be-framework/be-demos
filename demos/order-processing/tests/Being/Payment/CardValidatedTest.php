@@ -14,17 +14,18 @@ class CardValidatedTest extends TestCase
     {
         $validator = new CardValidator();
         $futureYear = (int) date('y') + 1;
-        $being = new CardValidated('4111111111111111', "12/{$futureYear}", $validator);
+        $being = new CardValidated('4111111111111111', "12/{$futureYear}", '123', $validator);
 
         $this->assertSame('4111111111111111', $being->cardNumber);
         $this->assertSame("12/{$futureYear}", $being->cardExpiry);
+        $this->assertSame('123', $being->cardCvv);
         $this->assertTrue($being->valid);
     }
 
     public function testCardExpired(): void
     {
         $validator = new CardValidator();
-        $being = new CardValidated('4111111111111111', '01/20', $validator);
+        $being = new CardValidated('4111111111111111', '01/20', '123', $validator);
 
         $this->assertFalse($being->valid);
     }
