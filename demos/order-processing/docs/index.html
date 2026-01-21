@@ -92,8 +92,29 @@
         <p class="tagline">Be, Don't Do.</p>
 
         <div class="card">
-            <h2>Order Processing Demo</h2>
-            <p>Diamond Metamorphosis pattern - parallel pipelines converging into a single Final state.</p>
+            <h2>What is Be Framework?</h2>
+            <p>Be Framework is an ontological programming framework that shifts focus from "what to do" to "what to be". Instead of writing procedural code with imperative commands, you declare transformations between states.</p>
+            <p>Traditional OOP: <code>OrderService.processOrder()</code> — a verb (Do)<br>
+               Be Framework: <code>OrderInput → OrderConfirmed</code> — noun transformation (Be)</p>
+        </div>
+
+        <div class="card">
+            <h2>Hello World</h2>
+            <p>Start here. The simplest transformation: an Input with a name becomes a Final with a greeting.</p>
+            <div class="diagram">
+   HelloInput  →  Hello
+   (name)         (greeting)
+            </div>
+            <p style="margin-top: 1rem;">This demo introduces the core concepts: Input (potentiality), Final (actuality), and Reason (sufficient reason for existence).</p>
+            <div class="links">
+                <a href="https://github.com/be-framework/demos/tree/1.x/demos/hello-world" class="btn">Source Code</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Order Processing</h2>
+            <p>An advanced demo showcasing the Diamond Metamorphosis pattern. Three parallel pipelines (inventory, payment, shipping) process independently and converge into a single Final state.</p>
+            <p>This pattern eliminates the nested try-catch nightmare of traditional order processing, replacing 250+ lines of spaghetti code with focused, testable classes.</p>
             <div class="diagram">
                 OrderInput
         ┌───────┼───────┐
@@ -122,6 +143,7 @@
 
         <div class="card">
             <h2>Philosophical Foundations</h2>
+            <p style="margin-bottom: 1rem;">Be Framework maps programming concepts to philosophical ideas from six thinkers:</p>
             <table style="width: 100%; color: var(--muted); border-collapse: collapse;">
                 <tr><td style="padding: 0.5rem 0;">Input/</td><td>δύναμις</td><td>Aristotle</td><td>Potentiality</td></tr>
                 <tr><td style="padding: 0.5rem 0;">Being/</td><td>Dasein</td><td>Heidegger</td><td>Being-in-becoming</td></tr>
