@@ -50,6 +50,8 @@ Order processing follows a "Diamond Metamorphosis" pattern where three parallel 
 
 ## Moment - The Trinity
 
+> **Note**: Moment is an evolving concept. The ideas presented here represent our current understanding and may be refined based on practical experience and feedback.
+
 The core concept of this demo is **Moment**. A Moment has three aspects:
 
 ### 1. Dynamis (δύναμις)

@@ -15,8 +15,10 @@ final readonly class CardValidated
     public function __construct(
         #[Input] public string $cardNumber,
         #[Input] public string $cardExpiry,
+        #[Input] public string $cardCvv,
         #[Inject] CardValidator $validator
     ) {
+        // CVV format is validated by Semantic layer (Semantic/CardCvv)
         $this->valid = $validator->validate($cardNumber, $cardExpiry);
     }
 }
