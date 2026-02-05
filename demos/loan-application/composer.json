@@ -1,0 +1,22 @@
+{
+    "name": "be-framework/demo-loan-application",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Be\\Demo\\LoanApplication\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Be\\Demo\\LoanApplication\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.3",
+        "be-framework/be": "0.x-dev",
+        "ray/di": "^2.18"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    }
+}

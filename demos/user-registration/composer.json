@@ -1,0 +1,23 @@
+{
+    "name": "be-framework/demo-user-registration",
+    "description": "Be Framework User Registration Demo - Being chain (sequential) pattern",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Be\\Demo\\UserRegistration\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Be\\Demo\\UserRegistration\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.3",
+        "be-framework/be": "0.x-dev",
+        "ray/di": "^2.18"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    }
+}
