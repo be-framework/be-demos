@@ -4,20 +4,15 @@ declare(strict_types=1);
 
 namespace Be\Demo\BlogPublishing\Final;
 
-use Be\Demo\BlogPublishing\Moment\ContentPrepared;
-use Be\Demo\BlogPublishing\Moment\MetadataResolved;
 use Be\Demo\BlogPublishing\Reason\PublishTimestamper;
 use Ray\Di\Di\Inject;
+use Ray\InputQuery\Attribute\Input;
 
 /**
- * Article Published - Final (convergence point)
+ * Article Published - Final (actualization)
  *
- * Mini-diamond merge: two pure-data Moments converge into one Final.
- * Unlike the order-processing demo, there are NO be() calls here
- * because the Moments have no Potential to realize.
- *
- * The Final simply reads the aggregated data from each Moment
- * and stamps the publication.
+ * Receives all prepared content from ArticlePrepared Being
+ * and stamps the publication with ID and timestamp.
  *
  * @link https://schema.org/Article
  */
@@ -26,9 +21,17 @@ final readonly class ArticlePublished
     public string $articleId;
     public string $publishedAt;
 
+    /**
+     * @param string[] $tags
+     */
     public function __construct(
-        #[Inject] public ContentPrepared $content,
-        #[Inject] public MetadataResolved $metadata,
+        #[Input] public string $title,
+        #[Input] public string $htmlBody,
+        #[Input] public string $slug,
+        #[Input] public string $excerpt,
+        #[Input] public string $authorId,
+        #[Input] public string $authorName,
+        #[Input] public array $tags,
         #[Inject] PublishTimestamper $timestamper,
     ) {
         $this->publishedAt = $timestamper->now();
@@ -39,8 +42,8 @@ final readonly class ArticlePublished
     {
         return sprintf(
             'ART-%s-%s',
-            $this->metadata->slug,
-            substr(md5($this->metadata->slug . $this->publishedAt), 0, 8)
+            $this->slug,
+            substr(md5($this->slug . $this->publishedAt), 0, 8)
         );
     }
 }

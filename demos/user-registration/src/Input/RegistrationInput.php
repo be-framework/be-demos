@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Be\Demo\UserRegistration\Input;
 
-use Be\Demo\UserRegistration\Final\UserRegistered;
+use Be\Demo\UserRegistration\Being\EmailVerified;
 use Be\Framework\Attribute\Be;
 
 /**
@@ -14,7 +14,7 @@ use Be\Framework\Attribute\Be;
  *
  * @link https://schema.org/RegisterAction
  */
-#[Be([UserRegistered::class])]
+#[Be([EmailVerified::class])]
 final readonly class RegistrationInput
 {
     public function __construct(

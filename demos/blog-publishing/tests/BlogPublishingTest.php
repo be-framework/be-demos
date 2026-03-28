@@ -47,16 +47,16 @@ class BlogPublishingTest extends TestCase
         $this->assertStringStartsWith('ART-', $final->articleId);
         $this->assertNotEmpty($final->publishedAt);
 
-        // Verify content Moment data is accessible (pure data, no be() needed)
-        $this->assertSame('Understanding the BE Framework', $final->content->title);
-        $this->assertStringContainsString('<strong>Hegelian philosophy</strong>', $final->content->htmlBody);
-        $this->assertNotEmpty($final->content->excerpt);
+        // Verify content data
+        $this->assertSame('Understanding the BE Framework', $final->title);
+        $this->assertStringContainsString('<strong>Hegelian philosophy</strong>', $final->htmlBody);
+        $this->assertNotEmpty($final->excerpt);
 
-        // Verify metadata Moment data is accessible (pure data, no be() needed)
-        $this->assertSame('understanding-the-be-framework', $final->metadata->slug);
-        $this->assertSame('550e8400-e29b-41d4-a716-446655440000', $final->metadata->authorId);
-        $this->assertSame(['philosophy', 'framework', 'php'], $final->metadata->tags);
-        $this->assertStringStartsWith('Author-', $final->metadata->authorName);
+        // Verify metadata
+        $this->assertSame('understanding-the-be-framework', $final->slug);
+        $this->assertSame('550e8400-e29b-41d4-a716-446655440000', $final->authorId);
+        $this->assertSame(['philosophy', 'framework', 'php'], $final->tags);
+        $this->assertStringStartsWith('Author-', $final->authorName);
     }
 
     public function testArticleWithHeadings(): void
@@ -75,8 +75,8 @@ class BlogPublishingTest extends TestCase
         $final = ($this->becoming)($input);
 
         $this->assertInstanceOf(ArticlePublished::class, $final);
-        $this->assertStringContainsString('<h1>Introduction</h1>', $final->content->htmlBody);
-        $this->assertSame('markdown-rendering-test', $final->metadata->slug);
+        $this->assertStringContainsString('<h1>Introduction</h1>', $final->htmlBody);
+        $this->assertSame('markdown-rendering-test', $final->slug);
     }
 
     public function testExcerptIsTruncated(): void
@@ -94,8 +94,8 @@ class BlogPublishingTest extends TestCase
         $final = ($this->becoming)($input);
 
         // Excerpt should be truncated to 200 chars + "..."
-        $this->assertLessThanOrEqual(203, mb_strlen($final->content->excerpt));
-        $this->assertStringEndsWith('...', $final->content->excerpt);
+        $this->assertLessThanOrEqual(203, mb_strlen($final->excerpt));
+        $this->assertStringEndsWith('...', $final->excerpt);
     }
 
     // ──────────────────────────────────────────────

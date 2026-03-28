@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace Be\Demo\BlogPublishing\Input;
 
-use Be\Demo\BlogPublishing\Final\ArticlePublished;
+use Be\Demo\BlogPublishing\Being\ArticlePrepared;
 use Be\Framework\Attribute\Be;
 
 /**
  * Article Input - Blog Publishing Demo
  *
- * Declares the potential to become ArticlePublished.
- * The input splits into two Beings (MarkdownRendered, SlugGenerated)
- * which feed two pure-data Moments (ContentPrepared, MetadataResolved)
- * before merging in the Final.
+ * Declares the potential to become ArticlePrepared (Being).
+ * The Being transforms content and metadata before
+ * flowing to the Final (ArticlePublished).
  *
  * @link https://schema.org/Article
  */
-#[Be([ArticlePublished::class])]
+#[Be([ArticlePrepared::class])]
 final readonly class ArticleInput
 {
     /**
