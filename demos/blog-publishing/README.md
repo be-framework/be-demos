@@ -1,46 +1,99 @@
 # Blog Publishing Demo
 
 **Level:** Intermediate
-**Concepts:** Moment WITHOUT Potential (pure data Moment), mini-diamond merge pattern
+**Concepts:** Being transformation with multiple Reason dependencies
 
 ## Flow
 
 ```
-ArticleInput -> MarkdownRendered(Being) -> SlugGenerated(Being)
-    -> [ContentPrepared(Moment) + MetadataResolved(Moment)] -> ArticlePublished(Final)
+ArticleInput → ArticlePrepared(Being) → ArticlePublished(Final)
 ```
 
-## Key Concept: Pure Data Moments
+## Key Concept: Being with Multiple Transformations
 
-In the order-processing demo, Moments implement `MomentInterface` and carry **Potential** -- deferred side effects that are realized via `be()` in the Final stage (e.g., capturing a payment, dispatching a shipment).
+This demo shows how a single Being can orchestrate multiple transformations using different Reason services:
 
-This demo shows the other kind of Moment: **pure data Moments**. These are "Moments" in the Hegelian sense only -- they are *parts of a whole* (ArticlePublished) that aggregate data from upstream Beings without carrying any Potential.
+- **Markdown rendering** - Converts markdown to HTML
+- **Slug generation** - Creates URL-friendly slugs from titles
+- **Excerpt extraction** - Pulls excerpt from rendered content
+- **Author resolution** - Resolves author ID to author name
 
-### What makes them different
+All these transformations happen in the Being layer, preparing the data for the Final state.
 
-| | Order Processing (with Potential) | Blog Publishing (pure data) |
-|---|---|---|
-| Implements `MomentInterface` | Yes | **No** |
-| Has `be()` method | Yes | **No** |
-| Carries Potential object | Yes (PaymentCapture, etc.) | **No** |
-| Final calls `be()` | Yes | **No** |
-| Role | Part + deferred action | Part only (data aggregation) |
+## The Code
 
-### Why use pure data Moments?
+### Input (Potentiality)
 
-When the transformation from Input to Final involves no side effects -- no payments to capture, no reservations to make, no external calls to finalize -- a Moment serves purely as a structural grouping. It gathers related data from multiple upstream Beings into a coherent "part" that the Final can consume.
+```php
+#[Be([ArticlePrepared::class])]
+final readonly class ArticleInput
+{
+    public function __construct(
+        public string $title,
+        public string $markdownBody,
+        public string $authorId,
+        public array $tags,
+    ) {}
+}
+```
 
-In this demo:
-- **ContentPrepared** aggregates title, markdown, HTML body, and excerpt
-- **MetadataResolved** aggregates slug, author info, and tags
+### Being (Transformation)
 
-The Final (ArticlePublished) simply reads their data directly, with no `be()` calls needed.
+```php
+#[Be([ArticlePublished::class])]
+final readonly class ArticlePrepared
+{
+    public string $htmlBody;
+    public string $slug;
+    public string $excerpt;
+    public string $authorName;
+
+    public function __construct(
+        #[Input] public string $title,
+        #[Input] public string $markdownBody,
+        #[Input] public string $authorId,
+        #[Input] public array $tags,
+        #[Inject] MarkdownRenderer $markdownRenderer,
+        #[Inject] SlugGenerator $slugGenerator,
+        #[Inject] ExcerptExtractor $excerptExtractor,
+        #[Inject] AuthorResolverInterface $authorResolver,
+    ) {
+        $this->htmlBody = $markdownRenderer->render($markdownBody);
+        $this->slug = $slugGenerator->generate($title);
+        $this->excerpt = $excerptExtractor->extract($this->htmlBody);
+        $this->authorName = $authorResolver->resolve($authorId);
+    }
+}
+```
+
+### Final (Actuality)
+
+```php
+final readonly class ArticlePublished
+{
+    public string $articleId;
+    public string $publishedAt;
+
+    public function __construct(
+        #[Input] public string $title,
+        #[Input] public string $htmlBody,
+        #[Input] public string $slug,
+        #[Input] public string $excerpt,
+        #[Input] public string $authorId,
+        #[Input] public string $authorName,
+        #[Input] public array $tags,
+        #[Inject] PublishTimestamper $timestamper,
+    ) {
+        $this->publishedAt = $timestamper->now();
+        $this->articleId = $this->generateArticleId();
+    }
+}
+```
 
 ## Layer Breakdown
 
 - **Input:** ArticleInput (title, markdownBody, authorId, tags)
-- **Being:** MarkdownRendered (produces htmlBody), SlugGenerated (produces slug)
-- **Moment:** ContentPrepared (aggregates content data), MetadataResolved (aggregates metadata)
-- **Final:** ArticlePublished (merges both Moments, stamps publication)
-- **Semantic:** ArticleTitle, MarkdownBody, AuthorId, Tag (validation)
+- **Being:** ArticlePrepared (renders HTML, generates slug, extracts excerpt, resolves author)
+- **Final:** ArticlePublished (stamps publication with ID and timestamp)
+- **Semantic:** Title, MarkdownBody, AuthorId, Tag, HtmlBody, Slug, Excerpt, AuthorName (validation)
 - **Reason:** MarkdownRenderer, SlugGenerator, ExcerptExtractor, AuthorResolver, PublishTimestamper
