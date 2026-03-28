@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Be\Demo\ContactForm\Input;
 
-use Be\Demo\ContactForm\Final\ContactReceived;
+use Be\Demo\ContactForm\Being\EmailNormalized;
 use Be\Framework\Attribute\Be;
 
 /**
  * Input for Contact Form transformation
  *
  * Captures contact form submission data.
- * Declares its potential to become ContactReceived.
+ * Declares its potential to become EmailNormalized.
  */
-#[Be([ContactReceived::class])]
+#[Be([EmailNormalized::class])]
 final readonly class ContactInput
 {
     public function __construct(

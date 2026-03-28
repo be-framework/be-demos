@@ -11,8 +11,8 @@ use Be\Demo\ContactForm\Final\ContactReceived;
 use Be\Demo\ContactForm\Input\ContactInput;
 use Be\Demo\ContactForm\Module\AppModule;
 use Be\Demo\ContactForm\Semantic\Email;
-use Be\Demo\ContactForm\Semantic\MessageBody;
-use Be\Demo\ContactForm\Semantic\SubjectLine;
+use Be\Demo\ContactForm\Semantic\Message;
+use Be\Demo\ContactForm\Semantic\Subject;
 use Be\Framework\Becoming;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
@@ -81,9 +81,9 @@ class ContactFormTest extends TestCase
         $semantic->validate('not-an-email');
     }
 
-    public function testValidSubjectLine(): void
+    public function testValidSubject(): void
     {
-        $semantic = new SubjectLine();
+        $semantic = new Subject();
         $semantic->validate('Hello from the contact form');
         $this->addToAssertionCount(1);
     }
@@ -91,27 +91,27 @@ class ContactFormTest extends TestCase
     public function testEmptySubjectThrowsException(): void
     {
         $this->expectException(InvalidSubjectException::class);
-        $semantic = new SubjectLine();
+        $semantic = new Subject();
         $semantic->validate('');
     }
 
     public function testWhitespaceOnlySubjectThrowsException(): void
     {
         $this->expectException(InvalidSubjectException::class);
-        $semantic = new SubjectLine();
+        $semantic = new Subject();
         $semantic->validate('   ');
     }
 
-    public function testSubjectLineTooLongThrowsException(): void
+    public function testSubjectTooLongThrowsException(): void
     {
         $this->expectException(InvalidSubjectException::class);
-        $semantic = new SubjectLine();
+        $semantic = new Subject();
         $semantic->validate(str_repeat('a', 201));
     }
 
-    public function testValidMessageBody(): void
+    public function testValidMessage(): void
     {
-        $semantic = new MessageBody();
+        $semantic = new Message();
         $semantic->validate('This message is long enough to pass validation.');
         $this->addToAssertionCount(1);
     }
@@ -119,14 +119,14 @@ class ContactFormTest extends TestCase
     public function testMessageTooShortThrowsException(): void
     {
         $this->expectException(InvalidMessageException::class);
-        $semantic = new MessageBody();
+        $semantic = new Message();
         $semantic->validate('Short');
     }
 
     public function testMessageTooLongThrowsException(): void
     {
         $this->expectException(InvalidMessageException::class);
-        $semantic = new MessageBody();
+        $semantic = new Message();
         $semantic->validate(str_repeat('a', 5001));
     }
 }

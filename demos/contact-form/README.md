@@ -15,7 +15,7 @@ A contact form submission is validated, the email is normalized through a Being 
 ### Input (Potentiality)
 
 ```php
-#[Be([ContactReceived::class])]
+#[Be([EmailNormalized::class])]
 final readonly class ContactInput
 {
     public function __construct(
@@ -31,11 +31,13 @@ The `#[Be]` attribute declares what this Input *can become*.
 
 ### Semantic (Validation)
 
-Three Semantic validators ensure data integrity:
+Five Semantic validators ensure data integrity:
 
+- **Name** - Validates non-empty name
 - **Email** - Validates email format using `filter_var`
-- **SubjectLine** - Validates non-empty and max 200 characters
-- **MessageBody** - Validates min 10 and max 5000 characters
+- **Subject** - Validates non-empty and max 200 characters
+- **Message** - Validates min 10 and max 5000 characters
+- **NormalizedEmail** - Validates normalized email format
 
 ```php
 final class Email
@@ -53,12 +55,16 @@ final class Email
 ### Being (Transformation)
 
 ```php
+#[Be([ContactReceived::class])]
 final readonly class EmailNormalized
 {
     public string $normalizedEmail;
 
     public function __construct(
-        #[Input] string $email,
+        #[Input] public string $name,
+        #[Input] public string $email,
+        #[Input] public string $subject,
+        #[Input] public string $message,
         #[Inject] EmailNormalizer $normalizer,
     ) {
         $this->normalizedEmail = $normalizer->normalize($email);
@@ -66,7 +72,7 @@ final readonly class EmailNormalized
 }
 ```
 
-The Being state transforms the raw email into a normalized form.
+The Being state transforms the raw email into a normalized form. Note that all properties from Input are carried through to support the Final state's requirements.
 
 ### Final (Actuality)
 
@@ -126,7 +132,7 @@ composer install
 | Concept | Class | Role |
 |---------|-------|------|
 | Input | ContactInput | Potentiality |
-| Semantic | Email, SubjectLine, MessageBody | Validation |
+| Semantic | Name, Email, Subject, Message, NormalizedEmail | Validation |
 | Being | EmailNormalized | Transformation |
 | Final | ContactReceived | Actuality |
 | Reason | EmailNormalizer, ReceiptGenerator | Sufficient reason |

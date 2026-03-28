@@ -8,11 +8,11 @@ use Be\Demo\ContactForm\Exception\InvalidSubjectException;
 use Be\Framework\Attribute\Validate;
 
 /**
- * SubjectLine - Semantic validation
+ * Subject - Semantic validation
  *
- * Validates that the subject line is non-empty and within length limits.
+ * Validates that the subject is non-empty and within length limits.
  */
-final class SubjectLine
+final class Subject
 {
     #[Validate]
     public function validate(string $subject): void

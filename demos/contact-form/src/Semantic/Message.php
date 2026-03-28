@@ -8,11 +8,11 @@ use Be\Demo\ContactForm\Exception\InvalidMessageException;
 use Be\Framework\Attribute\Validate;
 
 /**
- * MessageBody - Semantic validation
+ * Message - Semantic validation
  *
- * Validates that the message body meets minimum and maximum length requirements.
+ * Validates that the message meets minimum and maximum length requirements.
  */
-final class MessageBody
+final class Message
 {
     #[Validate]
     public function validate(string $message): void
