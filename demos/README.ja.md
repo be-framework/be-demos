@@ -1,0 +1,138 @@
+# BE Framework デモ集
+
+BE Frameworkの存在論的プログラミングアプローチを示すデモプロジェクト集です。
+
+## 哲学
+
+BE Frameworkは「Be, Don't Do（するな、あれ）」の原則を体現しています。ソフトウェアを動作の連続ではなく、存在の変容（メタモルフォーシス）としてモデル化します。各デモは6つの哲学的レイヤーを通じて異なる変容パターンを示します：
+
+| レイヤー | 語源 | 役割 |
+|---------|------|------|
+| **Input** | δύναμις（デュナミス） | システムに入る生の可能態 |
+| **Being** | Dasein（現存在） | 計算されたプロパティを持つ存在状態 |
+| **Moment** | 契機 | 遅延Potentialを持つ過渡的段階 |
+| **Final** | ἐνέργεια（エネルゲイア） | 完全に現実化された結果 |
+| **Semantic** | Sinn（意味） | ドメイン検証ルール |
+| **Reason** | 充足理由律 | ビジネスロジックと外部連携 |
+
+## デモカタログ
+
+### 初級
+
+#### [contact-form](./contact-form/)
+**パターン:** 線形変換
+**フロー:** `Input → Being → Final`
+
+最もシンプルなBE Frameworkパターン。基本的な入力検証、メール正規化、受領証生成を示すお問い合わせフォームです。
+
+```
+ContactInput → EmailNormalized → ContactReceived
+```
+
+#### [user-registration](./user-registration/)
+**パターン:** 連鎖チェーン
+**フロー:** `Input → Being(A) → Being(B) → Being(C) → Final`
+
+Being変換を連鎖させたユーザー登録：メール検証、パスワードハッシュ化、プロフィール拡充。
+
+```
+RegistrationInput → EmailVerified → PasswordHashed → ProfileEnriched → UserRegistered
+```
+
+### 中級
+
+#### [blog-publishing](./blog-publishing/)
+**パターン:** ダイヤモンド（純粋データMoment）
+**フロー:** `Input → Being(A) + Being(B) → Moment(A) + Moment(B) → Final`
+
+記事公開デモ。並列Beingパスが純粋データMoment（Potentialなし）を通じて収束します。
+
+```
+ArticleInput ─┬→ MarkdownRendered → ContentPrepared ─┬→ ArticlePublished
+              └→ SlugGenerated    → MetadataResolved ─┘
+```
+
+### 上級
+
+#### [medical-triage](./medical-triage/)
+**パターン:** 分岐メタモルフォーシス
+**フロー:** `Input → Being → [分岐] → Final(A) | Final(B) | Final(C)`
+
+JTASプロトコルを実装した救急トリアージ。1つの入力が重症度評価に基づき3つの異なるFinalに分岐します。
+
+```
+TriageInput → VitalsMeasured → TriageLevelDetermined
+                                        │
+              ┌─────────────────────────┼─────────────────────────┐
+              ↓                         ↓                         ↓
+        [緊急]                     [準緊急]                    [非緊急]
+              ↓                         ↓                         ↓
+     EmergencyAdmitted           UrgentQueued           OutpatientReferred
+```
+
+#### [loan-application](./loan-application/)
+**パターン:** カスケードダイヤモンド（2段階）
+**フロー:** `Input → Stage1(並列 → 収束) → Stage2(並列 → Final)`
+
+段階的Moment実現を伴う住宅ローン申請。Stage 1のMomentは適格性確認時に実現、Stage 2のMomentは最終承認時に実現。
+
+```
+LoanInput → IdentityVerified ─┬→ CreditScored   → CreditApproved   ─┬→ EligibilityConfirmed
+                              └→ IncomeAssessed → IncomeApproved   ─┘
+                                                                     ↓
+                              ┌→ PropertyAppraised → CollateralValued ─┬→ LoanApproved
+                              └→ InsuranceQuoted   → InsurancePrepared ─┘
+```
+
+#### [insurance-claim](./insurance-claim/)
+**パターン:** 複合収束
+**フロー:** `Input(A) + Input(B) → 収束 → 並列(3) → 分岐 → Final(A) | Final(B)`
+
+複数入力の収束、3方向並列評価、分岐Finalを持つ保険請求処理。
+
+```
+ClaimInput ──┬→ ClaimRegistered ─┬→ ClaimValidated ─┬→ DamageAssessed  ─┬→ [閾値判定] → ClaimSettled
+PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAssigned ─┤               または
+                                                    └→ FraudScreened   ─┘               ClaimEscalated
+```
+
+## パターン一覧
+
+| パターン | デモ | 入力数 | Being数 | Moment数 | Final数 |
+|---------|------|--------|---------|----------|---------|
+| 線形 | contact-form | 1 | 1 | 0 | 1 |
+| 連鎖 | user-registration | 1 | 3 | 0 | 1 |
+| ダイヤモンド | blog-publishing | 1 | 2 | 2 | 1 |
+| 分岐 | medical-triage | 1 | 2 | 2-3 | 3 |
+| カスケード | loan-application | 1 | 5 | 4 | 1 |
+| 複合 | insurance-claim | 2 | 5 | 3 | 2 |
+
+## テスト実行
+
+各デモには以下をカバーする包括的なテストが含まれます：
+- 正常系統合テスト
+- Semantic検証単体テスト
+- Reasonレイヤーロジックテスト
+- Potential冪等性テスト（該当する場合）
+
+```bash
+# 全テスト実行
+composer test
+
+# 特定デモのテスト実行
+./vendor/bin/phpunit demos/medical-triage/tests/
+```
+
+## 要件
+
+- PHP 8.2+
+- Composer
+- Ray.Di（依存性注入）
+
+## ライセンス
+
+MIT
+
+---
+
+[English version](./README.md)
