@@ -1,0 +1,181 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Be\Demo\BlogPublishing\Tests;
+
+use Be\Demo\BlogPublishing\Exception\InvalidAuthorException;
+use Be\Demo\BlogPublishing\Exception\InvalidBodyException;
+use Be\Demo\BlogPublishing\Exception\InvalidTagException;
+use Be\Demo\BlogPublishing\Exception\InvalidTitleException;
+use Be\Demo\BlogPublishing\Final\ArticlePublished;
+use Be\Demo\BlogPublishing\Input\ArticleInput;
+use Be\Demo\BlogPublishing\Module\AppModule;
+use Be\Demo\BlogPublishing\Semantic\ArticleTitle;
+use Be\Demo\BlogPublishing\Semantic\AuthorId;
+use Be\Demo\BlogPublishing\Semantic\MarkdownBody;
+use Be\Demo\BlogPublishing\Semantic\Tag;
+use Be\Framework\Becoming;
+use PHPUnit\Framework\TestCase;
+use Ray\Di\Injector;
+
+class BlogPublishingTest extends TestCase
+{
+    private Becoming $becoming;
+
+    protected function setUp(): void
+    {
+        $injector = new Injector(new AppModule());
+        $this->becoming = $injector->getInstance(Becoming::class);
+    }
+
+    public function testArticleInputBecomesArticlePublished(): void
+    {
+        $input = new ArticleInput(
+            title: 'Understanding the BE Framework',
+            markdownBody: 'The BE Framework brings **Hegelian philosophy** to software architecture. '
+                . 'It models transformations as a process of *becoming*, where Input evolves through '
+                . 'Being and Moment stages to reach its Final state.',
+            authorId: '550e8400-e29b-41d4-a716-446655440000',
+            tags: ['philosophy', 'framework', 'php'],
+        );
+
+        /** @var ArticlePublished $final */
+        $final = ($this->becoming)($input);
+
+        $this->assertInstanceOf(ArticlePublished::class, $final);
+        $this->assertStringStartsWith('ART-', $final->articleId);
+        $this->assertNotEmpty($final->publishedAt);
+
+        // Verify content Moment data is accessible (pure data, no be() needed)
+        $this->assertSame('Understanding the BE Framework', $final->content->title);
+        $this->assertStringContainsString('<strong>Hegelian philosophy</strong>', $final->content->htmlBody);
+        $this->assertNotEmpty($final->content->excerpt);
+
+        // Verify metadata Moment data is accessible (pure data, no be() needed)
+        $this->assertSame('understanding-the-be-framework', $final->metadata->slug);
+        $this->assertSame('550e8400-e29b-41d4-a716-446655440000', $final->metadata->authorId);
+        $this->assertSame(['philosophy', 'framework', 'php'], $final->metadata->tags);
+        $this->assertStringStartsWith('Author-', $final->metadata->authorName);
+    }
+
+    public function testArticleWithHeadings(): void
+    {
+        $input = new ArticleInput(
+            title: 'Markdown Rendering Test',
+            markdownBody: '# Introduction'
+                . "\n\n"
+                . 'This is the first paragraph of the article body which must be long enough '
+                . 'to pass the semantic validation of minimum fifty characters.',
+            authorId: '660e8400-e29b-41d4-a716-446655440000',
+            tags: ['test'],
+        );
+
+        /** @var ArticlePublished $final */
+        $final = ($this->becoming)($input);
+
+        $this->assertInstanceOf(ArticlePublished::class, $final);
+        $this->assertStringContainsString('<h1>Introduction</h1>', $final->content->htmlBody);
+        $this->assertSame('markdown-rendering-test', $final->metadata->slug);
+    }
+
+    public function testExcerptIsTruncated(): void
+    {
+        $longBody = str_repeat('This is a sentence for testing excerpt extraction. ', 20);
+
+        $input = new ArticleInput(
+            title: 'Long Article Excerpt Test',
+            markdownBody: $longBody,
+            authorId: '770e8400-e29b-41d4-a716-446655440000',
+            tags: ['long-form'],
+        );
+
+        /** @var ArticlePublished $final */
+        $final = ($this->becoming)($input);
+
+        // Excerpt should be truncated to 200 chars + "..."
+        $this->assertLessThanOrEqual(203, mb_strlen($final->content->excerpt));
+        $this->assertStringEndsWith('...', $final->content->excerpt);
+    }
+
+    // ──────────────────────────────────────────────
+    // Semantic Validation Tests
+    // ──────────────────────────────────────────────
+
+    public function testValidArticleTitle(): void
+    {
+        $semantic = new ArticleTitle();
+        $semantic->validate('Understanding the BE Framework');
+        $this->addToAssertionCount(1);
+    }
+
+    public function testEmptyTitleThrowsException(): void
+    {
+        $this->expectException(InvalidTitleException::class);
+        $semantic = new ArticleTitle();
+        $semantic->validate('');
+    }
+
+    public function testTitleTooLongThrowsException(): void
+    {
+        $this->expectException(InvalidTitleException::class);
+        $semantic = new ArticleTitle();
+        $semantic->validate(str_repeat('a', 201));
+    }
+
+    public function testValidMarkdownBody(): void
+    {
+        $semantic = new MarkdownBody();
+        $semantic->validate('This is the body content that is long enough to pass the minimum 50 character validation.');
+        $this->addToAssertionCount(1);
+    }
+
+    public function testBodyTooShortThrowsException(): void
+    {
+        $this->expectException(InvalidBodyException::class);
+        $semantic = new MarkdownBody();
+        $semantic->validate('Too short body.');
+    }
+
+    public function testBodyTooLongThrowsException(): void
+    {
+        $this->expectException(InvalidBodyException::class);
+        $semantic = new MarkdownBody();
+        $semantic->validate(str_repeat('a', 50001));
+    }
+
+    public function testValidAuthorId(): void
+    {
+        $semantic = new AuthorId();
+        $semantic->validate('550e8400-e29b-41d4-a716-446655440000');
+        $this->addToAssertionCount(1);
+    }
+
+    public function testInvalidAuthorIdThrowsException(): void
+    {
+        $this->expectException(InvalidAuthorException::class);
+        $semantic = new AuthorId();
+        $semantic->validate('not-a-valid-uuid');
+    }
+
+    public function testValidTag(): void
+    {
+        $semantic = new Tag();
+        $semantic->validate('philosophy');
+        $this->addToAssertionCount(1);
+    }
+
+    public function testInvalidTagFormatThrowsException(): void
+    {
+        $this->expectException(InvalidTagException::class);
+        $semantic = new Tag();
+        $semantic->validate('INVALID_TAG');
+    }
+
+    public function testTagTooLongThrowsException(): void
+    {
+        $this->expectException(InvalidTagException::class);
+        $semantic = new Tag();
+        $semantic->validate(str_repeat('a', 31));
+    }
+}

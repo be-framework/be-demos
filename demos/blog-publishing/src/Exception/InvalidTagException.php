@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Be\Demo\BlogPublishing\Exception;
+
+use Be\Framework\Attribute\Message;
+use DomainException;
+
+#[Message([
+    'en' => 'Invalid tag. Must be lowercase alphanumeric with hyphens, max 30 characters.',
+    'ja' => '無効なタグです。小文字英数字とハイフンのみ、30文字以下で入力してください。'
+])]
+final class InvalidTagException extends DomainException
+{
+}
