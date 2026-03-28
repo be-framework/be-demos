@@ -11,6 +11,8 @@ use Be\Demo\BlogPublishing\Exception\InvalidTitleException;
 use Be\Demo\BlogPublishing\Final\ArticlePublished;
 use Be\Demo\BlogPublishing\Input\ArticleInput;
 use Be\Demo\BlogPublishing\Module\AppModule;
+use Be\Demo\BlogPublishing\Reason\ExcerptExtractor;
+use Be\Demo\BlogPublishing\Reason\MarkdownRenderer;
 use Be\Demo\BlogPublishing\Semantic\ArticleTitle;
 use Be\Demo\BlogPublishing\Semantic\AuthorId;
 use Be\Demo\BlogPublishing\Semantic\MarkdownBody;
@@ -177,5 +179,64 @@ class BlogPublishingTest extends TestCase
         $this->expectException(InvalidTagException::class);
         $semantic = new Tag();
         $semantic->validate(str_repeat('a', 31));
+    }
+
+    // ──────────────────────────────────────────────
+    // Reason Layer Tests
+    // ──────────────────────────────────────────────
+
+    public function testMarkdownRendererEscapesHtmlToPreventXss(): void
+    {
+        $renderer = new MarkdownRenderer();
+        $malicious = '<script>alert("xss")</script>';
+
+        $html = $renderer->render($malicious);
+
+        $this->assertStringNotContainsString('<script>', $html);
+        $this->assertStringContainsString('&lt;script&gt;', $html);
+    }
+
+    public function testMarkdownRendererPreservesMarkdownAfterEscaping(): void
+    {
+        $renderer = new MarkdownRenderer();
+        $input = '**bold** and *italic* with <script>xss</script>';
+
+        $html = $renderer->render($input);
+
+        $this->assertStringContainsString('<strong>bold</strong>', $html);
+        $this->assertStringContainsString('<em>italic</em>', $html);
+        $this->assertStringNotContainsString('<script>', $html);
+    }
+
+    public function testExcerptExactly200CharsNoTruncation(): void
+    {
+        $extractor = new ExcerptExtractor();
+        $text = str_repeat('a', 200);
+
+        $excerpt = $extractor->extract($text);
+
+        $this->assertSame(200, mb_strlen($excerpt));
+        $this->assertStringNotContainsString('...', $excerpt);
+    }
+
+    public function testExcerpt201CharsTruncatedTo203(): void
+    {
+        $extractor = new ExcerptExtractor();
+        $text = str_repeat('a', 201);
+
+        $excerpt = $extractor->extract($text);
+
+        $this->assertSame(203, mb_strlen($excerpt)); // 200 + "..."
+        $this->assertStringEndsWith('...', $excerpt);
+    }
+
+    public function testExcerptStripsHtmlTags(): void
+    {
+        $extractor = new ExcerptExtractor();
+        $html = '<p>Hello <strong>world</strong></p>';
+
+        $excerpt = $extractor->extract($html);
+
+        $this->assertSame('Hello world', $excerpt);
     }
 }
