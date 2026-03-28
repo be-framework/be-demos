@@ -20,6 +20,9 @@ jobs:
           - user-registration
           - blog-publishing
           - order-processing
+          - medical-triage
+          - loan-application
+          - insurance-claim
     defaults:
       run:
         working-directory: demos/${{ matrix.demo }}

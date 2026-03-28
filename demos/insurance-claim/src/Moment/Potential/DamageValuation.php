@@ -14,7 +14,7 @@ use Be\Demo\InsuranceClaim\Moment\MomentInterface;
  */
 final class DamageValuation implements MomentInterface
 {
-    /** @var callable(): void */
+    /** @var callable(): string */
     private $realize;
 
     private ?string $valuationId = null;
