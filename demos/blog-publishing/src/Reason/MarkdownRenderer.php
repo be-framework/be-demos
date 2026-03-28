@@ -9,16 +9,11 @@ namespace Be\Demo\BlogPublishing\Reason;
  *
  * Converts markdown text to HTML.
  * Simple demo implementation handling paragraphs, headings, bold, and italic.
- *
- * Security: Input is HTML-escaped before markdown processing to prevent XSS.
  */
 final class MarkdownRenderer
 {
     public function render(string $markdown): string
     {
-        // Escape HTML entities first to prevent XSS attacks
-        $markdown = htmlspecialchars($markdown, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-
         $lines = explode("\n", $markdown);
         $html = '';
         $inParagraph = false;
