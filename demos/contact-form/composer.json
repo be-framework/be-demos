@@ -2,6 +2,8 @@
     "name": "be-framework/demo-contact-form",
     "description": "Be Framework Contact Form Demo - Semantic validation and Being transformation",
     "type": "project",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Be\\Demo\\ContactForm\\": "src/"

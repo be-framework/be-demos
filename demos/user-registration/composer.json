@@ -2,6 +2,8 @@
     "name": "be-framework/demo-user-registration",
     "description": "Be Framework User Registration Demo - Being chain (sequential) pattern",
     "type": "project",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Be\\Demo\\UserRegistration\\": "src/"
