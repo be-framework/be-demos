@@ -15,10 +15,11 @@ jobs:
       matrix:
         php: ['8.3', '8.4', '8.5']
         demo:
-          - order-processing
+          - hello-world
           - contact-form
           - user-registration
           - blog-publishing
+          - order-processing
     defaults:
       run:
         working-directory: demos/${{ matrix.demo }}
