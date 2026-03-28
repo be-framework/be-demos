@@ -1,6 +1,8 @@
 {
     "name": "be-framework/demo-loan-application",
     "type": "project",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Be\\Demo\\LoanApplication\\": "src/"
