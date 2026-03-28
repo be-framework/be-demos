@@ -126,8 +126,7 @@ composer test
 ## Requirements
 
 - PHP 8.2+
-- Composer
-- Ray.Di (dependency injection)
+- [Ray.Di](https://ray-di.github.io/) (dependency injection)
 
 ## License
 

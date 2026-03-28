@@ -126,8 +126,7 @@ composer test
 ## 要件
 
 - PHP 8.2+
-- Composer
-- Ray.Di（依存性注入）
+- [Ray.Di](https://ray-di.github.io/)（依存性注入）
 
 ## ライセンス
 
