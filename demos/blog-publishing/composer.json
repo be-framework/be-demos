@@ -2,8 +2,6 @@
     "name": "be-framework/demo-blog-publishing",
     "description": "Be Framework Blog Publishing Demo - Moment without Potential (pure data Moment) and mini-diamond merge",
     "type": "project",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Be\\Demo\\BlogPublishing\\": "src/"
@@ -16,7 +14,7 @@
     },
     "require": {
         "php": "^8.3",
-        "be-framework/be": "0.x-dev",
+        "be-framework/be": "0.x-dev as 0.1.0",
         "ray/di": "^2.18"
     },
     "require-dev": {
