@@ -153,7 +153,7 @@ class InsuranceClaimTest extends TestCase
             claimantId: 'CLM-001',
             incidentDate: '2024-06-15',
             incidentType: 'accident',
-            checker: $registrar
+            registrar: $registrar
         );
 
         $this->assertStringStartsWith('CLN-ACC-', $being->claimNumber);

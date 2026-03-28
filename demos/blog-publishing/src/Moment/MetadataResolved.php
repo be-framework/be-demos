@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Be\Demo\BlogPublishing\Moment;
 
+use Be\Demo\BlogPublishing\Being\SlugGenerated;
 use Be\Demo\BlogPublishing\Reason\AuthorResolverInterface;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
@@ -22,13 +23,15 @@ use Ray\InputQuery\Attribute\Input;
 final readonly class MetadataResolved
 {
     public string $authorName;
+    public string $slug;
 
     public function __construct(
-        #[Input] public string $slug,
+        #[Inject] SlugGenerated $slugGenerated,
         #[Input] public string $authorId,
         #[Input] public array $tags,
         #[Inject] AuthorResolverInterface $resolver,
     ) {
+        $this->slug = $slugGenerated->slug;
         $this->authorName = $resolver->resolve($authorId);
     }
 }

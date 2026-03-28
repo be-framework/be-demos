@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Be\Demo\BlogPublishing\Moment;
 
+use Be\Demo\BlogPublishing\Being\MarkdownRendered;
 use Be\Demo\BlogPublishing\Reason\ExcerptExtractor;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
@@ -22,13 +23,15 @@ use Ray\InputQuery\Attribute\Input;
 final readonly class ContentPrepared
 {
     public string $excerpt;
+    public string $htmlBody;
 
     public function __construct(
         #[Input] public string $title,
         #[Input] public string $markdownBody,
-        #[Input] public string $htmlBody,
+        #[Inject] MarkdownRendered $markdownRendered,
         #[Inject] ExcerptExtractor $extractor,
     ) {
-        $this->excerpt = $extractor->extract($htmlBody);
+        $this->htmlBody = $markdownRendered->htmlBody;
+        $this->excerpt = $extractor->extract($this->htmlBody);
     }
 }

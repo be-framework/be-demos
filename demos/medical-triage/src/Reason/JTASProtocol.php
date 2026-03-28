@@ -7,15 +7,15 @@ namespace Be\Demo\MedicalTriage\Reason;
 /**
  * JTAS Protocol - Policy Reason (the key branching logic)
  *
- * Japanese Triage and Acuity Scale assessment.
+ * Japan Triage and Acuity Scale assessment.
  * This is the Policy Reason that determines which Final path the patient takes.
  *
  * The assess() method returns triage level and code based on:
  * - Chief complaint severity
- * - Consciousness level (JCS)
+ * - Consciousness level (JCS - Japan Coma Scale)
  * - Vital sign abnormalities
  *
- * @link https://en.wikipedia.org/wiki/Canadian_Triage_and_Acuity_Scale
+ * @link https://www.jaam.jp/html/info/info-20200327.htm
  */
 final class JTASProtocol
 {
