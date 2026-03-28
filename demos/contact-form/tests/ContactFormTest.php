@@ -101,4 +101,46 @@ class ContactFormTest extends TestCase
 
         ($this->becoming)($input);
     }
+
+    public function testSubjectLineTooLongThrowsException(): void
+    {
+        $this->expectException(InvalidSubjectException::class);
+
+        $input = new ContactInput(
+            name: 'Test User',
+            email: 'test@example.com',
+            subject: str_repeat('a', 201),
+            message: 'This message is long enough to pass validation.',
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testMessageTooLongThrowsException(): void
+    {
+        $this->expectException(InvalidMessageException::class);
+
+        $input = new ContactInput(
+            name: 'Test User',
+            email: 'test@example.com',
+            subject: 'Valid subject',
+            message: str_repeat('a', 5001),
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testWhitespaceOnlySubjectThrowsException(): void
+    {
+        $this->expectException(InvalidSubjectException::class);
+
+        $input = new ContactInput(
+            name: 'Test User',
+            email: 'test@example.com',
+            subject: '   ',
+            message: 'This message is long enough to pass validation.',
+        );
+
+        ($this->becoming)($input);
+    }
 }

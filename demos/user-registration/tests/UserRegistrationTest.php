@@ -69,4 +69,112 @@ class UserRegistrationTest extends TestCase
         $this->assertStringStartsWith('USR-', $final->userId);
         $this->assertNotEmpty($final->welcomeToken);
     }
+
+    // ──────────────────────────────────────────────
+    // Negative Test Cases
+    // ──────────────────────────────────────────────
+
+    public function testInvalidEmailThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\UserRegistration\Exception\InvalidEmailException::class);
+
+        $input = new RegistrationInput(
+            email: 'not-an-email',
+            password: 'Str0ngP@ss',
+            displayName: 'Test User'
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testWeakPasswordTooShortThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\UserRegistration\Exception\WeakPasswordException::class);
+
+        $input = new RegistrationInput(
+            email: 'test@example.com',
+            password: 'Abc1',
+            displayName: 'Test User'
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testWeakPasswordMissingUppercaseThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\UserRegistration\Exception\WeakPasswordException::class);
+
+        $input = new RegistrationInput(
+            email: 'test@example.com',
+            password: 'lowercase123',
+            displayName: 'Test User'
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testWeakPasswordMissingLowercaseThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\UserRegistration\Exception\WeakPasswordException::class);
+
+        $input = new RegistrationInput(
+            email: 'test@example.com',
+            password: 'UPPERCASE123',
+            displayName: 'Test User'
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testWeakPasswordMissingDigitThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\UserRegistration\Exception\WeakPasswordException::class);
+
+        $input = new RegistrationInput(
+            email: 'test@example.com',
+            password: 'NoDigitsHere',
+            displayName: 'Test User'
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testInvalidDisplayNameTooShortThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\UserRegistration\Exception\InvalidDisplayNameException::class);
+
+        $input = new RegistrationInput(
+            email: 'test@example.com',
+            password: 'Str0ngP@ss',
+            displayName: 'A'
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testInvalidDisplayNameTooLongThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\UserRegistration\Exception\InvalidDisplayNameException::class);
+
+        $input = new RegistrationInput(
+            email: 'test@example.com',
+            password: 'Str0ngP@ss',
+            displayName: str_repeat('a', 51)
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testInvalidDisplayNameWithControlCharsThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\UserRegistration\Exception\InvalidDisplayNameException::class);
+
+        $input = new RegistrationInput(
+            email: 'test@example.com',
+            password: 'Str0ngP@ss',
+            displayName: "Test\x00User"
+        );
+
+        ($this->becoming)($input);
+    }
 }

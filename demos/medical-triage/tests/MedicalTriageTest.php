@@ -311,4 +311,64 @@ class MedicalTriageTest extends TestCase
         $this->assertSame(1, $callCount);
         $this->assertSame('TEAM-TRAUMA-001', $alert->getTeamId());
     }
+
+    // =========================================================================
+    // Semantic Validation Negative Tests
+    // =========================================================================
+
+    public function testInvalidPatientIdFormatThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\MedicalTriage\Exception\InvalidPatientIdException::class);
+
+        $validator = new \Be\Demo\MedicalTriage\Semantic\PatientId();
+        $validator->validate('INVALID-123');
+    }
+
+    public function testEmptyPatientIdThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\MedicalTriage\Exception\InvalidPatientIdException::class);
+
+        $validator = new \Be\Demo\MedicalTriage\Semantic\PatientId();
+        $validator->validate('');
+    }
+
+    public function testTemperatureTooLowThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\MedicalTriage\Exception\InvalidTemperatureException::class);
+
+        $validator = new \Be\Demo\MedicalTriage\Semantic\Temperature();
+        $validator->validate(29.9);
+    }
+
+    public function testTemperatureTooHighThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\MedicalTriage\Exception\InvalidTemperatureException::class);
+
+        $validator = new \Be\Demo\MedicalTriage\Semantic\Temperature();
+        $validator->validate(45.1);
+    }
+
+    public function testHeartRateNegativeThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\MedicalTriage\Exception\InvalidHeartRateException::class);
+
+        $validator = new \Be\Demo\MedicalTriage\Semantic\HeartRate();
+        $validator->validate(-1);
+    }
+
+    public function testHeartRateTooHighThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\MedicalTriage\Exception\InvalidHeartRateException::class);
+
+        $validator = new \Be\Demo\MedicalTriage\Semantic\HeartRate();
+        $validator->validate(301);
+    }
+
+    public function testInvalidConsciousnessLevelThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\MedicalTriage\Exception\InvalidConsciousnessException::class);
+
+        $validator = new \Be\Demo\MedicalTriage\Semantic\ConsciousnessLevel();
+        $validator->validate(5); // 5 is not a valid JCS value
+    }
 }

@@ -30,6 +30,10 @@ use Be\Demo\LoanApplication\Reason\PropertyAppraisal;
 use Be\Demo\LoanApplication\Semantic\AnnualIncome;
 use Be\Demo\LoanApplication\Semantic\ApplicantId;
 use Be\Demo\LoanApplication\Semantic\LoanAmount;
+use Be\Demo\LoanApplication\Semantic\PropertyAddress;
+use Be\Demo\LoanApplication\Semantic\EmploymentYears;
+use Be\Demo\LoanApplication\Exception\InvalidPropertyAddressException;
+use Be\Demo\LoanApplication\Exception\InvalidEmploymentException;
 use PHPUnit\Framework\TestCase;
 
 class LoanApplicationTest extends TestCase
@@ -337,5 +341,49 @@ class LoanApplicationTest extends TestCase
         // Verify all Stage 2 potentials are realized
         $this->assertStringStartsWith('COL-', $final->collateral->registration->getRegistrationId());
         $this->assertStringStartsWith('INS-', $final->insurance->contract->getPolicyId());
+    }
+
+    // ─── Additional Semantic Negative Tests ─────────────────────────
+
+    public function testNegativeIncomeThrows(): void
+    {
+        $this->expectException(InvalidIncomeException::class);
+        $validator = new AnnualIncome();
+        $validator->validate(-1000000);
+    }
+
+    public function testEmptyPropertyAddressThrows(): void
+    {
+        $this->expectException(InvalidPropertyAddressException::class);
+        $validator = new PropertyAddress();
+        $validator->validate('');
+    }
+
+    public function testPropertyAddressTooShortThrows(): void
+    {
+        $this->expectException(InvalidPropertyAddressException::class);
+        $validator = new PropertyAddress();
+        $validator->validate('ABC');
+    }
+
+    public function testPropertyAddressTooLongThrows(): void
+    {
+        $this->expectException(InvalidPropertyAddressException::class);
+        $validator = new PropertyAddress();
+        $validator->validate(str_repeat('a', 201));
+    }
+
+    public function testNegativeEmploymentYearsThrows(): void
+    {
+        $this->expectException(InvalidEmploymentException::class);
+        $validator = new EmploymentYears();
+        $validator->validate(-1);
+    }
+
+    public function testEmploymentYearsTooHighThrows(): void
+    {
+        $this->expectException(InvalidEmploymentException::class);
+        $validator = new EmploymentYears();
+        $validator->validate(51);
     }
 }

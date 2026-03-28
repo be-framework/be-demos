@@ -89,4 +89,106 @@ class BlogPublishingTest extends TestCase
         $this->assertLessThanOrEqual(203, mb_strlen($final->content->excerpt));
         $this->assertStringEndsWith('...', $final->content->excerpt);
     }
+
+    // ──────────────────────────────────────────────
+    // Negative Test Cases
+    // ──────────────────────────────────────────────
+
+    public function testEmptyTitleThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidTitleException::class);
+
+        $input = new ArticleInput(
+            title: '',
+            markdownBody: 'This is the body content that is long enough to pass the minimum 50 character validation.',
+            authorId: '550e8400-e29b-41d4-a716-446655440000',
+            tags: ['test'],
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testTitleTooLongThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidTitleException::class);
+
+        $input = new ArticleInput(
+            title: str_repeat('a', 201),
+            markdownBody: 'This is the body content that is long enough to pass the minimum 50 character validation.',
+            authorId: '550e8400-e29b-41d4-a716-446655440000',
+            tags: ['test'],
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testBodyTooShortThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidBodyException::class);
+
+        $input = new ArticleInput(
+            title: 'Valid Title',
+            markdownBody: 'Too short body.',
+            authorId: '550e8400-e29b-41d4-a716-446655440000',
+            tags: ['test'],
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testBodyTooLongThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidBodyException::class);
+
+        $input = new ArticleInput(
+            title: 'Valid Title',
+            markdownBody: str_repeat('a', 50001),
+            authorId: '550e8400-e29b-41d4-a716-446655440000',
+            tags: ['test'],
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testInvalidAuthorIdThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidAuthorException::class);
+
+        $input = new ArticleInput(
+            title: 'Valid Title',
+            markdownBody: 'This is the body content that is long enough to pass the minimum 50 character validation.',
+            authorId: 'not-a-valid-uuid',
+            tags: ['test'],
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testInvalidTagFormatThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidTagException::class);
+
+        $input = new ArticleInput(
+            title: 'Valid Title',
+            markdownBody: 'This is the body content that is long enough to pass the minimum 50 character validation.',
+            authorId: '550e8400-e29b-41d4-a716-446655440000',
+            tags: ['INVALID_TAG'],
+        );
+
+        ($this->becoming)($input);
+    }
+
+    public function testTagTooLongThrowsException(): void
+    {
+        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidTagException::class);
+
+        $input = new ArticleInput(
+            title: 'Valid Title',
+            markdownBody: 'This is the body content that is long enough to pass the minimum 50 character validation.',
+            authorId: '550e8400-e29b-41d4-a716-446655440000',
+            tags: [str_repeat('a', 31)],
+        );
+
+        ($this->becoming)($input);
+    }
 }
