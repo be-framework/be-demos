@@ -1,19 +1,20 @@
 {
-    "name": "be-framework/demo-hello-world",
-    "description": "Be Framework Hello World Demo - The simplest transformation",
+    "name": "be-framework/demo-user-registration",
+    "description": "Be Framework User Registration Demo - Being chain (sequential) pattern",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Be\\Demo\\Hello\\": "src/"
+            "Be\\Demo\\UserRegistration\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Be\\Demo\\Hello\\Tests\\": "tests/"
+            "Be\\Demo\\UserRegistration\\Tests\\": "tests/"
         }
     },
     "require": {
         "php": "^8.3",
+        "ext-mbstring": "*",
         "be-framework/be": "0.x-dev as 0.1.0",
         "ray/di": "^2.18"
     },
