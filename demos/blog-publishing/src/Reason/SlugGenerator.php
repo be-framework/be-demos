@@ -26,6 +26,9 @@ final class SlugGenerator
         $slug = preg_replace('/-+/', '-', $slug) ?? $slug;
 
         // Trim hyphens from edges
-        return trim($slug, '-');
+        $slug = trim($slug, '-');
+
+        // Fallback for empty slugs (e.g. non-ASCII-only titles)
+        return $slug !== '' ? $slug : 'untitled';
     }
 }

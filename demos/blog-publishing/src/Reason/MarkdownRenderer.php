@@ -61,6 +61,9 @@ final class MarkdownRenderer
 
     private function renderInline(string $text): string
     {
+        // Escape HTML entities first to prevent XSS
+        $text = htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+
         // Bold: **text**
         $text = preg_replace('/\*\*(.+?)\*\*/', '<strong>$1</strong>', $text) ?? $text;
 

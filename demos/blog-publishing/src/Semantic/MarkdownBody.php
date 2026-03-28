@@ -17,7 +17,7 @@ final class MarkdownBody
     #[Validate]
     public function validate(string $markdownBody): void
     {
-        $length = mb_strlen($markdownBody);
+        $length = mb_strlen(trim($markdownBody));
 
         if ($length < 50) {
             throw new InvalidBodyException();

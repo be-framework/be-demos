@@ -17,7 +17,7 @@ final class ArticleTitle
     #[Validate]
     public function validate(string $title): void
     {
-        $length = mb_strlen($title);
+        $length = mb_strlen(trim($title));
 
         if ($length < 1) {
             throw new InvalidTitleException();

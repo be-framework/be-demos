@@ -22,7 +22,7 @@ final readonly class PasswordHashed
 
     public function __construct(
         #[Input] public string $email,
-        #[Input] public string $password,
+        #[Input] string $password,
         #[Input] public string $displayName,
         #[Inject] PasswordHasher $hasher,
     ) {
