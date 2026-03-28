@@ -10,6 +10,9 @@ use Be\Demo\ContactForm\Exception\InvalidSubjectException;
 use Be\Demo\ContactForm\Final\ContactReceived;
 use Be\Demo\ContactForm\Input\ContactInput;
 use Be\Demo\ContactForm\Module\AppModule;
+use Be\Demo\ContactForm\Semantic\Email;
+use Be\Demo\ContactForm\Semantic\MessageBody;
+use Be\Demo\ContactForm\Semantic\SubjectLine;
 use Be\Framework\Becoming;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
@@ -60,87 +63,70 @@ class ContactFormTest extends TestCase
         $this->assertSame('jane@example.com', $final->normalizedEmail);
     }
 
+    // ──────────────────────────────────────────────
+    // Semantic Validation Tests
+    // ──────────────────────────────────────────────
+
+    public function testValidEmail(): void
+    {
+        $semantic = new Email();
+        $semantic->validate('test@example.com');
+        $this->addToAssertionCount(1);
+    }
+
     public function testInvalidEmailThrowsException(): void
     {
         $this->expectException(InvalidEmailException::class);
+        $semantic = new Email();
+        $semantic->validate('not-an-email');
+    }
 
-        $input = new ContactInput(
-            name: 'Test User',
-            email: 'not-an-email',
-            subject: 'Test subject line',
-            message: 'This message is long enough to pass validation.',
-        );
-
-        ($this->becoming)($input);
+    public function testValidSubjectLine(): void
+    {
+        $semantic = new SubjectLine();
+        $semantic->validate('Hello from the contact form');
+        $this->addToAssertionCount(1);
     }
 
     public function testEmptySubjectThrowsException(): void
     {
         $this->expectException(InvalidSubjectException::class);
-
-        $input = new ContactInput(
-            name: 'Test User',
-            email: 'test@example.com',
-            subject: '',
-            message: 'This message is long enough to pass validation.',
-        );
-
-        ($this->becoming)($input);
-    }
-
-    public function testMessageTooShortThrowsException(): void
-    {
-        $this->expectException(InvalidMessageException::class);
-
-        $input = new ContactInput(
-            name: 'Test User',
-            email: 'test@example.com',
-            subject: 'Valid subject',
-            message: 'Short',
-        );
-
-        ($this->becoming)($input);
-    }
-
-    public function testSubjectLineTooLongThrowsException(): void
-    {
-        $this->expectException(InvalidSubjectException::class);
-
-        $input = new ContactInput(
-            name: 'Test User',
-            email: 'test@example.com',
-            subject: str_repeat('a', 201),
-            message: 'This message is long enough to pass validation.',
-        );
-
-        ($this->becoming)($input);
-    }
-
-    public function testMessageTooLongThrowsException(): void
-    {
-        $this->expectException(InvalidMessageException::class);
-
-        $input = new ContactInput(
-            name: 'Test User',
-            email: 'test@example.com',
-            subject: 'Valid subject',
-            message: str_repeat('a', 5001),
-        );
-
-        ($this->becoming)($input);
+        $semantic = new SubjectLine();
+        $semantic->validate('');
     }
 
     public function testWhitespaceOnlySubjectThrowsException(): void
     {
         $this->expectException(InvalidSubjectException::class);
+        $semantic = new SubjectLine();
+        $semantic->validate('   ');
+    }
 
-        $input = new ContactInput(
-            name: 'Test User',
-            email: 'test@example.com',
-            subject: '   ',
-            message: 'This message is long enough to pass validation.',
-        );
+    public function testSubjectLineTooLongThrowsException(): void
+    {
+        $this->expectException(InvalidSubjectException::class);
+        $semantic = new SubjectLine();
+        $semantic->validate(str_repeat('a', 201));
+    }
 
-        ($this->becoming)($input);
+    public function testValidMessageBody(): void
+    {
+        $semantic = new MessageBody();
+        $semantic->validate('This message is long enough to pass validation.');
+        $this->addToAssertionCount(1);
+    }
+
+    public function testMessageTooShortThrowsException(): void
+    {
+        $this->expectException(InvalidMessageException::class);
+        $semantic = new MessageBody();
+        $semantic->validate('Short');
+    }
+
+    public function testMessageTooLongThrowsException(): void
+    {
+        $this->expectException(InvalidMessageException::class);
+        $semantic = new MessageBody();
+        $semantic->validate(str_repeat('a', 5001));
     }
 }

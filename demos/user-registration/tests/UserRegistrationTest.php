@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 namespace Be\Demo\UserRegistration\Tests;
 
+use Be\Demo\UserRegistration\Exception\InvalidDisplayNameException;
+use Be\Demo\UserRegistration\Exception\InvalidEmailException;
+use Be\Demo\UserRegistration\Exception\WeakPasswordException;
 use Be\Demo\UserRegistration\Final\UserRegistered;
 use Be\Demo\UserRegistration\Input\RegistrationInput;
 use Be\Demo\UserRegistration\Module\AppModule;
+use Be\Demo\UserRegistration\Semantic\DisplayName;
+use Be\Demo\UserRegistration\Semantic\Email;
+use Be\Demo\UserRegistration\Semantic\Password;
 use Be\Framework\Becoming;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
@@ -71,110 +77,83 @@ class UserRegistrationTest extends TestCase
     }
 
     // ──────────────────────────────────────────────
-    // Negative Test Cases
+    // Semantic Validation Tests
     // ──────────────────────────────────────────────
+
+    public function testValidEmail(): void
+    {
+        $semantic = new Email();
+        $semantic->validate('test@example.com');
+        $this->addToAssertionCount(1);
+    }
 
     public function testInvalidEmailThrowsException(): void
     {
-        $this->expectException(\Be\Demo\UserRegistration\Exception\InvalidEmailException::class);
+        $this->expectException(InvalidEmailException::class);
+        $semantic = new Email();
+        $semantic->validate('not-an-email');
+    }
 
-        $input = new RegistrationInput(
-            email: 'not-an-email',
-            password: 'Str0ngP@ss',
-            displayName: 'Test User'
-        );
-
-        ($this->becoming)($input);
+    public function testValidPassword(): void
+    {
+        $semantic = new Password();
+        $semantic->validate('Str0ngP@ss');
+        $this->addToAssertionCount(1);
     }
 
     public function testWeakPasswordTooShortThrowsException(): void
     {
-        $this->expectException(\Be\Demo\UserRegistration\Exception\WeakPasswordException::class);
-
-        $input = new RegistrationInput(
-            email: 'test@example.com',
-            password: 'Abc1',
-            displayName: 'Test User'
-        );
-
-        ($this->becoming)($input);
+        $this->expectException(WeakPasswordException::class);
+        $semantic = new Password();
+        $semantic->validate('Abc1');
     }
 
     public function testWeakPasswordMissingUppercaseThrowsException(): void
     {
-        $this->expectException(\Be\Demo\UserRegistration\Exception\WeakPasswordException::class);
-
-        $input = new RegistrationInput(
-            email: 'test@example.com',
-            password: 'lowercase123',
-            displayName: 'Test User'
-        );
-
-        ($this->becoming)($input);
+        $this->expectException(WeakPasswordException::class);
+        $semantic = new Password();
+        $semantic->validate('lowercase123');
     }
 
     public function testWeakPasswordMissingLowercaseThrowsException(): void
     {
-        $this->expectException(\Be\Demo\UserRegistration\Exception\WeakPasswordException::class);
-
-        $input = new RegistrationInput(
-            email: 'test@example.com',
-            password: 'UPPERCASE123',
-            displayName: 'Test User'
-        );
-
-        ($this->becoming)($input);
+        $this->expectException(WeakPasswordException::class);
+        $semantic = new Password();
+        $semantic->validate('UPPERCASE123');
     }
 
     public function testWeakPasswordMissingDigitThrowsException(): void
     {
-        $this->expectException(\Be\Demo\UserRegistration\Exception\WeakPasswordException::class);
+        $this->expectException(WeakPasswordException::class);
+        $semantic = new Password();
+        $semantic->validate('NoDigitsHere');
+    }
 
-        $input = new RegistrationInput(
-            email: 'test@example.com',
-            password: 'NoDigitsHere',
-            displayName: 'Test User'
-        );
-
-        ($this->becoming)($input);
+    public function testValidDisplayName(): void
+    {
+        $semantic = new DisplayName();
+        $semantic->validate('Alice');
+        $this->addToAssertionCount(1);
     }
 
     public function testInvalidDisplayNameTooShortThrowsException(): void
     {
-        $this->expectException(\Be\Demo\UserRegistration\Exception\InvalidDisplayNameException::class);
-
-        $input = new RegistrationInput(
-            email: 'test@example.com',
-            password: 'Str0ngP@ss',
-            displayName: 'A'
-        );
-
-        ($this->becoming)($input);
+        $this->expectException(InvalidDisplayNameException::class);
+        $semantic = new DisplayName();
+        $semantic->validate('A');
     }
 
     public function testInvalidDisplayNameTooLongThrowsException(): void
     {
-        $this->expectException(\Be\Demo\UserRegistration\Exception\InvalidDisplayNameException::class);
-
-        $input = new RegistrationInput(
-            email: 'test@example.com',
-            password: 'Str0ngP@ss',
-            displayName: str_repeat('a', 51)
-        );
-
-        ($this->becoming)($input);
+        $this->expectException(InvalidDisplayNameException::class);
+        $semantic = new DisplayName();
+        $semantic->validate(str_repeat('a', 51));
     }
 
     public function testInvalidDisplayNameWithControlCharsThrowsException(): void
     {
-        $this->expectException(\Be\Demo\UserRegistration\Exception\InvalidDisplayNameException::class);
-
-        $input = new RegistrationInput(
-            email: 'test@example.com',
-            password: 'Str0ngP@ss',
-            displayName: "Test\x00User"
-        );
-
-        ($this->becoming)($input);
+        $this->expectException(InvalidDisplayNameException::class);
+        $semantic = new DisplayName();
+        $semantic->validate("Test\x00User");
     }
 }

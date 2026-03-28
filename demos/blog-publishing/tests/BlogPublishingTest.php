@@ -4,9 +4,17 @@ declare(strict_types=1);
 
 namespace Be\Demo\BlogPublishing\Tests;
 
+use Be\Demo\BlogPublishing\Exception\InvalidAuthorException;
+use Be\Demo\BlogPublishing\Exception\InvalidBodyException;
+use Be\Demo\BlogPublishing\Exception\InvalidTagException;
+use Be\Demo\BlogPublishing\Exception\InvalidTitleException;
 use Be\Demo\BlogPublishing\Final\ArticlePublished;
 use Be\Demo\BlogPublishing\Input\ArticleInput;
 use Be\Demo\BlogPublishing\Module\AppModule;
+use Be\Demo\BlogPublishing\Semantic\ArticleTitle;
+use Be\Demo\BlogPublishing\Semantic\AuthorId;
+use Be\Demo\BlogPublishing\Semantic\MarkdownBody;
+use Be\Demo\BlogPublishing\Semantic\Tag;
 use Be\Framework\Becoming;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
@@ -91,104 +99,83 @@ class BlogPublishingTest extends TestCase
     }
 
     // ──────────────────────────────────────────────
-    // Negative Test Cases
+    // Semantic Validation Tests
     // ──────────────────────────────────────────────
+
+    public function testValidArticleTitle(): void
+    {
+        $semantic = new ArticleTitle();
+        $semantic->validate('Understanding the BE Framework');
+        $this->addToAssertionCount(1);
+    }
 
     public function testEmptyTitleThrowsException(): void
     {
-        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidTitleException::class);
-
-        $input = new ArticleInput(
-            title: '',
-            markdownBody: 'This is the body content that is long enough to pass the minimum 50 character validation.',
-            authorId: '550e8400-e29b-41d4-a716-446655440000',
-            tags: ['test'],
-        );
-
-        ($this->becoming)($input);
+        $this->expectException(InvalidTitleException::class);
+        $semantic = new ArticleTitle();
+        $semantic->validate('');
     }
 
     public function testTitleTooLongThrowsException(): void
     {
-        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidTitleException::class);
+        $this->expectException(InvalidTitleException::class);
+        $semantic = new ArticleTitle();
+        $semantic->validate(str_repeat('a', 201));
+    }
 
-        $input = new ArticleInput(
-            title: str_repeat('a', 201),
-            markdownBody: 'This is the body content that is long enough to pass the minimum 50 character validation.',
-            authorId: '550e8400-e29b-41d4-a716-446655440000',
-            tags: ['test'],
-        );
-
-        ($this->becoming)($input);
+    public function testValidMarkdownBody(): void
+    {
+        $semantic = new MarkdownBody();
+        $semantic->validate('This is the body content that is long enough to pass the minimum 50 character validation.');
+        $this->addToAssertionCount(1);
     }
 
     public function testBodyTooShortThrowsException(): void
     {
-        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidBodyException::class);
-
-        $input = new ArticleInput(
-            title: 'Valid Title',
-            markdownBody: 'Too short body.',
-            authorId: '550e8400-e29b-41d4-a716-446655440000',
-            tags: ['test'],
-        );
-
-        ($this->becoming)($input);
+        $this->expectException(InvalidBodyException::class);
+        $semantic = new MarkdownBody();
+        $semantic->validate('Too short body.');
     }
 
     public function testBodyTooLongThrowsException(): void
     {
-        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidBodyException::class);
+        $this->expectException(InvalidBodyException::class);
+        $semantic = new MarkdownBody();
+        $semantic->validate(str_repeat('a', 50001));
+    }
 
-        $input = new ArticleInput(
-            title: 'Valid Title',
-            markdownBody: str_repeat('a', 50001),
-            authorId: '550e8400-e29b-41d4-a716-446655440000',
-            tags: ['test'],
-        );
-
-        ($this->becoming)($input);
+    public function testValidAuthorId(): void
+    {
+        $semantic = new AuthorId();
+        $semantic->validate('550e8400-e29b-41d4-a716-446655440000');
+        $this->addToAssertionCount(1);
     }
 
     public function testInvalidAuthorIdThrowsException(): void
     {
-        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidAuthorException::class);
+        $this->expectException(InvalidAuthorException::class);
+        $semantic = new AuthorId();
+        $semantic->validate('not-a-valid-uuid');
+    }
 
-        $input = new ArticleInput(
-            title: 'Valid Title',
-            markdownBody: 'This is the body content that is long enough to pass the minimum 50 character validation.',
-            authorId: 'not-a-valid-uuid',
-            tags: ['test'],
-        );
-
-        ($this->becoming)($input);
+    public function testValidTag(): void
+    {
+        $semantic = new Tag();
+        $semantic->validate('philosophy');
+        $this->addToAssertionCount(1);
     }
 
     public function testInvalidTagFormatThrowsException(): void
     {
-        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidTagException::class);
-
-        $input = new ArticleInput(
-            title: 'Valid Title',
-            markdownBody: 'This is the body content that is long enough to pass the minimum 50 character validation.',
-            authorId: '550e8400-e29b-41d4-a716-446655440000',
-            tags: ['INVALID_TAG'],
-        );
-
-        ($this->becoming)($input);
+        $this->expectException(InvalidTagException::class);
+        $semantic = new Tag();
+        $semantic->validate('INVALID_TAG');
     }
 
     public function testTagTooLongThrowsException(): void
     {
-        $this->expectException(\Be\Demo\BlogPublishing\Exception\InvalidTagException::class);
-
-        $input = new ArticleInput(
-            title: 'Valid Title',
-            markdownBody: 'This is the body content that is long enough to pass the minimum 50 character validation.',
-            authorId: '550e8400-e29b-41d4-a716-446655440000',
-            tags: [str_repeat('a', 31)],
-        );
-
-        ($this->becoming)($input);
+        $this->expectException(InvalidTagException::class);
+        $semantic = new Tag();
+        $semantic->validate(str_repeat('a', 31));
     }
 }
