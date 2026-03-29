@@ -19,6 +19,16 @@ BE Frameworkは「Be, Don't Do（するな、あれ）」の原則を体現し�
 
 ### 初級
 
+#### [hello-world](./hello-world/)
+**パターン:** 最小変換
+**フロー:** `Input → Final`
+
+最もシンプルなBE Frameworkデモ。BeingやMomentレイヤーを持たない挨拶変換です。
+
+```
+HelloInput → Hello
+```
+
 #### [contact-form](./contact-form/)
 **パターン:** 線形変換
 **フロー:** `Input → Being → Final`
@@ -40,6 +50,18 @@ RegistrationInput → EmailVerified → PasswordHashed → ProfileEnriched → U
 ```
 
 ### 中級
+
+#### [order-processing](./order-processing/)
+**パターン:** ダイヤモンドメタモルフォーシス
+**フロー:** `Input → Being → [並列Moments] → Final`
+
+在庫、決済、配送のMomentがFinal状態で収束するECオーダー処理。
+
+```
+OrderInput → OrderValidated ─┬→ InventoryReserved ─┬→ OrderConfirmed
+                             ├→ PaymentCaptured   ─┤
+                             └→ ShippingArranged  ─┘
+```
 
 #### [blog-publishing](./blog-publishing/)
 **パターン:** ダイヤモンド（純粋データMoment）
@@ -100,9 +122,11 @@ PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAss
 
 | パターン | デモ | 入力数 | Being数 | Moment数 | Final数 |
 |---------|------|--------|---------|----------|---------|
+| 最小 | hello-world | 1 | 0 | 0 | 1 |
 | 線形 | contact-form | 1 | 1 | 0 | 1 |
 | 連鎖 | user-registration | 1 | 3 | 0 | 1 |
-| ダイヤモンド | blog-publishing | 1 | 2 | 2 | 1 |
+| ダイヤモンド | order-processing | 1 | 1 | 3 | 1 |
+| ダイヤモンド | blog-publishing | 1 | 1 | 0 | 1 |
 | 分岐 | medical-triage | 1 | 2 | 2-3 | 3 |
 | カスケード | loan-application | 1 | 5 | 4 | 1 |
 | 複合 | insurance-claim | 2 | 5 | 3 | 2 |

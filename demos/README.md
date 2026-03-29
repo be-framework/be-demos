@@ -19,6 +19,16 @@ The BE Framework embodies the principle "Be, Don't Do" - modeling software as tr
 
 ### Beginner Level
 
+#### [hello-world](./hello-world/)
+**Pattern:** Minimal Transformation
+**Flow:** `Input → Final`
+
+The simplest possible BE Framework demo. A greeting transformation with no Being or Moment layers.
+
+```
+HelloInput → Hello
+```
+
 #### [contact-form](./contact-form/)
 **Pattern:** Linear Transformation
 **Flow:** `Input → Being → Final`
@@ -40,6 +50,18 @@ RegistrationInput → EmailVerified → PasswordHashed → ProfileEnriched → U
 ```
 
 ### Intermediate Level
+
+#### [order-processing](./order-processing/)
+**Pattern:** Diamond Metamorphosis
+**Flow:** `Input → Being → [parallel Moments] → Final`
+
+E-commerce order processing with inventory, payment, and shipping Moments that converge in the Final state.
+
+```
+OrderInput → OrderValidated ─┬→ InventoryReserved ─┬→ OrderConfirmed
+                             ├→ PaymentCaptured   ─┤
+                             └→ ShippingArranged  ─┘
+```
 
 #### [blog-publishing](./blog-publishing/)
 **Pattern:** Diamond with Pure Data Moments
@@ -100,9 +122,11 @@ PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAss
 
 | Pattern | Demo | Inputs | Beings | Moments | Finals |
 |---------|------|--------|--------|---------|--------|
+| Minimal | hello-world | 1 | 0 | 0 | 1 |
 | Linear | contact-form | 1 | 1 | 0 | 1 |
 | Sequential | user-registration | 1 | 3 | 0 | 1 |
-| Diamond | blog-publishing | 1 | 2 | 2 | 1 |
+| Diamond | order-processing | 1 | 1 | 3 | 1 |
+| Diamond | blog-publishing | 1 | 1 | 0 | 1 |
 | Branching | medical-triage | 1 | 2 | 2-3 | 3 |
 | Cascade | loan-application | 1 | 5 | 4 | 1 |
 | Complex | insurance-claim | 2 | 5 | 3 | 2 |
