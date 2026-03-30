@@ -20,7 +20,13 @@ Objects don't perform actions—they undergo metamorphosis.
 | Demo | Description | Complexity |
 |------|-------------|------------|
 | [hello-world](demos/hello-world/) | Simplest possible transformation | Beginner |
-| [order-processing](demos/order-processing/) | Diamond Metamorphosis with parallel pipelines | Advanced |
+| [contact-form](demos/contact-form/) | Linear transformation with validation | Beginner |
+| [user-registration](demos/user-registration/) | Sequential Being chain | Beginner |
+| [order-processing](demos/order-processing/) | Diamond Metamorphosis with parallel pipelines | Intermediate |
+| [blog-publishing](demos/blog-publishing/) | Being transformation with services | Intermediate |
+| [medical-triage](demos/medical-triage/) | Branching to multiple Finals | Advanced |
+| [loan-application](demos/loan-application/) | Cascade Diamond with staged Moments | Advanced |
+| [insurance-claim](demos/insurance-claim/) | Complex convergence with multiple inputs | Advanced |
 
 ## Getting Started
 
