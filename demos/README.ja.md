@@ -19,13 +19,23 @@ BE Frameworkは「Be, Don't Do（するな、あれ）」の原則を体現し�
 
 ### 初級
 
+#### [hello-world](./hello-world/)
+**パターン:** 最小変換
+**フロー:** `Input → Final`
+
+最もシンプルなBE Frameworkデモ。BeingやMomentレイヤーを持たない挨拶変換です。
+
+```text
+HelloInput → Hello
+```
+
 #### [contact-form](./contact-form/)
 **パターン:** 線形変換
 **フロー:** `Input → Being → Final`
 
 最もシンプルなBE Frameworkパターン。基本的な入力検証、メール正規化、受領証生成を示すお問い合わせフォームです。
 
-```
+```text
 ContactInput → EmailNormalized → ContactReceived
 ```
 
@@ -35,21 +45,32 @@ ContactInput → EmailNormalized → ContactReceived
 
 Being変換を連鎖させたユーザー登録：メール検証、パスワードハッシュ化、プロフィール拡充。
 
-```
+```text
 RegistrationInput → EmailVerified → PasswordHashed → ProfileEnriched → UserRegistered
 ```
 
 ### 中級
 
-#### [blog-publishing](./blog-publishing/)
-**パターン:** ダイヤモンド（純粋データMoment）
-**フロー:** `Input → Being(A) + Being(B) → Moment(A) + Moment(B) → Final`
+#### [order-processing](./order-processing/)
+**パターン:** ダイヤモンドメタモルフォーシス
+**フロー:** `Input → [並列Beings] → [並列Moments] → Final`
 
-記事公開デモ。並列Beingパスが純粋データMoment（Potentialなし）を通じて収束します。
+並列Beingチェーン（在庫、決済、配送）がMomentを生成し、Final状態で収束するECオーダー処理。
 
+```text
+OrderInput ─┬→ StockLocated → QuantityChecked   → InventoryReserved ─┬→ OrderConfirmed
+            ├→ CardValidated → PaymentAuthorized → PaymentCompleted  ─┤
+            └→ AddressValidated → CarrierSelected → ShippingArranged ─┘
 ```
-ArticleInput ─┬→ MarkdownRendered → ContentPrepared ─┬→ ArticlePublished
-              └→ SlugGenerated    → MetadataResolved ─┘
+
+#### [blog-publishing](./blog-publishing/)
+**パターン:** 連鎖変換（3 Being、2 Moment）
+**フロー:** `Input → Moment → Being → Being → Moment → Being → Final`
+
+マークダウンレンダリング、スラグ生成、抜粋抽出、著者解決を段階的に処理する記事公開デモ。BeingクラスはArticlePrepared、MarkdownRendered、SlugGenerated。MomentクラスはContentPreparedとMetadataResolved。
+
+```text
+ArticleInput → ContentPrepared → ArticlePrepared → MarkdownRendered → MetadataResolved → SlugGenerated → ArticlePublished
 ```
 
 ### 上級
@@ -60,7 +81,7 @@ ArticleInput ─┬→ MarkdownRendered → ContentPrepared ─┬→ ArticlePub
 
 JTASプロトコルを実装した救急トリアージ。1つの入力が重症度評価に基づき3つの異なるFinalに分岐します。
 
-```
+```text
 TriageInput → VitalsMeasured → TriageLevelDetermined
                                         │
               ┌─────────────────────────┼─────────────────────────┐
@@ -76,7 +97,7 @@ TriageInput → VitalsMeasured → TriageLevelDetermined
 
 段階的Moment実現を伴う住宅ローン申請。Stage 1のMomentは適格性確認時に実現、Stage 2のMomentは最終承認時に実現。
 
-```
+```text
 LoanInput → IdentityVerified ─┬→ CreditScored   → CreditApproved   ─┬→ EligibilityConfirmed
                               └→ IncomeAssessed → IncomeApproved   ─┘
                                                                      ↓
@@ -90,7 +111,7 @@ LoanInput → IdentityVerified ─┬→ CreditScored   → CreditApproved   ─
 
 複数入力の収束、3方向並列評価、分岐Finalを持つ保険請求処理。
 
-```
+```text
 ClaimInput ──┬→ ClaimRegistered ─┬→ ClaimValidated ─┬→ DamageAssessed  ─┬→ [閾値判定] → ClaimSettled
 PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAssigned ─┤               または
                                                     └→ FraudScreened   ─┘               ClaimEscalated
@@ -100,9 +121,11 @@ PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAss
 
 | パターン | デモ | 入力数 | Being数 | Moment数 | Final数 |
 |---------|------|--------|---------|----------|---------|
+| 最小 | hello-world | 1 | 0 | 0 | 1 |
 | 線形 | contact-form | 1 | 1 | 0 | 1 |
 | 連鎖 | user-registration | 1 | 3 | 0 | 1 |
-| ダイヤモンド | blog-publishing | 1 | 2 | 2 | 1 |
+| ダイヤモンド | order-processing | 1 | 6 | 6 | 1 |
+| 連鎖 | blog-publishing | 1 | 3 | 2 | 1 |
 | 分岐 | medical-triage | 1 | 2 | 2-3 | 3 |
 | カスケード | loan-application | 1 | 5 | 4 | 1 |
 | 複合 | insurance-claim | 2 | 5 | 3 | 2 |
