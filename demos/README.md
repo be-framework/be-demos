@@ -25,7 +25,7 @@ The BE Framework embodies the principle "Be, Don't Do" - modeling software as tr
 
 The simplest possible BE Framework demo. A greeting transformation with no Being or Moment layers.
 
-```
+```text
 HelloInput → Hello
 ```
 
@@ -35,7 +35,7 @@ HelloInput → Hello
 
 The simplest BE Framework pattern. An email contact form demonstrating basic input validation, email normalization, and receipt generation.
 
-```
+```text
 ContactInput → EmailNormalized → ContactReceived
 ```
 
@@ -45,7 +45,7 @@ ContactInput → EmailNormalized → ContactReceived
 
 User registration with chained Being transformations: email verification, password hashing, and profile enrichment.
 
-```
+```text
 RegistrationInput → EmailVerified → PasswordHashed → ProfileEnriched → UserRegistered
 ```
 
@@ -53,25 +53,24 @@ RegistrationInput → EmailVerified → PasswordHashed → ProfileEnriched → U
 
 #### [order-processing](./order-processing/)
 **Pattern:** Diamond Metamorphosis
-**Flow:** `Input → Being → [parallel Moments] → Final`
+**Flow:** `Input → [parallel Beings] → [parallel Moments] → Final`
 
-E-commerce order processing with inventory, payment, and shipping Moments that converge in the Final state.
+E-commerce order processing with parallel Being chains (Inventory, Payment, Shipping) that produce Moments converging in the Final state.
 
-```
-OrderInput → OrderValidated ─┬→ InventoryReserved ─┬→ OrderConfirmed
-                             ├→ PaymentCaptured   ─┤
-                             └→ ShippingArranged  ─┘
+```text
+OrderInput ─┬→ StockLocated → QuantityChecked   → InventoryReserved ─┬→ OrderConfirmed
+            ├→ CardValidated → PaymentAuthorized → PaymentCompleted  ─┤
+            └→ AddressValidated → CarrierSelected → ShippingArranged ─┘
 ```
 
 #### [blog-publishing](./blog-publishing/)
-**Pattern:** Diamond with Pure Data Moments
-**Flow:** `Input → Being(A) + Being(B) → Moment(A) + Moment(B) → Final`
+**Pattern:** Being Transformation
+**Flow:** `Input → Being → Final`
 
-Article publishing demonstrating parallel Being paths that converge through pure data Moments (no Potentials).
+Article publishing with a single Being that handles markdown rendering, slug generation, excerpt extraction, and author resolution.
 
-```
-ArticleInput ─┬→ MarkdownRendered → ContentPrepared ─┬→ ArticlePublished
-              └→ SlugGenerated    → MetadataResolved ─┘
+```text
+ArticleInput → ArticlePrepared → ArticlePublished
 ```
 
 ### Advanced Level
@@ -82,7 +81,7 @@ ArticleInput ─┬→ MarkdownRendered → ContentPrepared ─┬→ ArticlePub
 
 Emergency room triage implementing JTAS protocol. One input branches to three possible Finals based on severity assessment.
 
-```
+```text
 TriageInput → VitalsMeasured → TriageLevelDetermined
                                         │
               ┌─────────────────────────┼─────────────────────────┐
@@ -98,7 +97,7 @@ TriageInput → VitalsMeasured → TriageLevelDetermined
 
 Mortgage application with staged Moment realization. Stage 1 Moments realize at eligibility confirmation; Stage 2 Moments realize at final approval.
 
-```
+```text
 LoanInput → IdentityVerified ─┬→ CreditScored   → CreditApproved   ─┬→ EligibilityConfirmed
                               └→ IncomeAssessed → IncomeApproved   ─┘
                                                                      ↓
@@ -112,7 +111,7 @@ LoanInput → IdentityVerified ─┬→ CreditScored   → CreditApproved   ─
 
 Insurance claim processing with multiple input convergence, three-way parallel assessment, and branching finals.
 
-```
+```text
 ClaimInput ──┬→ ClaimRegistered ─┬→ ClaimValidated ─┬→ DamageAssessed  ─┬→ [threshold] → ClaimSettled
 PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAssigned ─┤              or
                                                     └→ FraudScreened   ─┘              ClaimEscalated
@@ -125,8 +124,8 @@ PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAss
 | Minimal | hello-world | 1 | 0 | 0 | 1 |
 | Linear | contact-form | 1 | 1 | 0 | 1 |
 | Sequential | user-registration | 1 | 3 | 0 | 1 |
-| Diamond | order-processing | 1 | 1 | 3 | 1 |
-| Diamond | blog-publishing | 1 | 1 | 0 | 1 |
+| Diamond | order-processing | 1 | 6 | 3 | 1 |
+| Linear | blog-publishing | 1 | 1 | 0 | 1 |
 | Branching | medical-triage | 1 | 2 | 2-3 | 3 |
 | Cascade | loan-application | 1 | 5 | 4 | 1 |
 | Complex | insurance-claim | 2 | 5 | 3 | 2 |
