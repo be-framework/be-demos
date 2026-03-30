@@ -19,7 +19,7 @@ BE Frameworkは「Be, Don't Do（するな、あれ）」の原則を体現し�
 
 ### 初級
 
-#### [hello-world](./hello-world/)
+#### [hello-world](./demos/hello-world/)
 **パターン:** 最小変換
 **フロー:** `Input → Final`
 
@@ -29,7 +29,7 @@ BE Frameworkは「Be, Don't Do（するな、あれ）」の原則を体現し�
 HelloInput → Hello
 ```
 
-#### [contact-form](./contact-form/)
+#### [contact-form](./demos/contact-form/)
 **パターン:** 線形変換
 **フロー:** `Input → Being → Final`
 
@@ -39,7 +39,7 @@ HelloInput → Hello
 ContactInput → EmailNormalized → ContactReceived
 ```
 
-#### [user-registration](./user-registration/)
+#### [user-registration](./demos/user-registration/)
 **パターン:** 連鎖チェーン
 **フロー:** `Input → Being(A) → Being(B) → Being(C) → Final`
 
@@ -51,7 +51,7 @@ RegistrationInput → EmailVerified → PasswordHashed → ProfileEnriched → U
 
 ### 中級
 
-#### [order-processing](./order-processing/)
+#### [order-processing](./demos/order-processing/)
 **パターン:** ダイヤモンドメタモルフォーシス
 **フロー:** `Input → [並列Beings] → [並列Moments] → Final`
 
@@ -63,7 +63,7 @@ OrderInput ─┬→ StockLocated → QuantityChecked   → InventoryReserved �
             └→ AddressValidated → CarrierSelected → ShippingArranged ─┘
 ```
 
-#### [blog-publishing](./blog-publishing/)
+#### [blog-publishing](./demos/blog-publishing/)
 **パターン:** 連鎖変換（3 Being、2 Moment）
 **フロー:** `Input → Moment → Being → Being → Moment → Being → Final`
 
@@ -75,7 +75,7 @@ ArticleInput → ContentPrepared → ArticlePrepared → MarkdownRendered → Me
 
 ### 上級
 
-#### [medical-triage](./medical-triage/)
+#### [medical-triage](./demos/medical-triage/)
 **パターン:** 分岐メタモルフォーシス
 **フロー:** `Input → Being → [分岐] → Final(A) | Final(B) | Final(C)`
 
@@ -91,7 +91,7 @@ TriageInput → VitalsMeasured → TriageLevelDetermined
      EmergencyAdmitted           UrgentQueued           OutpatientReferred
 ```
 
-#### [loan-application](./loan-application/)
+#### [loan-application](./demos/loan-application/)
 **パターン:** カスケードダイヤモンド（2段階）
 **フロー:** `Input → Stage1(並列 → 収束) → Stage2(並列 → Final)`
 
@@ -105,7 +105,7 @@ LoanInput → IdentityVerified ─┬→ CreditScored   → CreditApproved   ─
                               └→ InsuranceQuoted   → InsurancePrepared ─┘
 ```
 
-#### [insurance-claim](./insurance-claim/)
+#### [insurance-claim](./demos/insurance-claim/)
 **パターン:** 複合収束
 **フロー:** `Input(A) + Input(B) → 収束 → 並列(3) → 分岐 → Final(A) | Final(B)`
 
@@ -143,7 +143,7 @@ PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAss
 composer test
 
 # 特定デモのテスト実行
-./vendor/bin/phpunit demos/medical-triage/tests/
+./demos/vendor/bin/phpunit demos/medical-triage/tests/
 ```
 
 ## 要件

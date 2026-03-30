@@ -1,69 +1,160 @@
-# Be Framework Demos
+# BE Framework Demos
 
-**Be, Don't Do.**
+A collection of demonstration projects showcasing the BE Framework's ontological programming approach.
 
-A collection of demos showcasing [Be Framework](https://be-framework.github.io/) - an ontological programming framework.
+## Philosophy
 
-## What is Be Framework?
+The BE Framework embodies the principle "Be, Don't Do" - modeling software as transformations of being rather than sequences of actions. Each demo illustrates different metamorphosis patterns through six philosophical layers:
 
-Traditional OOP centers on "what to do" (Do). Be Framework centers on "what to be" (Be).
+| Layer | Greek/German | Role |
+|-------|--------------|------|
+| **Input** | δύναμις (Dynamis) | Raw potential entering the system |
+| **Being** | Dasein | Existential state with computed properties |
+| **Moment** | 契機 (Keiki) | Transitional phase with deferred Potentials |
+| **Final** | ἐνέργεια (Energeia) | Fully actualized result |
+| **Semantic** | Sinn | Domain validation rules |
+| **Reason** | Sufficient Reason | Business logic and external integrations |
 
+## Demo Catalog
+
+### Beginner Level
+
+#### [hello-world](./demos/hello-world/)
+**Pattern:** Minimal Transformation
+**Flow:** `Input → Final`
+
+The simplest possible BE Framework demo. A greeting transformation with no Being or Moment layers.
+
+```text
+HelloInput → Hello
 ```
-Traditional: OrderService.processOrder()  ← Verb (Do)
-Be:          OrderInput → OrderConfirmed  ← Noun transformation (Be)
+
+#### [contact-form](./demos/contact-form/)
+**Pattern:** Linear Transformation
+**Flow:** `Input → Being → Final`
+
+The simplest BE Framework pattern. An email contact form demonstrating basic input validation, email normalization, and receipt generation.
+
+```text
+ContactInput → EmailNormalized → ContactReceived
 ```
 
-Objects don't perform actions—they undergo metamorphosis.
+#### [user-registration](./demos/user-registration/)
+**Pattern:** Sequential Chain
+**Flow:** `Input → Being(A) → Being(B) → Being(C) → Final`
 
-## Demos
+User registration with chained Being transformations: email verification, password hashing, and profile enrichment.
 
-| Demo | Description | Complexity |
-|------|-------------|------------|
-| [hello-world](demos/hello-world/) | Simplest possible transformation | Beginner |
-| [contact-form](demos/contact-form/) | Linear transformation with validation | Beginner |
-| [user-registration](demos/user-registration/) | Sequential Being chain | Beginner |
-| [order-processing](demos/order-processing/) | Diamond Metamorphosis with parallel pipelines | Intermediate |
-| [blog-publishing](demos/blog-publishing/) | Being transformation with services | Intermediate |
-| [medical-triage](demos/medical-triage/) | Branching to multiple Finals | Advanced |
-| [loan-application](demos/loan-application/) | Cascade Diamond with staged Moments | Advanced |
-| [insurance-claim](demos/insurance-claim/) | Complex convergence with multiple inputs | Advanced |
+```text
+RegistrationInput → EmailVerified → PasswordHashed → ProfileEnriched → UserRegistered
+```
 
-## Getting Started
+### Intermediate Level
 
-Each demo is self-contained. Navigate to a demo directory and run:
+#### [order-processing](./demos/order-processing/)
+**Pattern:** Diamond Metamorphosis
+**Flow:** `Input → [parallel Beings] → [parallel Moments] → Final`
+
+E-commerce order processing with parallel Being chains (Inventory, Payment, Shipping) that produce Moments converging in the Final state.
+
+```text
+OrderInput ─┬→ StockLocated → QuantityChecked   → InventoryReserved ─┬→ OrderConfirmed
+            ├→ CardValidated → PaymentAuthorized → PaymentCompleted  ─┤
+            └→ AddressValidated → CarrierSelected → ShippingArranged ─┘
+```
+
+#### [blog-publishing](./demos/blog-publishing/)
+**Pattern:** Sequential Chain (3 Beings, 2 Moments)
+**Flow:** `Input → Moment → Being → Being → Moment → Being → Final`
+
+Article publishing with staged processing through three Being classes (ArticlePrepared, MarkdownRendered, SlugGenerated) and two Moment classes (ContentPrepared, MetadataResolved), handling markdown rendering, slug generation, excerpt extraction, and author resolution.
+
+```text
+ArticleInput → ContentPrepared → ArticlePrepared → MarkdownRendered → MetadataResolved → SlugGenerated → ArticlePublished
+```
+
+### Advanced Level
+
+#### [medical-triage](./demos/medical-triage/)
+**Pattern:** Branching Metamorphosis
+**Flow:** `Input → Being → [Branch] → Final(A) | Final(B) | Final(C)`
+
+Emergency room triage implementing JTAS protocol. One input branches to three possible Finals based on severity assessment.
+
+```text
+TriageInput → VitalsMeasured → TriageLevelDetermined
+                                        │
+              ┌─────────────────────────┼─────────────────────────┐
+              ↓                         ↓                         ↓
+        [immediate]               [urgent]                  [non-urgent]
+              ↓                         ↓                         ↓
+     EmergencyAdmitted           UrgentQueued           OutpatientReferred
+```
+
+#### [loan-application](./demos/loan-application/)
+**Pattern:** Cascade Diamond (2-Stage)
+**Flow:** `Input → Stage1(parallel → converge) → Stage2(parallel → Final)`
+
+Mortgage application with staged Moment realization. Stage 1 Moments realize at eligibility confirmation; Stage 2 Moments realize at final approval.
+
+```text
+LoanInput → IdentityVerified ─┬→ CreditScored   → CreditApproved   ─┬→ EligibilityConfirmed
+                              └→ IncomeAssessed → IncomeApproved   ─┘
+                                                                     ↓
+                              ┌→ PropertyAppraised → CollateralValued ─┬→ LoanApproved
+                              └→ InsuranceQuoted   → InsurancePrepared ─┘
+```
+
+#### [insurance-claim](./demos/insurance-claim/)
+**Pattern:** Complex Convergence
+**Flow:** `Input(A) + Input(B) → converge → parallel(3) → Branch → Final(A) | Final(B)`
+
+Insurance claim processing with multiple input convergence, three-way parallel assessment, and branching finals.
+
+```text
+ClaimInput ──┬→ ClaimRegistered ─┬→ ClaimValidated ─┬→ DamageAssessed  ─┬→ [threshold] → ClaimSettled
+PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAssigned ─┤              or
+                                                    └→ FraudScreened   ─┘              ClaimEscalated
+```
+
+## Pattern Summary
+
+| Pattern | Demo | Inputs | Beings | Moments | Finals |
+|---------|------|--------|--------|---------|--------|
+| Minimal | hello-world | 1 | 0 | 0 | 1 |
+| Linear | contact-form | 1 | 1 | 0 | 1 |
+| Sequential | user-registration | 1 | 3 | 0 | 1 |
+| Diamond | order-processing | 1 | 6 | 6 | 1 |
+| Sequential | blog-publishing | 1 | 3 | 2 | 1 |
+| Branching | medical-triage | 1 | 2 | 2-3 | 3 |
+| Cascade | loan-application | 1 | 5 | 4 | 1 |
+| Complex | insurance-claim | 2 | 5 | 3 | 2 |
+
+## Running Tests
+
+Each demo includes comprehensive tests covering:
+- Happy path integration tests
+- Semantic validation unit tests
+- Reason layer logic tests
+- Potential idempotency tests (where applicable)
 
 ```bash
-cd demos/hello-world
-composer install
-./vendor/bin/phpunit
+# Run all tests
+composer test
+
+# Run specific demo tests
+./demos/vendor/bin/phpunit demos/medical-triage/tests/
 ```
 
-## Philosophical Foundations
+## Requirements
 
-Be Framework implements concepts from six philosophers:
-
-| Concept | Philosopher | Framework Element |
-|---------|-------------|-------------------|
-| δύναμις (Potentiality) | Aristotle | Input |
-| Dasein (Being-there) | Heidegger | Being |
-| Moment (Aspect of whole) | Hegel | Moment |
-| ἐνέργεια (Actuality) | Aristotle | Final |
-| Sinn (Sense) | Frege | Semantic |
-| Sufficient Reason | Leibniz | Reason |
-
-## Core Insight
-
-> **"Existence precedes realization"**
-
-A Moment is born, given purpose (class name), and then becomes through `be()`.
-
-This is the meaning of **Be, Don't Do**.
-
-## Learn More
-
-- [Be Framework Documentation](https://be-framework.github.io/)
-- [ALPS (Application-Level Profile Semantics)](http://alps.io/)
+- PHP 8.2+
+- [Ray.Di](https://ray-di.github.io/) (dependency injection)
 
 ## License
 
 MIT
+
+---
+
+[日本語版はこちら](./README.ja.md)
