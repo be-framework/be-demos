@@ -64,13 +64,13 @@ OrderInput ─┬→ StockLocated → QuantityChecked   → InventoryReserved �
 ```
 
 #### [blog-publishing](./blog-publishing/)
-**パターン:** Being変換
-**フロー:** `Input → Being → Final`
+**パターン:** 連鎖変換（3 Being、2 Moment）
+**フロー:** `Input → Moment → Being → Being → Moment → Being → Final`
 
-マークダウンレンダリング、スラグ生成、抜粋抽出、著者解決を行う単一Beingを持つ記事公開デモ。
+マークダウンレンダリング、スラグ生成、抜粋抽出、著者解決を段階的に処理する記事公開デモ。BeingクラスはArticlePrepared、MarkdownRendered、SlugGenerated。MomentクラスはContentPreparedとMetadataResolved。
 
 ```text
-ArticleInput → ArticlePrepared → ArticlePublished
+ArticleInput → ContentPrepared → ArticlePrepared → MarkdownRendered → MetadataResolved → SlugGenerated → ArticlePublished
 ```
 
 ### 上級
@@ -124,8 +124,8 @@ PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAss
 | 最小 | hello-world | 1 | 0 | 0 | 1 |
 | 線形 | contact-form | 1 | 1 | 0 | 1 |
 | 連鎖 | user-registration | 1 | 3 | 0 | 1 |
-| ダイヤモンド | order-processing | 1 | 6 | 3 | 1 |
-| 線形 | blog-publishing | 1 | 1 | 0 | 1 |
+| ダイヤモンド | order-processing | 1 | 6 | 6 | 1 |
+| 連鎖 | blog-publishing | 1 | 3 | 2 | 1 |
 | 分岐 | medical-triage | 1 | 2 | 2-3 | 3 |
 | カスケード | loan-application | 1 | 5 | 4 | 1 |
 | 複合 | insurance-claim | 2 | 5 | 3 | 2 |

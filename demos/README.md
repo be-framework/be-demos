@@ -64,13 +64,13 @@ OrderInput ─┬→ StockLocated → QuantityChecked   → InventoryReserved �
 ```
 
 #### [blog-publishing](./blog-publishing/)
-**Pattern:** Being Transformation
-**Flow:** `Input → Being → Final`
+**Pattern:** Sequential Chain (3 Beings, 2 Moments)
+**Flow:** `Input → Moment → Being → Being → Moment → Being → Final`
 
-Article publishing with a single Being that handles markdown rendering, slug generation, excerpt extraction, and author resolution.
+Article publishing with staged processing through three Being classes (ArticlePrepared, MarkdownRendered, SlugGenerated) and two Moment classes (ContentPrepared, MetadataResolved), handling markdown rendering, slug generation, excerpt extraction, and author resolution.
 
 ```text
-ArticleInput → ArticlePrepared → ArticlePublished
+ArticleInput → ContentPrepared → ArticlePrepared → MarkdownRendered → MetadataResolved → SlugGenerated → ArticlePublished
 ```
 
 ### Advanced Level
@@ -124,8 +124,8 @@ PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAss
 | Minimal | hello-world | 1 | 0 | 0 | 1 |
 | Linear | contact-form | 1 | 1 | 0 | 1 |
 | Sequential | user-registration | 1 | 3 | 0 | 1 |
-| Diamond | order-processing | 1 | 6 | 3 | 1 |
-| Linear | blog-publishing | 1 | 1 | 0 | 1 |
+| Diamond | order-processing | 1 | 6 | 6 | 1 |
+| Sequential | blog-publishing | 1 | 3 | 2 | 1 |
 | Branching | medical-triage | 1 | 2 | 2-3 | 3 |
 | Cascade | loan-application | 1 | 5 | 4 | 1 |
 | Complex | insurance-claim | 2 | 5 | 3 | 2 |
