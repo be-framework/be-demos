@@ -72,31 +72,9 @@ final class JTASProtocol
         int $heartRate,
         int $bloodPressureSystolic
     ): bool {
-        // Altered consciousness (JCS >= 100) is always immediate
-        if ($consciousnessLevel >= 100) {
-            return true;
-        }
-
-        // Known immediate complaints
-        $complaint = strtolower($chiefComplaint);
-        foreach (self::IMMEDIATE_COMPLAINTS as $immediate) {
-            if (str_contains($complaint, $immediate)) {
-                return true;
-            }
-        }
-
-        // Extreme vital signs
-        if ($temperature >= 41.0 || $temperature <= 32.0) {
-            return true;
-        }
-        if ($heartRate >= 150 || $heartRate <= 40) {
-            return true;
-        }
-        if ($bloodPressureSystolic >= 220 || $bloodPressureSystolic <= 70) {
-            return true;
-        }
-
-        return false;
+        return $consciousnessLevel >= 100
+            || $this->matchesComplaint($chiefComplaint, self::IMMEDIATE_COMPLAINTS)
+            || $this->hasExtremeVitals($temperature, $heartRate, $bloodPressureSystolic);
     }
 
     private function isUrgent(
@@ -106,30 +84,36 @@ final class JTASProtocol
         int $heartRate,
         int $bloodPressureSystolic
     ): bool {
-        // Mild consciousness disturbance (JCS 1-30) is urgent
-        if ($consciousnessLevel >= 1 && $consciousnessLevel <= 30) {
-            return true;
-        }
+        return ($consciousnessLevel >= 1 && $consciousnessLevel <= 30)
+            || $this->matchesComplaint($chiefComplaint, self::URGENT_COMPLAINTS)
+            || $this->hasAbnormalVitals($temperature, $heartRate, $bloodPressureSystolic);
+    }
 
-        // Known urgent complaints
+    /** @param list<string> $complaints */
+    private function matchesComplaint(string $chiefComplaint, array $complaints): bool
+    {
         $complaint = strtolower($chiefComplaint);
-        foreach (self::URGENT_COMPLAINTS as $urgent) {
-            if (str_contains($complaint, $urgent)) {
+
+        foreach ($complaints as $keyword) {
+            if (str_contains($complaint, $keyword)) {
                 return true;
             }
         }
 
-        // Moderately abnormal vital signs
-        if ($temperature >= 39.0 || $temperature <= 35.0) {
-            return true;
-        }
-        if ($heartRate >= 120 || $heartRate <= 50) {
-            return true;
-        }
-        if ($bloodPressureSystolic >= 180 || $bloodPressureSystolic <= 80) {
-            return true;
-        }
-
         return false;
+    }
+
+    private function hasExtremeVitals(float $temperature, int $heartRate, int $systolic): bool
+    {
+        return $temperature >= 41.0 || $temperature <= 32.0
+            || $heartRate >= 150 || $heartRate <= 40
+            || $systolic >= 220 || $systolic <= 70;
+    }
+
+    private function hasAbnormalVitals(float $temperature, int $heartRate, int $systolic): bool
+    {
+        return $temperature >= 39.0 || $temperature <= 35.0
+            || $heartRate >= 120 || $heartRate <= 50
+            || $systolic >= 180 || $systolic <= 80;
     }
 }

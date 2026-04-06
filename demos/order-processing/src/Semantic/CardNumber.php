@@ -30,18 +30,14 @@ final class CardNumber
 
     private function luhnCheck(string $number): bool
     {
+        $digits = array_map('intval', array_reverse(str_split($number)));
         $sum = 0;
-        $length = strlen($number);
-        for ($i = 0; $i < $length; $i++) {
-            $digit = (int) $number[$length - 1 - $i];
-            if ($i % 2 === 1) {
-                $digit *= 2;
-                if ($digit > 9) {
-                    $digit -= 9;
-                }
-            }
-            $sum += $digit;
+
+        foreach ($digits as $i => $digit) {
+            $doubled = ($i % 2 === 1) ? $digit * 2 : $digit;
+            $sum += ($doubled > 9) ? $doubled - 9 : $doubled;
         }
+
         return $sum % 10 === 0;
     }
 }

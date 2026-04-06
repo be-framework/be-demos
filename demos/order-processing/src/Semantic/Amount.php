@@ -17,12 +17,8 @@ final class Amount
     #[Validate]
     public function validate(int $amount): void
     {
-        if ($amount < 1) {
-            throw new InvalidAmountException();
-        }
-
-        // Maximum amount: 100 million yen
-        if ($amount > 100000000) {
+        // Valid range: 1 - 100 million yen
+        if ($amount < 1 || $amount > 100_000_000) {
             throw new InvalidAmountException();
         }
     }

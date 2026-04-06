@@ -11,16 +11,15 @@ final class CardValidator
 {
     public function validate(string $cardNumber, string $cardExpiry): bool
     {
-        // Demo: validate expiry format MM/YY and not expired
+        // Validate expiry format MM/YY
         if (!preg_match('/^(0[1-9]|1[0-2])\/(\d{2})$/', $cardExpiry, $matches)) {
             return false;
         }
 
-        $month = (int) $matches[1];
-        $year = 2000 + (int) $matches[2];
-        $now = new \DateTimeImmutable();
+        // Check card is not expired
+        $expiry = \DateTimeImmutable::createFromFormat('Y-m', sprintf('20%s-%s', $matches[2], $matches[1]));
+        $now = new \DateTimeImmutable('first day of this month');
 
-        return $year > (int) $now->format('Y')
-            || ($year === (int) $now->format('Y') && $month >= (int) $now->format('m'));
+        return $expiry >= $now;
     }
 }
