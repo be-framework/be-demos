@@ -18,8 +18,11 @@ final class CardValidator
 
         // Check card is not expired
         $expiry = \DateTimeImmutable::createFromFormat('Y-m', sprintf('20%s-%s', $matches[2], $matches[1]));
-        $now = new \DateTimeImmutable('first day of this month');
 
-        return $expiry >= $now;
+        if ($expiry === false) {
+            return false;
+        }
+
+        return $expiry >= new \DateTimeImmutable('first day of this month');
     }
 }
