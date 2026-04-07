@@ -23,33 +23,36 @@ final class VitalsAssessor
         int $bloodPressureDiastolic
     ): string {
         // Critical: any vital sign in danger zone
-        if ($temperature >= 40.0 || $temperature <= 32.0) {
-            return 'critical';
-        }
-        if ($heartRate >= 150 || $heartRate <= 40) {
-            return 'critical';
-        }
-        if ($bloodPressureSystolic >= 220 || $bloodPressureSystolic <= 70) {
-            return 'critical';
-        }
-        if ($bloodPressureDiastolic >= 130 || $bloodPressureDiastolic <= 40) {
+        if ($this->hasCriticalVitals($temperature, $heartRate, $bloodPressureSystolic, $bloodPressureDiastolic)) {
             return 'critical';
         }
 
         // Moderate: any vital sign outside normal range
-        if ($temperature >= 38.5 || $temperature <= 35.0) {
-            return 'moderate';
-        }
-        if ($heartRate >= 100 || $heartRate <= 50) {
-            return 'moderate';
-        }
-        if ($bloodPressureSystolic >= 160 || $bloodPressureSystolic <= 90) {
-            return 'moderate';
-        }
-        if ($bloodPressureDiastolic >= 100 || $bloodPressureDiastolic <= 50) {
+        if ($this->hasModerateVitals($temperature, $heartRate, $bloodPressureSystolic, $bloodPressureDiastolic)) {
             return 'moderate';
         }
 
         return 'stable';
+    }
+
+    private function hasCriticalVitals(float $temperature, int $heartRate, int $systolic, int $diastolic): bool
+    {
+        return !$this->inRange($temperature, 32.0, 40.0)
+            || !$this->inRange($heartRate, 40, 150)
+            || !$this->inRange($systolic, 70, 220)
+            || !$this->inRange($diastolic, 40, 130);
+    }
+
+    private function hasModerateVitals(float $temperature, int $heartRate, int $systolic, int $diastolic): bool
+    {
+        return !$this->inRange($temperature, 35.0, 38.5)
+            || !$this->inRange($heartRate, 50, 100)
+            || !$this->inRange($systolic, 90, 160)
+            || !$this->inRange($diastolic, 50, 100);
+    }
+
+    private function inRange(float|int $value, float|int $min, float|int $max): bool
+    {
+        return $value > $min && $value < $max;
     }
 }

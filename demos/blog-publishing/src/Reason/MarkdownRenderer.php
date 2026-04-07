@@ -42,13 +42,9 @@ final class MarkdownRenderer
                 continue;
             }
 
-            // Paragraph text
-            if (!$inParagraph) {
-                $html .= '<p>';
-                $inParagraph = true;
-            } else {
-                $html .= ' ';
-            }
+            // Paragraph text - separate line from opening tag
+            $html .= $inParagraph ? ' ' : '<p>';
+            $inParagraph = true;
             $html .= $this->renderInline($trimmed);
         }
 

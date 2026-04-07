@@ -17,17 +17,9 @@ final class StreetAddress
     #[Validate]
     public function validate(string $streetAddress): void
     {
-        $trimmed = trim($streetAddress);
+        $length = mb_strlen(trim($streetAddress));
 
-        if (empty($trimmed)) {
-            throw new InvalidStreetAddressException();
-        }
-
-        if (mb_strlen($trimmed) < 5) {
-            throw new InvalidStreetAddressException();
-        }
-
-        if (mb_strlen($trimmed) > 200) {
+        if ($length < 5 || $length > 200) {
             throw new InvalidStreetAddressException();
         }
     }
