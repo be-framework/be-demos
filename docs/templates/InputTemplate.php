@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Template;
+namespace Be\Template; // TODO: replace with Be\Demo\<Name>\Input or Be\App\Input when copied
 
 use Be\Framework\Attribute\Be;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Template;
+namespace Be\Template; // TODO: replace with Be\Demo\<Name>\Reason or Be\App\Reason when copied
 
 /**
  * Reason template (Sufficient Reason).

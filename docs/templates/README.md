@@ -1,10 +1,19 @@
 # Templates — Minimal skeletons for each BE Framework layer
 
 These six files are copy-paste starting points for every layer of a BE
-Framework flow. They are intentionally placed under `namespace Be\Template;`
-so that no `composer.json` autoloader picks them up and no real demo depends
-on them. They will not be executed; they exist purely as reference shapes
-for humans and AI assistants.
+Framework flow. They live under `docs/templates/`, outside any
+`composer.json` autoload path, so no real demo depends on them. They will
+not be executed; they exist purely as reference shapes for humans and AI
+assistants.
+
+> **Namespace rule.** Each template file uses the placeholder namespace
+> `Be\Template;` only because PHP requires the file to declare *some*
+> namespace. **When you copy a template into a real demo you MUST replace
+> it** with the per-demo pattern — `Be\Demo\<Name>\<Layer>\…` or
+> `Be\App\<Layer>\…` — to comply with the repository convention in
+> [`CLAUDE.md`](../../CLAUDE.md). Never leave `Be\Template` in committed
+> code. Each template marks the line you must change with a `TODO`
+> comment on the `namespace` declaration.
 
 Each template:
 

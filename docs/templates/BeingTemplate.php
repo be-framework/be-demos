@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Template;
+namespace Be\Template; // TODO: replace with Be\Demo\<Name>\Being or Be\App\Being when copied
 
 use Be\Framework\Attribute\Be;
 use Ray\Di\Di\Inject;

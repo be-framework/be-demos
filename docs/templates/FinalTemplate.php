@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Template;
+namespace Be\Template; // TODO: replace with Be\Demo\<Name>\Final or Be\App\Final when copied
 
 use Ray\Di\Di\Inject;
 

@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema#",
   "title": "BE Framework Demo Pattern Catalog",
-  "description": "Machine-readable index of all demos in this repository. Class counts reflect concrete classes under src/<Layer>/, excluding MomentInterface.php and Potential/ sub-namespaces. Paths are relative to the repository root.",
-  "version": "1.0.0",
-  "generatedFrom": "README.md pattern table (lines 120-131) + direct filesystem enumeration",
+  "description": "Machine-readable index of all demos in this repository. Class counts include only classes actively connected to the live transformation graph: Inputs and intermediate Beings linked via `#[Be]` transitions, Moments injected into Finals via `#[Inject]`, and the Finals themselves. Standalone exemplar classes that exist under `src/<Layer>/` but are never reached from the chain are excluded, as are `MomentInterface.php` and `Potential/` sub-namespaces. Paths are relative to the repository root.",
+  "version": "1.1.0",
+  "generatedFrom": "Direct enumeration of #[Be] attributes and Final constructor #[Inject] parameters",
   "patterns": [
     {
       "id": "minimal",
@@ -11,7 +11,7 @@
       "level": "beginner",
       "flow": "Input -> Final",
       "classes": { "input": 1, "being": 0, "moment": 0, "final": 1 },
-      "entryFile": "demos/hello-world/src/Input/HelloInput.php",
+      "entryFiles": ["demos/hello-world/src/Input/HelloInput.php"],
       "finalFiles": ["demos/hello-world/src/Final/Hello.php"],
       "keyConcepts": ["#[Be] attribute", "Input-to-Final direct transformation"]
     },
@@ -21,7 +21,7 @@
       "level": "beginner",
       "flow": "Input -> Being -> Final",
       "classes": { "input": 1, "being": 1, "moment": 0, "final": 1 },
-      "entryFile": "demos/contact-form/src/Input/ContactInput.php",
+      "entryFiles": ["demos/contact-form/src/Input/ContactInput.php"],
       "finalFiles": ["demos/contact-form/src/Final/ContactReceived.php"],
       "keyConcepts": ["single Being transformation", "Semantic validation", "injected Reason service"]
     },
@@ -31,7 +31,7 @@
       "level": "beginner",
       "flow": "Input -> Being(A) -> Being(B) -> Being(C) -> Final",
       "classes": { "input": 1, "being": 3, "moment": 0, "final": 1 },
-      "entryFile": "demos/user-registration/src/Input/RegistrationInput.php",
+      "entryFiles": ["demos/user-registration/src/Input/RegistrationInput.php"],
       "finalFiles": ["demos/user-registration/src/Final/UserRegistered.php"],
       "keyConcepts": ["chained #[Be] transitions", "stepwise enrichment"]
     },
@@ -39,29 +39,29 @@
       "id": "diamond",
       "demo": "order-processing",
       "level": "intermediate",
-      "flow": "Input -> [parallel Beings] -> [parallel Moments] -> Final",
-      "classes": { "input": 1, "being": 6, "moment": 3, "final": 1 },
-      "entryFile": "demos/order-processing/src/Input/OrderInput.php",
+      "flow": "Input -> Final (with three Moments converging via #[Inject])",
+      "classes": { "input": 1, "being": 0, "moment": 3, "final": 1 },
+      "entryFiles": ["demos/order-processing/src/Input/OrderInput.php"],
       "finalFiles": ["demos/order-processing/src/Final/OrderConfirmed.php"],
-      "keyConcepts": ["parallel Being branches", "Moment convergence", "diamond metamorphosis", "self-completion via be()"]
+      "keyConcepts": ["Moment convergence", "diamond metamorphosis", "self-completion via be()"]
     },
     {
       "id": "staged-sequential",
       "demo": "blog-publishing",
       "level": "intermediate",
-      "flow": "Input -> Moment -> Being -> Being -> Moment -> Being -> Final",
-      "classes": { "input": 1, "being": 3, "moment": 2, "final": 1 },
-      "entryFile": "demos/blog-publishing/src/Input/ArticleInput.php",
+      "flow": "Input -> Being -> Final",
+      "classes": { "input": 1, "being": 1, "moment": 0, "final": 1 },
+      "entryFiles": ["demos/blog-publishing/src/Input/ArticleInput.php"],
       "finalFiles": ["demos/blog-publishing/src/Final/ArticlePublished.php"],
-      "keyConcepts": ["Moments interleaved with Beings", "staged metadata resolution"]
+      "keyConcepts": ["multi-Reason Being", "markdown rendering", "slug generation", "excerpt extraction"]
     },
     {
       "id": "branching",
       "demo": "medical-triage",
       "level": "advanced",
-      "flow": "Input -> Being -> [branch] -> Final(A) | Final(B) | Final(C)",
-      "classes": { "input": 1, "being": 2, "moment": 4, "final": 3 },
-      "entryFile": "demos/medical-triage/src/Input/PatientInput.php",
+      "flow": "Input -> Final(A) | Final(B) | Final(C) (each Final injects its own Moments)",
+      "classes": { "input": 1, "being": 0, "moment": 4, "final": 3 },
+      "entryFiles": ["demos/medical-triage/src/Input/PatientInput.php"],
       "finalFiles": [
         "demos/medical-triage/src/Final/EmergencyAdmitted.php",
         "demos/medical-triage/src/Final/UrgentQueued.php",
@@ -73,18 +73,18 @@
       "id": "cascade-diamond",
       "demo": "loan-application",
       "level": "advanced",
-      "flow": "Input -> Stage1(parallel -> converge) -> Stage2(parallel -> Final)",
-      "classes": { "input": 1, "being": 6, "moment": 4, "final": 1 },
-      "entryFile": "demos/loan-application/src/Input/LoanInput.php",
+      "flow": "Input -> Final (with two Moments converging via #[Inject])",
+      "classes": { "input": 1, "being": 0, "moment": 2, "final": 1 },
+      "entryFiles": ["demos/loan-application/src/Input/LoanInput.php"],
       "finalFiles": ["demos/loan-application/src/Final/LoanApproved.php"],
-      "keyConcepts": ["two-stage Moment realization", "intermediate convergence", "cascading diamond"]
+      "keyConcepts": ["staged Moment realization", "collateral and insurance convergence"]
     },
     {
       "id": "complex-convergence",
       "demo": "insurance-claim",
       "level": "advanced",
-      "flow": "Input(A) + Input(B) -> converge -> parallel(3) -> branch -> Final(A) | Final(B)",
-      "classes": { "input": 2, "being": 6, "moment": 5, "final": 2 },
+      "flow": "Input(A) + Input(B) -> Final(A) | Final(B) (each Final injects four Moments)",
+      "classes": { "input": 2, "being": 0, "moment": 5, "final": 2 },
       "entryFiles": [
         "demos/insurance-claim/src/Input/ClaimInput.php",
         "demos/insurance-claim/src/Input/PolicyInput.php"
@@ -93,7 +93,7 @@
         "demos/insurance-claim/src/Final/ClaimSettled.php",
         "demos/insurance-claim/src/Final/ClaimEscalated.php"
       ],
-      "keyConcepts": ["multi-input convergence", "three-way parallel assessment", "threshold-based branching"]
+      "keyConcepts": ["multi-input convergence", "shared Moments across branching Finals", "fraud screening"]
     }
   ]
 }
