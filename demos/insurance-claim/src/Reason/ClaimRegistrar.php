@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Reason;
+namespace Be\Pattern\InsuranceClaim\Reason;
 
 /**
  * Claim Registrar - Reason for claim registration

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\UserRegistration\Tests;
+namespace Be\Pattern\UserRegistration\Tests;
 
-use Be\Demo\UserRegistration\Exception\InvalidDisplayNameException;
-use Be\Demo\UserRegistration\Exception\InvalidEmailException;
-use Be\Demo\UserRegistration\Exception\WeakPasswordException;
-use Be\Demo\UserRegistration\Final\UserRegistered;
-use Be\Demo\UserRegistration\Input\RegistrationInput;
-use Be\Demo\UserRegistration\Module\AppModule;
-use Be\Demo\UserRegistration\Semantic\DisplayName;
-use Be\Demo\UserRegistration\Semantic\Email;
-use Be\Demo\UserRegistration\Semantic\Password;
+use Be\Pattern\UserRegistration\Exception\InvalidDisplayNameException;
+use Be\Pattern\UserRegistration\Exception\InvalidEmailException;
+use Be\Pattern\UserRegistration\Exception\WeakPasswordException;
+use Be\Pattern\UserRegistration\Final\UserRegistered;
+use Be\Pattern\UserRegistration\Input\RegistrationInput;
+use Be\Pattern\UserRegistration\Module\AppModule;
+use Be\Pattern\UserRegistration\Semantic\DisplayName;
+use Be\Pattern\UserRegistration\Semantic\Email;
+use Be\Pattern\UserRegistration\Semantic\Password;
 use Be\Framework\Becoming;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;

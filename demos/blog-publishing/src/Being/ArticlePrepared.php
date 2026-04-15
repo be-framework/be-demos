@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Being;
+namespace Be\Pattern\BlogPublishing\Being;
 
-use Be\Demo\BlogPublishing\Final\ArticlePublished;
-use Be\Demo\BlogPublishing\Reason\AuthorResolverInterface;
-use Be\Demo\BlogPublishing\Reason\ExcerptExtractor;
-use Be\Demo\BlogPublishing\Reason\MarkdownRenderer;
-use Be\Demo\BlogPublishing\Reason\SlugGenerator;
+use Be\Pattern\BlogPublishing\Final\ArticlePublished;
+use Be\Pattern\BlogPublishing\Reason\AuthorResolverInterface;
+use Be\Pattern\BlogPublishing\Reason\ExcerptExtractor;
+use Be\Pattern\BlogPublishing\Reason\MarkdownRenderer;
+use Be\Pattern\BlogPublishing\Reason\SlugGenerator;
 use Be\Framework\Attribute\Be;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;

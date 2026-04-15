@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Semantic;
+namespace Be\Pattern\MedicalTriage\Semantic;
 
 /**
  * Being - branching discriminator

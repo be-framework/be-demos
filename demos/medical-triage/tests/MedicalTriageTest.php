@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Tests;
+namespace Be\Pattern\MedicalTriage\Tests;
 
-use Be\Demo\MedicalTriage\Exception\InvalidConsciousnessException;
-use Be\Demo\MedicalTriage\Exception\InvalidPatientIdException;
-use Be\Demo\MedicalTriage\Final\EmergencyAdmitted;
-use Be\Demo\MedicalTriage\Final\OutpatientReferred;
-use Be\Demo\MedicalTriage\Final\UrgentQueued;
-use Be\Demo\MedicalTriage\Input\PatientInput;
-use Be\Demo\MedicalTriage\Module\AppModule;
-use Be\Demo\MedicalTriage\Reason\ImmediateCase;
-use Be\Demo\MedicalTriage\Reason\JTASProtocol;
-use Be\Demo\MedicalTriage\Reason\NonUrgentCase;
-use Be\Demo\MedicalTriage\Reason\UrgentCase;
-use Be\Demo\MedicalTriage\Semantic\ConsciousnessLevel;
-use Be\Demo\MedicalTriage\Semantic\PatientId;
+use Be\Pattern\MedicalTriage\Exception\InvalidConsciousnessException;
+use Be\Pattern\MedicalTriage\Exception\InvalidPatientIdException;
+use Be\Pattern\MedicalTriage\Final\EmergencyAdmitted;
+use Be\Pattern\MedicalTriage\Final\OutpatientReferred;
+use Be\Pattern\MedicalTriage\Final\UrgentQueued;
+use Be\Pattern\MedicalTriage\Input\PatientInput;
+use Be\Pattern\MedicalTriage\Module\AppModule;
+use Be\Pattern\MedicalTriage\Reason\ImmediateCase;
+use Be\Pattern\MedicalTriage\Reason\JTASProtocol;
+use Be\Pattern\MedicalTriage\Reason\NonUrgentCase;
+use Be\Pattern\MedicalTriage\Reason\UrgentCase;
+use Be\Pattern\MedicalTriage\Semantic\ConsciousnessLevel;
+use Be\Pattern\MedicalTriage\Semantic\PatientId;
 use Be\Framework\Becoming;
 use Be\Framework\Exception\SemanticVariableException;
 use PHPUnit\Framework\TestCase;
@@ -39,7 +39,7 @@ class MedicalTriageTest extends TestCase
     {
         return new Becoming(
             new Injector(new AppModule()),
-            'Be\\Demo\\MedicalTriage\\Semantic',
+            'Be\\Pattern\\MedicalTriage\\Semantic',
         );
     }
 

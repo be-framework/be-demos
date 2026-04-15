@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Moment;
+namespace Be\Pattern\LoanApplication\Moment;
 
 /**
  * Moment - Potential waiting to be realized

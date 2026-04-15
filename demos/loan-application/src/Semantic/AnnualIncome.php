@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Semantic;
+namespace Be\Pattern\LoanApplication\Semantic;
 
-use Be\Demo\LoanApplication\Exception\InvalidIncomeException;
+use Be\Pattern\LoanApplication\Exception\InvalidIncomeException;
 use Be\Framework\Attribute\Validate;
 
 /**

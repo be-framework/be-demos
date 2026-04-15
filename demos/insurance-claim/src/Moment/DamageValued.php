@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Moment;
+namespace Be\Pattern\InsuranceClaim\Moment;
 
-use Be\Demo\InsuranceClaim\Moment\Potential\DamageValuation;
-use Be\Demo\InsuranceClaim\Reason\DamageAppraiserInterface;
+use Be\Pattern\InsuranceClaim\Moment\Potential\DamageValuation;
+use Be\Pattern\InsuranceClaim\Reason\DamageAppraiserInterface;
 use Ray\Di\Di\Inject;
 
 /**

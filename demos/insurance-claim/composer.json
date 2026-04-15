@@ -3,12 +3,12 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Be\\Demo\\InsuranceClaim\\": "src/"
+            "Be\\Pattern\\InsuranceClaim\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Be\\Demo\\InsuranceClaim\\Tests\\": "tests/"
+            "Be\\Pattern\\InsuranceClaim\\Tests\\": "tests/"
         }
     },
     "require": {

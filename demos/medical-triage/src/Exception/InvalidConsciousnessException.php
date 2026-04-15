@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Exception;
+namespace Be\Pattern\MedicalTriage\Exception;
 
 use Be\Framework\Attribute\Message;
 use DomainException;

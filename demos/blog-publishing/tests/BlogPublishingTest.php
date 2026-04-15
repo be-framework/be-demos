@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Tests;
+namespace Be\Pattern\BlogPublishing\Tests;
 
-use Be\Demo\BlogPublishing\Exception\InvalidAuthorException;
-use Be\Demo\BlogPublishing\Exception\InvalidBodyException;
-use Be\Demo\BlogPublishing\Exception\InvalidTagException;
-use Be\Demo\BlogPublishing\Exception\InvalidTitleException;
-use Be\Demo\BlogPublishing\Final\ArticlePublished;
-use Be\Demo\BlogPublishing\Input\ArticleInput;
-use Be\Demo\BlogPublishing\Module\AppModule;
-use Be\Demo\BlogPublishing\Semantic\ArticleTitle;
-use Be\Demo\BlogPublishing\Semantic\AuthorId;
-use Be\Demo\BlogPublishing\Semantic\MarkdownBody;
-use Be\Demo\BlogPublishing\Semantic\Tag;
+use Be\Pattern\BlogPublishing\Exception\InvalidAuthorException;
+use Be\Pattern\BlogPublishing\Exception\InvalidBodyException;
+use Be\Pattern\BlogPublishing\Exception\InvalidTagException;
+use Be\Pattern\BlogPublishing\Exception\InvalidTitleException;
+use Be\Pattern\BlogPublishing\Final\ArticlePublished;
+use Be\Pattern\BlogPublishing\Input\ArticleInput;
+use Be\Pattern\BlogPublishing\Module\AppModule;
+use Be\Pattern\BlogPublishing\Semantic\ArticleTitle;
+use Be\Pattern\BlogPublishing\Semantic\AuthorId;
+use Be\Pattern\BlogPublishing\Semantic\MarkdownBody;
+use Be\Pattern\BlogPublishing\Semantic\Tag;
 use Be\Framework\Becoming;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;

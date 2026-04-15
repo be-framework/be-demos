@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\Hello\Input;
+namespace Be\Pattern\Hello\Input;
 
-use Be\Demo\Hello\Final\Hello;
+use Be\Pattern\Hello\Final\Hello;
 use Be\Framework\Attribute\Be;
 
 /**

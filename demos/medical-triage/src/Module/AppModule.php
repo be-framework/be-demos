@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Module;
+namespace Be\Pattern\MedicalTriage\Module;
 
-use Be\Demo\MedicalTriage\Reason\JTASProtocol;
+use Be\Pattern\MedicalTriage\Reason\JTASProtocol;
 use Ray\Di\AbstractModule;
 
 final class AppModule extends AbstractModule

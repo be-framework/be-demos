@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Being;
+namespace Be\Pattern\InsuranceClaim\Being;
 
 use Ray\InputQuery\Attribute\Input;
 use Ray\Di\Di\Inject;
-use Be\Demo\InsuranceClaim\Reason\PolicyRegistryInterface;
+use Be\Pattern\InsuranceClaim\Reason\PolicyRegistryInterface;
 
 /**
  * Policy Verified - Being (first stage from PolicyInput)

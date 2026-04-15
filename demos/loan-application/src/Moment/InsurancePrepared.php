@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Moment;
+namespace Be\Pattern\LoanApplication\Moment;
 
-use Be\Demo\LoanApplication\Moment\Potential\InsuranceContract;
-use Be\Demo\LoanApplication\Reason\InsuranceQuoterInterface;
+use Be\Pattern\LoanApplication\Moment\Potential\InsuranceContract;
+use Be\Pattern\LoanApplication\Reason\InsuranceQuoterInterface;
 use Ray\Di\Di\Inject;
 
 /**

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Semantic;
+namespace Be\Pattern\MedicalTriage\Semantic;
 
-use Be\Demo\MedicalTriage\Exception\InvalidConsciousnessException;
+use Be\Pattern\MedicalTriage\Exception\InvalidConsciousnessException;
 use Be\Framework\Attribute\Validate;
 
 /**

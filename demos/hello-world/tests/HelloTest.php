@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\Hello\Tests;
+namespace Be\Pattern\Hello\Tests;
 
-use Be\Demo\Hello\Final\Hello;
-use Be\Demo\Hello\Input\HelloInput;
-use Be\Demo\Hello\Module\AppModule;
+use Be\Pattern\Hello\Final\Hello;
+use Be\Pattern\Hello\Input\HelloInput;
+use Be\Pattern\Hello\Module\AppModule;
 use Be\Framework\Becoming;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Reason;
+namespace Be\Pattern\InsuranceClaim\Reason;
 
 /**
  * Settlement Policy - Reason for determining auto-approval

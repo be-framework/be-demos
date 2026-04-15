@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Moment;
+namespace Be\Pattern\InsuranceClaim\Moment;
 
 /**
  * Moment - Potential waiting to be realized

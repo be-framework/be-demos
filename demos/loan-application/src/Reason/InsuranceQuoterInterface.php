@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Reason;
+namespace Be\Pattern\LoanApplication\Reason;
 
-use Be\Demo\LoanApplication\Moment\Potential\InsuranceContract;
+use Be\Pattern\LoanApplication\Moment\Potential\InsuranceContract;
 
 /**
  * Insurance Quoter Interface

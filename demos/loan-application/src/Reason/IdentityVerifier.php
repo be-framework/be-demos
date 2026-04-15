@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Reason;
+namespace Be\Pattern\LoanApplication\Reason;
 
 /**
  * Identity Verifier - Reason for identity verification

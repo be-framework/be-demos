@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Semantic;
+namespace Be\Pattern\BlogPublishing\Semantic;
 
 use Be\Framework\Attribute\Validate;
 use InvalidArgumentException;

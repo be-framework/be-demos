@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Semantic;
+namespace Be\Pattern\LoanApplication\Semantic;
 
-use Be\Demo\LoanApplication\Exception\InvalidPropertyAddressException;
+use Be\Pattern\LoanApplication\Exception\InvalidPropertyAddressException;
 use Be\Framework\Attribute\Validate;
 
 /**

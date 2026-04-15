@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Being;
+namespace Be\Pattern\MedicalTriage\Being;
 
-use Be\Demo\MedicalTriage\Final\EmergencyAdmitted;
-use Be\Demo\MedicalTriage\Final\OutpatientReferred;
-use Be\Demo\MedicalTriage\Final\UrgentQueued;
-use Be\Demo\MedicalTriage\Reason\ImmediateCase;
-use Be\Demo\MedicalTriage\Reason\JTASProtocol;
-use Be\Demo\MedicalTriage\Reason\NonUrgentCase;
-use Be\Demo\MedicalTriage\Reason\UrgentCase;
+use Be\Pattern\MedicalTriage\Final\EmergencyAdmitted;
+use Be\Pattern\MedicalTriage\Final\OutpatientReferred;
+use Be\Pattern\MedicalTriage\Final\UrgentQueued;
+use Be\Pattern\MedicalTriage\Reason\ImmediateCase;
+use Be\Pattern\MedicalTriage\Reason\JTASProtocol;
+use Be\Pattern\MedicalTriage\Reason\NonUrgentCase;
+use Be\Pattern\MedicalTriage\Reason\UrgentCase;
 use Be\Framework\Attribute\Be;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;

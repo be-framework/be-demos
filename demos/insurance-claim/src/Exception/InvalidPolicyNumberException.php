@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Exception;
+namespace Be\Pattern\InsuranceClaim\Exception;
 
 use Be\Framework\Attribute\Message;
 use DomainException;

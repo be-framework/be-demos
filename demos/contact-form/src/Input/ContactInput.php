@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\ContactForm\Input;
+namespace Be\Pattern\ContactForm\Input;
 
-use Be\Demo\ContactForm\Being\EmailNormalized;
+use Be\Pattern\ContactForm\Being\EmailNormalized;
 use Be\Framework\Attribute\Be;
 
 /**

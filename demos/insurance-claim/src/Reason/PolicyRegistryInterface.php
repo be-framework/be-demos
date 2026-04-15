@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Reason;
+namespace Be\Pattern\InsuranceClaim\Reason;
 
 /**
  * Policy Registry Interface

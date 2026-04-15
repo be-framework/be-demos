@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\UserRegistration\Being;
+namespace Be\Pattern\UserRegistration\Being;
 
-use Be\Demo\UserRegistration\Exception\DuplicateEmailException;
-use Be\Demo\UserRegistration\Reason\EmailVerifierInterface;
+use Be\Pattern\UserRegistration\Exception\DuplicateEmailException;
+use Be\Pattern\UserRegistration\Reason\EmailVerifierInterface;
 use Be\Framework\Attribute\Be;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\Hello\Final;
+namespace Be\Pattern\Hello\Final;
 
-use Be\Demo\Hello\Reason\Greeting;
+use Be\Pattern\Hello\Reason\Greeting;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
 

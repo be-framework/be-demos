@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\Template\Moment; // TODO: replace `Template` with the real demo name (or use Be\App\Moment)
+namespace Be\Pattern\Template\Moment; // TODO: replace `Template` with the real demo name (or use Be\App\Moment)
 
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
