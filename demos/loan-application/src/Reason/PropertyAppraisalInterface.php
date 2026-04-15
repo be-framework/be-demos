@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Reason;
+namespace Be\Pattern\LoanApplication\Reason;
 
-use Be\Demo\LoanApplication\Moment\Potential\CollateralRegistration;
+use Be\Pattern\LoanApplication\Moment\Potential\CollateralRegistration;
 
 /**
  * Property Appraisal Interface

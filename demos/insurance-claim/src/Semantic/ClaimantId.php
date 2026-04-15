@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Semantic;
+namespace Be\Pattern\InsuranceClaim\Semantic;
 
 use Be\Framework\Attribute\Validate;
-use Be\Demo\InsuranceClaim\Exception\InvalidClaimantIdException;
+use Be\Pattern\InsuranceClaim\Exception\InvalidClaimantIdException;
 
 /**
  * Claimant ID

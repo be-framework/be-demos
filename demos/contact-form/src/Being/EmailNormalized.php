@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\ContactForm\Being;
+namespace Be\Pattern\ContactForm\Being;
 
-use Be\Demo\ContactForm\Final\ContactReceived;
-use Be\Demo\ContactForm\Reason\EmailNormalizer;
+use Be\Pattern\ContactForm\Final\ContactReceived;
+use Be\Pattern\ContactForm\Reason\EmailNormalizer;
 use Be\Framework\Attribute\Be;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;

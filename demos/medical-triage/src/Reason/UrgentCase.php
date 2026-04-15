@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Reason;
+namespace Be\Pattern\MedicalTriage\Reason;
 
 /**
  * Urgent Case - Reason strategy for potentially life-threatening triage (JTAS Level 2 / YELLOW)
  *
  * Acts as a typed discriminator AND a behavior carrier: the Be Framework uses the
- * concrete type of {@see \Be\Demo\MedicalTriage\Being\TriageLevelDetermined::$being}
- * to pick {@see \Be\Demo\MedicalTriage\Final\UrgentQueued}, and the chosen
+ * concrete type of {@see \Be\Pattern\MedicalTriage\Being\TriageLevelDetermined::$being}
+ * to pick {@see \Be\Pattern\MedicalTriage\Final\UrgentQueued}, and the chosen
  * Final delegates its domain work back to this object's {@see self::queue()}.
  */
 final readonly class UrgentCase

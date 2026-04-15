@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Final;
+namespace Be\Pattern\InsuranceClaim\Final;
 
-use Be\Demo\InsuranceClaim\Moment\AdjustmentReviewed;
-use Be\Demo\InsuranceClaim\Moment\DamageValued;
-use Be\Demo\InsuranceClaim\Moment\FraudCleared;
-use Be\Demo\InsuranceClaim\Moment\PaymentDispatched;
+use Be\Pattern\InsuranceClaim\Moment\AdjustmentReviewed;
+use Be\Pattern\InsuranceClaim\Moment\DamageValued;
+use Be\Pattern\InsuranceClaim\Moment\FraudCleared;
+use Be\Pattern\InsuranceClaim\Moment\PaymentDispatched;
 use Ray\Di\Di\Inject;
 
 /**

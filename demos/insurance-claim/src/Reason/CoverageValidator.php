@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Reason;
+namespace Be\Pattern\InsuranceClaim\Reason;
 
 /**
  * Coverage Validator - Reason for coverage applicability check

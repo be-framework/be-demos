@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\ContactForm\Final;
+namespace Be\Pattern\ContactForm\Final;
 
-use Be\Demo\ContactForm\Reason\ReceiptGenerator;
+use Be\Pattern\ContactForm\Reason\ReceiptGenerator;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
 

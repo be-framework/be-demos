@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Moment;
+namespace Be\Pattern\LoanApplication\Moment;
 
-use Be\Demo\LoanApplication\Reason\IncomePolicy;
+use Be\Pattern\LoanApplication\Reason\IncomePolicy;
 use Ray\Di\Di\Inject;
 
 /**

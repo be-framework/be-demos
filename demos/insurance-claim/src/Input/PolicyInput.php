@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Input;
+namespace Be\Pattern\InsuranceClaim\Input;
 
-use Be\Demo\InsuranceClaim\Final\ClaimEscalated;
-use Be\Demo\InsuranceClaim\Final\ClaimSettled;
+use Be\Pattern\InsuranceClaim\Final\ClaimEscalated;
+use Be\Pattern\InsuranceClaim\Final\ClaimSettled;
 use Be\Framework\Attribute\Be;
 
 /**

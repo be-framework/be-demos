@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\UserRegistration\Reason;
+namespace Be\Pattern\UserRegistration\Reason;
 
 /**
  * Welcome Token Generator - Reason (stateless service)

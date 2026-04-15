@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Being;
+namespace Be\Pattern\LoanApplication\Being;
 
-use Be\Demo\LoanApplication\Reason\IdentityVerifierInterface;
+use Be\Pattern\LoanApplication\Reason\IdentityVerifierInterface;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
 

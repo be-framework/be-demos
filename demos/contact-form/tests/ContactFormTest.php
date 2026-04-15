@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\ContactForm\Tests;
+namespace Be\Pattern\ContactForm\Tests;
 
-use Be\Demo\ContactForm\Exception\InvalidEmailException;
-use Be\Demo\ContactForm\Exception\InvalidMessageException;
-use Be\Demo\ContactForm\Exception\InvalidSubjectException;
-use Be\Demo\ContactForm\Final\ContactReceived;
-use Be\Demo\ContactForm\Input\ContactInput;
-use Be\Demo\ContactForm\Module\AppModule;
-use Be\Demo\ContactForm\Semantic\Email;
-use Be\Demo\ContactForm\Semantic\Message;
-use Be\Demo\ContactForm\Semantic\Subject;
+use Be\Pattern\ContactForm\Exception\InvalidEmailException;
+use Be\Pattern\ContactForm\Exception\InvalidMessageException;
+use Be\Pattern\ContactForm\Exception\InvalidSubjectException;
+use Be\Pattern\ContactForm\Final\ContactReceived;
+use Be\Pattern\ContactForm\Input\ContactInput;
+use Be\Pattern\ContactForm\Module\AppModule;
+use Be\Pattern\ContactForm\Semantic\Email;
+use Be\Pattern\ContactForm\Semantic\Message;
+use Be\Pattern\ContactForm\Semantic\Subject;
 use Be\Framework\Becoming;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;

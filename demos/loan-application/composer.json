@@ -3,12 +3,12 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Be\\Demo\\LoanApplication\\": "src/"
+            "Be\\Pattern\\LoanApplication\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Be\\Demo\\LoanApplication\\Tests\\": "tests/"
+            "Be\\Pattern\\LoanApplication\\Tests\\": "tests/"
         }
     },
     "require": {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Moment;
+namespace Be\Pattern\InsuranceClaim\Moment;
 
 /**
  * Escalation Queued - Moment (pure data, no Potential)

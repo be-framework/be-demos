@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\UserRegistration\Exception;
+namespace Be\Pattern\UserRegistration\Exception;
 
 use Be\Framework\Attribute\Message;
 use DomainException;

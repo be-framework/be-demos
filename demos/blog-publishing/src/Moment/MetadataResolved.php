@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Moment;
+namespace Be\Pattern\BlogPublishing\Moment;
 
-use Be\Demo\BlogPublishing\Being\SlugGenerated;
-use Be\Demo\BlogPublishing\Reason\AuthorResolverInterface;
+use Be\Pattern\BlogPublishing\Being\SlugGenerated;
+use Be\Pattern\BlogPublishing\Reason\AuthorResolverInterface;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Moment;
+namespace Be\Pattern\InsuranceClaim\Moment;
 
-use Be\Demo\InsuranceClaim\Moment\Potential\PaymentExecution;
-use Be\Demo\InsuranceClaim\Reason\PaymentProcessorInterface;
+use Be\Pattern\InsuranceClaim\Moment\Potential\PaymentExecution;
+use Be\Pattern\InsuranceClaim\Reason\PaymentProcessorInterface;
 use Ray\Di\Di\Inject;
 
 /**

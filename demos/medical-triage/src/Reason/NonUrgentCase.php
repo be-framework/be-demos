@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Reason;
+namespace Be\Pattern\MedicalTriage\Reason;
 
 /**
  * Non-Urgent Case - Reason strategy for outpatient-level triage (JTAS Level 3 / GREEN)
  *
  * Acts as a typed discriminator AND a behavior carrier: the Be Framework uses the
- * concrete type of {@see \Be\Demo\MedicalTriage\Being\TriageLevelDetermined::$being}
- * to pick {@see \Be\Demo\MedicalTriage\Final\OutpatientReferred}, and the chosen
+ * concrete type of {@see \Be\Pattern\MedicalTriage\Being\TriageLevelDetermined::$being}
+ * to pick {@see \Be\Pattern\MedicalTriage\Final\OutpatientReferred}, and the chosen
  * Final delegates its domain work back to this object's {@see self::refer()}.
  */
 final readonly class NonUrgentCase

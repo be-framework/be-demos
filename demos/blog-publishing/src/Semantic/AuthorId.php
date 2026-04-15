@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Semantic;
+namespace Be\Pattern\BlogPublishing\Semantic;
 
-use Be\Demo\BlogPublishing\Exception\InvalidAuthorException;
+use Be\Pattern\BlogPublishing\Exception\InvalidAuthorException;
 use Be\Framework\Attribute\Validate;
 
 /**

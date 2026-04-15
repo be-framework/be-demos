@@ -4,12 +4,12 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Be\\Demo\\UserRegistration\\": "src/"
+            "Be\\Pattern\\UserRegistration\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Be\\Demo\\UserRegistration\\Tests\\": "tests/"
+            "Be\\Pattern\\UserRegistration\\Tests\\": "tests/"
         }
     },
     "require": {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\UserRegistration\Semantic;
+namespace Be\Pattern\UserRegistration\Semantic;
 
-use Be\Demo\UserRegistration\Exception\InvalidEmailException;
+use Be\Pattern\UserRegistration\Exception\InvalidEmailException;
 use Be\Framework\Attribute\Validate;
 
 /**

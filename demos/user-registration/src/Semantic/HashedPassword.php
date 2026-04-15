@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\UserRegistration\Semantic;
+namespace Be\Pattern\UserRegistration\Semantic;
 
 use Be\Framework\Attribute\Validate;
 use InvalidArgumentException;

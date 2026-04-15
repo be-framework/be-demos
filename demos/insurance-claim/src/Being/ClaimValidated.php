@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Being;
+namespace Be\Pattern\InsuranceClaim\Being;
 
 use Ray\InputQuery\Attribute\Input;
 use Ray\Di\Di\Inject;
-use Be\Demo\InsuranceClaim\Reason\CoverageValidator;
+use Be\Pattern\InsuranceClaim\Reason\CoverageValidator;
 
 /**
  * Claim Validated - Being (convergence point)

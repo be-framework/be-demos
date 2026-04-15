@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Moment\Potential;
+namespace Be\Pattern\LoanApplication\Moment\Potential;
 
-use Be\Demo\LoanApplication\Moment\MomentInterface;
+use Be\Pattern\LoanApplication\Moment\MomentInterface;
 
 /**
  * Collateral Registration - potential to register property as collateral

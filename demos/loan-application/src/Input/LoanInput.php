@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Input;
+namespace Be\Pattern\LoanApplication\Input;
 
-use Be\Demo\LoanApplication\Final\LoanApproved;
+use Be\Pattern\LoanApplication\Final\LoanApproved;
 use Be\Framework\Attribute\Be;
 
 /**

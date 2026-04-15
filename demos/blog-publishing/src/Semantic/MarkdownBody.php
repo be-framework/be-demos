@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Semantic;
+namespace Be\Pattern\BlogPublishing\Semantic;
 
-use Be\Demo\BlogPublishing\Exception\InvalidBodyException;
+use Be\Pattern\BlogPublishing\Exception\InvalidBodyException;
 use Be\Framework\Attribute\Validate;
 
 /**

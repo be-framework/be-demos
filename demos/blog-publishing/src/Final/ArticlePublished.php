@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Final;
+namespace Be\Pattern\BlogPublishing\Final;
 
-use Be\Demo\BlogPublishing\Reason\PublishTimestamper;
+use Be\Pattern\BlogPublishing\Reason\PublishTimestamper;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
 

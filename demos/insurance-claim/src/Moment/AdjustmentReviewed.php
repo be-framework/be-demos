@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Moment;
+namespace Be\Pattern\InsuranceClaim\Moment;
 
 use Ray\Di\Di\Inject;
-use Be\Demo\InsuranceClaim\Reason\AdjusterAllocatorInterface;
+use Be\Pattern\InsuranceClaim\Reason\AdjusterAllocatorInterface;
 
 /**
  * Adjustment Reviewed - Moment (pure data, no Potential)

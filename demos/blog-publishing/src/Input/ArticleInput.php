@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Input;
+namespace Be\Pattern\BlogPublishing\Input;
 
-use Be\Demo\BlogPublishing\Being\ArticlePrepared;
+use Be\Pattern\BlogPublishing\Being\ArticlePrepared;
 use Be\Framework\Attribute\Be;
 
 /**

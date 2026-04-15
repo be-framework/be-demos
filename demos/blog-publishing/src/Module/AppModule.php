@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Module;
+namespace Be\Pattern\BlogPublishing\Module;
 
-use Be\Demo\BlogPublishing\Reason\AuthorResolver;
-use Be\Demo\BlogPublishing\Reason\AuthorResolverInterface;
-use Be\Demo\BlogPublishing\Reason\ExcerptExtractor;
-use Be\Demo\BlogPublishing\Reason\MarkdownRenderer;
-use Be\Demo\BlogPublishing\Reason\PublishTimestamper;
-use Be\Demo\BlogPublishing\Reason\SlugGenerator;
+use Be\Pattern\BlogPublishing\Reason\AuthorResolver;
+use Be\Pattern\BlogPublishing\Reason\AuthorResolverInterface;
+use Be\Pattern\BlogPublishing\Reason\ExcerptExtractor;
+use Be\Pattern\BlogPublishing\Reason\MarkdownRenderer;
+use Be\Pattern\BlogPublishing\Reason\PublishTimestamper;
+use Be\Pattern\BlogPublishing\Reason\SlugGenerator;
 use Be\Framework\Module\BeModule;
 use Ray\Di\AbstractModule;
 
@@ -18,7 +18,7 @@ final class AppModule extends AbstractModule
     protected function configure(): void
     {
         // Install BeModule with demo's semantic namespace
-        $this->install(new BeModule('Be\Demo\BlogPublishing\Semantic'));
+        $this->install(new BeModule('Be\Pattern\BlogPublishing\Semantic'));
 
         // Reason bindings
         $this->bind(MarkdownRenderer::class);
