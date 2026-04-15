@@ -15,13 +15,15 @@ Pick the row that best describes your problem. Each link goes to a complete, tes
 | One input, one output — no intermediate state | **Minimal** | [hello-world](./demos/hello-world/) |
 | Validate and normalize a single form | **Linear** | [contact-form](./demos/contact-form/) |
 | Several transformations that must run in order | **Sequential Chain** | [user-registration](./demos/user-registration/) |
-| Independent concerns that run in parallel and merge | **Diamond** | [order-processing](./demos/order-processing/) |
-| A sequential chain with staged intermediate commits | **Sequential + Moments** | [blog-publishing](./demos/blog-publishing/) |
+| Independent concerns converge in a Final via injected Moments | **Diamond** | [order-processing](./demos/order-processing/) |
+| One Being orchestrating multiple Reason services | **Multi-Reason Being** | [blog-publishing](./demos/blog-publishing/) |
 | One input, several outcomes chosen by a decision | **Branching** | [medical-triage](./demos/medical-triage/) |
-| Two pipelines in series, each with its own parallelism | **Cascade Diamond** | [loan-application](./demos/loan-application/) |
-| Multiple inputs converge, fan out, then branch | **Complex Convergence** | [insurance-claim](./demos/insurance-claim/) |
+| Staged Moment realization (stage 1 gates stage 2) | **Cascade Diamond** | [loan-application](./demos/loan-application/) |
+| Multiple inputs branch to multiple Finals with shared Moments | **Complex Convergence** | [insurance-claim](./demos/insurance-claim/) |
 
 > A machine-readable version of this catalog lives in [`docs/patterns.json`](./docs/patterns.json).
+>
+> **Diagram legend.** Solid arrows (`→`) show the `#[Be]` transformation chain. Dashed arrows (`⇢`) show Moments injected into a Final via `#[Inject]`, where each Moment self-completes inside the Final constructor.
 
 ---
 
@@ -68,39 +70,32 @@ User registration with chained Being transformations: email verification, passwo
 
 ### Diamond — [order-processing](./demos/order-processing/)
 
-**Flow:** `Input → [parallel Beings] → [parallel Moments] → Final`
+**Flow:** `Input → Final` with three Moments injected into the Final
 
 ```mermaid
 flowchart LR
-    I([Input]) --> B1([Being])
-    I --> B2([Being])
-    I --> B3([Being])
-    B1 --> M1([Moment]) --> F([Final])
-    B2 --> M2([Moment]) --> F
-    B3 --> M3([Moment]) --> F
+    I([Input]) --> F([Final])
+    M1([Moment]) -.-> F
+    M2([Moment]) -.-> F
+    M3([Moment]) -.-> F
 ```
 
-E-commerce order processing with parallel Being chains (Inventory, Payment, Shipping) that produce Moments converging in the Final state.
+E-commerce order processing. `OrderInput` transitions directly to `OrderConfirmed`, which injects three independent Moments — `InventoryReserved`, `PaymentCompleted`, `ShippingArranged`. Each Moment's `be()` is called inside the `OrderConfirmed` constructor, so the three concerns converge ("diamond metamorphosis") at a single point of self-completion.
 
-> Concrete:
-> ```text
-> OrderInput ─┬→ StockLocated → QuantityChecked   → InventoryReserved ─┬→ OrderConfirmed
->             ├→ CardValidated → PaymentAuthorized → PaymentCompleted  ─┤
->             └→ AddressValidated → CarrierSelected → ShippingArranged ─┘
-> ```
+> Concrete: `OrderInput → OrderConfirmed` with `InventoryReserved`, `PaymentCompleted`, `ShippingArranged` injected into the Final.
 
-### Sequential + Moments — [blog-publishing](./demos/blog-publishing/)
+### Multi-Reason Being — [blog-publishing](./demos/blog-publishing/)
 
-**Flow:** `Input → Moment → Being → Being → Moment → Being → Final`
+**Flow:** `Input → Being → Final`
 
 ```mermaid
 flowchart LR
-    I([Input]) --> M1([Moment]) --> B1([Being]) --> B2([Being]) --> M2([Moment]) --> B3([Being]) --> F([Final])
+    I([Input]) --> B([Being]) --> F([Final])
 ```
 
-Article publishing staged through three Being classes (`ArticlePrepared`, `MarkdownRendered`, `SlugGenerated`) and two Moment classes (`ContentPrepared`, `MetadataResolved`), handling markdown rendering, slug generation, excerpt extraction, and author resolution.
+Article publishing. Externally the shape is Linear — `ArticleInput → ArticlePrepared → ArticlePublished`. What makes it distinctive is the intermediate Being (`ArticlePrepared`), which orchestrates several injected Reason services (`MarkdownRenderer`, `SlugGenerator`, `ExcerptExtractor`, `AuthorResolver`) to carry out markdown rendering, slug generation, excerpt extraction and author resolution in a single transformation.
 
-> Concrete: `ArticleInput → ContentPrepared → ArticlePrepared → MarkdownRendered → MetadataResolved → SlugGenerated → ArticlePublished`
+> Concrete: `ArticleInput → ArticlePrepared → ArticlePublished`
 
 ### Branching — [medical-triage](./demos/medical-triage/)
 
@@ -129,54 +124,37 @@ Emergency room triage implementing the JTAS protocol. One input branches to thre
 
 ### Cascade Diamond — [loan-application](./demos/loan-application/)
 
-**Flow:** `Input → Stage1(parallel → converge) → Stage2(parallel → Final)`
+**Flow:** `Input → Final` with two Moments injected, realized in staged order
 
 ```mermaid
 flowchart LR
-    I([Input]) --> S([Being])
-    S --> A1([Being]) --> AM1([Moment]) --> C([Being])
-    S --> A2([Being]) --> AM2([Moment]) --> C
-    C --> D1([Being]) --> DM1([Moment]) --> F([Final])
-    C --> D2([Being]) --> DM2([Moment]) --> F
+    I([Input]) --> F([Final])
+    M1([Moment · stage 1]) -.-> F
+    M2([Moment · stage 2]) -.-> F
 ```
 
-Mortgage application with staged Moment realization. Stage 1 Moments realize at eligibility confirmation; Stage 2 Moments realize at final approval.
+Mortgage application. `LoanInput` transitions directly to `LoanApproved`, which injects `CollateralValued` and `InsurancePrepared`. The "cascade" is in the Moments' internal Potentials: stage 1 concerns (identity, credit, income) must realize before stage 2 concerns (appraisal, insurance) can commit, even though both stages converge in a single Final.
 
-> Concrete:
-> ```text
-> LoanInput → IdentityVerified ─┬→ CreditScored   → CreditApproved   ─┬→ EligibilityConfirmed
->                               └→ IncomeAssessed → IncomeApproved   ─┘
->                                                                      ↓
->                               ┌→ PropertyAppraised → CollateralValued ─┬→ LoanApproved
->                               └→ InsuranceQuoted   → InsurancePrepared ─┘
-> ```
+> Concrete: `LoanInput → LoanApproved` with `CollateralValued`, `InsurancePrepared` injected into the Final.
 
 ### Complex Convergence — [insurance-claim](./demos/insurance-claim/)
 
-**Flow:** `Input(A) + Input(B) → converge → parallel(3) → Branch → Final(A) | Final(B)`
+**Flow:** Two Inputs, each branching to one of two Finals, with Moments shared across branches
 
 ```mermaid
 flowchart LR
-    I1([Input A]) --> C([Being])
-    I2([Input B]) --> C
-    C --> P1([Being])
-    C --> P2([Being])
-    C --> P3([Being])
-    P1 --> D{Branch}
-    P2 --> D
-    P3 --> D
-    D --> F1([Final A])
-    D --> F2([Final B])
+    I1([Input A]) --> F1([Final A])
+    I1 --> F2([Final B])
+    I2([Input B]) --> F1
+    I2 --> F2
+    M1([Moment]) -.-> F1 & F2
+    M2([Moment]) -.-> F1 & F2
+    M3([Moment]) -.-> F1 & F2
 ```
 
-Insurance claim processing with multiple input convergence, three-way parallel assessment, and branching finals.
+Insurance claim processing. `ClaimInput` and `PolicyInput` both declare `#[Be([ClaimSettled, ClaimEscalated])]`, so each Input resolves to exactly one of the two Finals by `$being` type matching. Moments such as `DamageValued`, `AdjustmentReviewed` and `FraudCleared` are injected into both Finals, so the same self-completion logic is shared regardless of which branch is taken.
 
-> Concrete:
-> ```text
-> ClaimInput ──┬→ ClaimRegistered ─┬→ ClaimValidated ─┬→ DamageAssessed  ─┬→ [threshold] → ClaimSettled
-> PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAssigned ─┤              or
->                                                     └→ FraudScreened   ─┘              ClaimEscalated
-> ```
+> Concrete: `ClaimInput` + `PolicyInput` → `ClaimSettled` | `ClaimEscalated`, with shared Moments injected into each Final.
 
 ---
 

@@ -15,13 +15,15 @@
 | 入力1、出力1、中間状態なし | **最小変換** | [hello-world](./demos/hello-world/) |
 | 単一フォームの検証と正規化 | **線形** | [contact-form](./demos/contact-form/) |
 | 順序のある複数の変換 | **連鎖チェーン** | [user-registration](./demos/user-registration/) |
-| 独立した関心事を並列処理して収束 | **ダイヤモンド** | [order-processing](./demos/order-processing/) |
-| 段階的な中間コミットを伴う連鎖 | **連鎖 + Moment** | [blog-publishing](./demos/blog-publishing/) |
+| 独立した関心事が注入Momentを通じてFinalで収束 | **ダイヤモンド** | [order-processing](./demos/order-processing/) |
+| 1つのBeingが複数Reasonサービスをオーケストレーション | **マルチReason Being** | [blog-publishing](./demos/blog-publishing/) |
 | 1入力から判定で複数結果に分岐 | **分岐** | [medical-triage](./demos/medical-triage/) |
-| 直列2段、各段に独自の並列性 | **カスケードダイヤモンド** | [loan-application](./demos/loan-application/) |
-| 複数入力が収束→並列→分岐 | **複合収束** | [insurance-claim](./demos/insurance-claim/) |
+| 段階的なMoment実現（ステージ1がステージ2のゲート） | **カスケードダイヤモンド** | [loan-application](./demos/loan-application/) |
+| 複数入力が複数Finalに分岐し、Momentを共有 | **複合収束** | [insurance-claim](./demos/insurance-claim/) |
 
 > このカタログの機械可読版は [`docs/patterns.json`](./docs/patterns.json) にあります。
+>
+> **図の凡例**: 実線矢印（`→`）は `#[Be]` による変換チェーン。破線矢印（`⇢`）は `#[Inject]` で Final に注入される Moment を表し、各 Moment は Final のコンストラクタ内で自己完結（`be()`）します。
 
 ---
 
@@ -68,39 +70,32 @@ Being変換を連鎖させたユーザー登録：メール検証、パスワー
 
 ### ダイヤモンド — [order-processing](./demos/order-processing/)
 
-**フロー:** `Input → [並列Beings] → [並列Moments] → Final`
+**フロー:** `Input → Final`（3つのMomentがFinalに注入される）
 
 ```mermaid
 flowchart LR
-    I([Input]) --> B1([Being])
-    I --> B2([Being])
-    I --> B3([Being])
-    B1 --> M1([Moment]) --> F([Final])
-    B2 --> M2([Moment]) --> F
-    B3 --> M3([Moment]) --> F
+    I([Input]) --> F([Final])
+    M1([Moment]) -.-> F
+    M2([Moment]) -.-> F
+    M3([Moment]) -.-> F
 ```
 
-並列Beingチェーン（在庫、決済、配送）がMomentを生成し、Final状態で収束するECオーダー処理。
+ECオーダー処理。`OrderInput` は直接 `OrderConfirmed` に遷移し、`OrderConfirmed` が3つの独立した Moment（`InventoryReserved`、`PaymentCompleted`、`ShippingArranged`）を `#[Inject]` します。各 Moment の `be()` は `OrderConfirmed` のコンストラクタ内で呼び出され、3つの関心事が1点で自己完結する「ダイヤモンドメタモルフォーシス」を形成します。
 
-> 具体:
-> ```text
-> OrderInput ─┬→ StockLocated → QuantityChecked   → InventoryReserved ─┬→ OrderConfirmed
->             ├→ CardValidated → PaymentAuthorized → PaymentCompleted  ─┤
->             └→ AddressValidated → CarrierSelected → ShippingArranged ─┘
-> ```
+> 具体: `OrderInput → OrderConfirmed`（Final に `InventoryReserved`・`PaymentCompleted`・`ShippingArranged` を注入）
 
-### 連鎖 + Moment — [blog-publishing](./demos/blog-publishing/)
+### マルチReason Being — [blog-publishing](./demos/blog-publishing/)
 
-**フロー:** `Input → Moment → Being → Being → Moment → Being → Final`
+**フロー:** `Input → Being → Final`
 
 ```mermaid
 flowchart LR
-    I([Input]) --> M1([Moment]) --> B1([Being]) --> B2([Being]) --> M2([Moment]) --> B3([Being]) --> F([Final])
+    I([Input]) --> B([Being]) --> F([Final])
 ```
 
-3つのBeingクラス（`ArticlePrepared`、`MarkdownRendered`、`SlugGenerated`）と2つのMomentクラス（`ContentPrepared`、`MetadataResolved`）を通じて、マークダウンレンダリング、スラグ生成、抜粋抽出、著者解決を段階的に処理する記事公開デモ。
+記事公開デモ。外形的には Linear と同じ `ArticleInput → ArticlePrepared → ArticlePublished` です。特徴は中間 Being（`ArticlePrepared`）が複数の Reason サービス（`MarkdownRenderer`、`SlugGenerator`、`ExcerptExtractor`、`AuthorResolver`）をオーケストレーションし、マークダウンレンダリング・スラグ生成・抜粋抽出・著者解決を1つの変換の中でまとめて行う点にあります。
 
-> 具体: `ArticleInput → ContentPrepared → ArticlePrepared → MarkdownRendered → MetadataResolved → SlugGenerated → ArticlePublished`
+> 具体: `ArticleInput → ArticlePrepared → ArticlePublished`
 
 ### 分岐 — [medical-triage](./demos/medical-triage/)
 
@@ -129,54 +124,37 @@ JTASプロトコルを実装した救急トリアージ。1つの入力が型付
 
 ### カスケードダイヤモンド — [loan-application](./demos/loan-application/)
 
-**フロー:** `Input → Stage1(並列 → 収束) → Stage2(並列 → Final)`
+**フロー:** `Input → Final`（2つのMomentがFinalに注入され、段階的に実現される）
 
 ```mermaid
 flowchart LR
-    I([Input]) --> S([Being])
-    S --> A1([Being]) --> AM1([Moment]) --> C([Being])
-    S --> A2([Being]) --> AM2([Moment]) --> C
-    C --> D1([Being]) --> DM1([Moment]) --> F([Final])
-    C --> D2([Being]) --> DM2([Moment]) --> F
+    I([Input]) --> F([Final])
+    M1([Moment · ステージ1]) -.-> F
+    M2([Moment · ステージ2]) -.-> F
 ```
 
-段階的Moment実現を伴う住宅ローン申請。Stage 1のMomentは適格性確認時に実現、Stage 2のMomentは最終承認時に実現。
+住宅ローン申請デモ。`LoanInput` は直接 `LoanApproved` に遷移し、`LoanApproved` が `CollateralValued` と `InsurancePrepared` を注入します。「カスケード」は Moment 内部の Potential にあり、ステージ1の関心事（身元確認・信用・所得）がステージ2の関心事（物件評価・保険）より先に実現されなければならない点を指します。両ステージは1つの Final に収束します。
 
-> 具体:
-> ```text
-> LoanInput → IdentityVerified ─┬→ CreditScored   → CreditApproved   ─┬→ EligibilityConfirmed
->                               └→ IncomeAssessed → IncomeApproved   ─┘
->                                                                      ↓
->                               ┌→ PropertyAppraised → CollateralValued ─┬→ LoanApproved
->                               └→ InsuranceQuoted   → InsurancePrepared ─┘
-> ```
+> 具体: `LoanInput → LoanApproved`（Final に `CollateralValued`・`InsurancePrepared` を注入）
 
 ### 複合収束 — [insurance-claim](./demos/insurance-claim/)
 
-**フロー:** `Input(A) + Input(B) → 収束 → 並列(3) → 分岐 → Final(A) | Final(B)`
+**フロー:** 2つの Input が、共有 Moment を注入された 2つの Final のいずれかに分岐する
 
 ```mermaid
 flowchart LR
-    I1([Input A]) --> C([Being])
-    I2([Input B]) --> C
-    C --> P1([Being])
-    C --> P2([Being])
-    C --> P3([Being])
-    P1 --> D{分岐}
-    P2 --> D
-    P3 --> D
-    D --> F1([Final A])
-    D --> F2([Final B])
+    I1([Input A]) --> F1([Final A])
+    I1 --> F2([Final B])
+    I2([Input B]) --> F1
+    I2 --> F2
+    M1([Moment]) -.-> F1 & F2
+    M2([Moment]) -.-> F1 & F2
+    M3([Moment]) -.-> F1 & F2
 ```
 
-複数入力の収束、3方向並列評価、分岐Finalを持つ保険請求処理。
+保険請求処理デモ。`ClaimInput` と `PolicyInput` はどちらも `#[Be([ClaimSettled, ClaimEscalated])]` を宣言しており、`$being` の型マッチングによって各 Input がちょうど1つの Final に解決されます。`DamageValued`、`AdjustmentReviewed`、`FraudCleared` などの Moment は両方の Final に注入されるため、どちらの分岐を辿っても同じ自己完結ロジックが共有されます。
 
-> 具体:
-> ```text
-> ClaimInput ──┬→ ClaimRegistered ─┬→ ClaimValidated ─┬→ DamageAssessed  ─┬→ [閾値判定] → ClaimSettled
-> PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAssigned ─┤               または
->                                                     └→ FraudScreened   ─┘               ClaimEscalated
-> ```
+> 具体: `ClaimInput` + `PolicyInput` → `ClaimSettled` または `ClaimEscalated`（各 Final に共有 Moment を注入）
 
 ---
 
