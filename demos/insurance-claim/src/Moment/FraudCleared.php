@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Moment;
+namespace Be\Pattern\InsuranceClaim\Moment;
 
 use Ray\Di\Di\Inject;
-use Be\Demo\InsuranceClaim\Reason\FraudDetectorInterface;
+use Be\Pattern\InsuranceClaim\Reason\FraudDetectorInterface;
 
 /**
  * Fraud Cleared - Moment (pure data, no Potential)

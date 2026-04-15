@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\ContactForm\Semantic;
+namespace Be\Pattern\ContactForm\Semantic;
 
-use Be\Demo\ContactForm\Exception\InvalidNameException;
+use Be\Pattern\ContactForm\Exception\InvalidNameException;
 use Be\Framework\Attribute\Validate;
 
 use function trim;

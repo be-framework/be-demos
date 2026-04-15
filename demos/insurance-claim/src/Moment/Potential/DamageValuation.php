@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Moment\Potential;
+namespace Be\Pattern\InsuranceClaim\Moment\Potential;
 
-use Be\Demo\InsuranceClaim\Moment\MomentInterface;
+use Be\Pattern\InsuranceClaim\Moment\MomentInterface;
 
 /**
  * Damage Valuation - potential to finalize damage assessment

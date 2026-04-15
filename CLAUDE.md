@@ -95,7 +95,7 @@ will not run under Ray.Di or will break framework expectations.
 8. **Reason services**: always define an `…Interface` and depend on the
    interface, never the concrete class. Ray.Di binds the implementation.
 9. **Namespaces**: follow the existing per-demo pattern
-   (`Be\Demo\<Name>\<Layer>\…` or `Be\App\<Layer>\…`). Never invent a new
+   (`Be\Pattern\<Name>\<Layer>\…` or `Be\App\<Layer>\…`). Never invent a new
    root namespace.
 10. **No side effects in Beings.** A Being transforms data; external I/O
     belongs in an injected Reason service.

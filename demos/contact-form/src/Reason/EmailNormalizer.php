@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\ContactForm\Reason;
+namespace Be\Pattern\ContactForm\Reason;
 
 /**
  * EmailNormalizer - Reason class

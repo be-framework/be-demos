@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\ContactForm\Semantic;
+namespace Be\Pattern\ContactForm\Semantic;
 
-use Be\Demo\ContactForm\Exception\InvalidMessageException;
+use Be\Pattern\ContactForm\Exception\InvalidMessageException;
 use Be\Framework\Attribute\Validate;
 
 /**

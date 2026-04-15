@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Reason;
+namespace Be\Pattern\InsuranceClaim\Reason;
 
-use Be\Demo\InsuranceClaim\Moment\Potential\PaymentExecution;
+use Be\Pattern\InsuranceClaim\Moment\Potential\PaymentExecution;
 
 /**
  * Payment Processor Interface

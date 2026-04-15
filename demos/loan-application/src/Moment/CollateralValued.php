@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Moment;
+namespace Be\Pattern\LoanApplication\Moment;
 
-use Be\Demo\LoanApplication\Moment\Potential\CollateralRegistration;
-use Be\Demo\LoanApplication\Reason\PropertyAppraisalInterface;
+use Be\Pattern\LoanApplication\Moment\Potential\CollateralRegistration;
+use Be\Pattern\LoanApplication\Reason\PropertyAppraisalInterface;
 use Ray\Di\Di\Inject;
 
 /**

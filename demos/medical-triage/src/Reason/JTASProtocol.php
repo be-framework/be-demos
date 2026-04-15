@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Reason;
+namespace Be\Pattern\MedicalTriage\Reason;
 
 /**
  * JTAS Protocol - Policy Reason (the key branching logic)

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Semantic;
+namespace Be\Pattern\MedicalTriage\Semantic;
 
-use Be\Demo\MedicalTriage\Exception\InvalidPatientIdException;
+use Be\Pattern\MedicalTriage\Exception\InvalidPatientIdException;
 use Be\Framework\Attribute\Validate;
 
 /**

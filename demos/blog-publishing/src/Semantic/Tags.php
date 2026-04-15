@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Semantic;
+namespace Be\Pattern\BlogPublishing\Semantic;
 
-use Be\Demo\BlogPublishing\Exception\InvalidTagException;
+use Be\Pattern\BlogPublishing\Exception\InvalidTagException;
 use Be\Framework\Attribute\Validate;
 
 /**

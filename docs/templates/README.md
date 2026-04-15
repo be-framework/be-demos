@@ -7,10 +7,10 @@ not be executed; they exist purely as reference shapes for humans and AI
 assistants.
 
 > **Namespace rule.** Each template file uses a placeholder namespace of the
-> form `Be\Demo\Template\<Layer>;` so the file declares *some* namespace
-> while still mirroring the repo convention `Be\Demo\<Name>\<Layer>\…`.
+> form `Be\Pattern\Template\<Layer>;` so the file declares *some* namespace
+> while still mirroring the repo convention `Be\Pattern\<Name>\<Layer>\…`.
 > **When you copy a template into a real demo you MUST replace `Template`
-> with the actual demo name** (e.g. `Be\Demo\OrderProcessing\Being\…`) or
+> with the actual demo name** (e.g. `Be\Pattern\OrderProcessing\Being\…`) or
 > use the alternate `Be\App\<Layer>\…` form, to comply with the rules in
 > [`CLAUDE.md`](../../CLAUDE.md). Never leave the literal `Template` segment
 > in committed code. Each template marks the line you must change with a

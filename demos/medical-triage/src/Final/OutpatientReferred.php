@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Final;
+namespace Be\Pattern\MedicalTriage\Final;
 
-use Be\Demo\MedicalTriage\Reason\NonUrgentCase;
+use Be\Pattern\MedicalTriage\Reason\NonUrgentCase;
 use Ray\InputQuery\Attribute\Input;
 
 /**

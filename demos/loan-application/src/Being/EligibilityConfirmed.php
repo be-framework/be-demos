@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Being;
+namespace Be\Pattern\LoanApplication\Being;
 
-use Be\Demo\LoanApplication\Moment\CreditApproved;
-use Be\Demo\LoanApplication\Moment\IncomeApproved;
+use Be\Pattern\LoanApplication\Moment\CreditApproved;
+use Be\Pattern\LoanApplication\Moment\IncomeApproved;
 use Ray\Di\Di\Inject;
 
 /**

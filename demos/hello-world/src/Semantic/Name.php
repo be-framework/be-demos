@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\Hello\Semantic;
+namespace Be\Pattern\Hello\Semantic;
 
-use Be\Demo\Hello\Exception\InvalidNameException;
+use Be\Pattern\Hello\Exception\InvalidNameException;
 use Be\Framework\Attribute\Validate;
 
 use function trim;

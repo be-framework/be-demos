@@ -3,12 +3,12 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Be\\Demo\\MedicalTriage\\": "src/"
+            "Be\\Pattern\\MedicalTriage\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Be\\Demo\\MedicalTriage\\Tests\\": "tests/"
+            "Be\\Pattern\\MedicalTriage\\Tests\\": "tests/"
         }
     },
     "require": {

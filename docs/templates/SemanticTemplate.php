@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\Template\Semantic; // TODO: replace `Template` with the real demo name (or use Be\App\Semantic)
+namespace Be\Pattern\Template\Semantic; // TODO: replace `Template` with the real demo name (or use Be\App\Semantic)
 
 use Be\Framework\Attribute\Validate;
 

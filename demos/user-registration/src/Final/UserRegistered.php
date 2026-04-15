@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\UserRegistration\Final;
+namespace Be\Pattern\UserRegistration\Final;
 
-use Be\Demo\UserRegistration\Reason\UserIdGenerator;
-use Be\Demo\UserRegistration\Reason\WelcomeTokenGenerator;
+use Be\Pattern\UserRegistration\Reason\UserIdGenerator;
+use Be\Pattern\UserRegistration\Reason\WelcomeTokenGenerator;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
 

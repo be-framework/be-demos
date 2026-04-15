@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Reason;
+namespace Be\Pattern\BlogPublishing\Reason;
 
 /**
  * Markdown Renderer - Reason (stateless service)

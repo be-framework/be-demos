@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Being;
+namespace Be\Pattern\BlogPublishing\Being;
 
-use Be\Demo\BlogPublishing\Reason\SlugGenerator;
+use Be\Pattern\BlogPublishing\Reason\SlugGenerator;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
 

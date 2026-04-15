@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\ContactForm\Exception;
+namespace Be\Pattern\ContactForm\Exception;
 
 use Be\Framework\Attribute\Message;
 use DomainException;

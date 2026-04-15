@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Being;
+namespace Be\Pattern\BlogPublishing\Being;
 
-use Be\Demo\BlogPublishing\Reason\MarkdownRenderer;
+use Be\Pattern\BlogPublishing\Reason\MarkdownRenderer;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
 

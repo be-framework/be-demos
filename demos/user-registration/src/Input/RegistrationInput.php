@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\UserRegistration\Input;
+namespace Be\Pattern\UserRegistration\Input;
 
-use Be\Demo\UserRegistration\Being\EmailVerified;
+use Be\Pattern\UserRegistration\Being\EmailVerified;
 use Be\Framework\Attribute\Be;
 
 /**

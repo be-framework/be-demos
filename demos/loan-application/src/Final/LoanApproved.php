@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Final;
+namespace Be\Pattern\LoanApplication\Final;
 
-use Be\Demo\LoanApplication\Moment\CollateralValued;
-use Be\Demo\LoanApplication\Moment\InsurancePrepared;
-use Be\Demo\LoanApplication\Reason\LoanPolicy;
+use Be\Pattern\LoanApplication\Moment\CollateralValued;
+use Be\Pattern\LoanApplication\Moment\InsurancePrepared;
+use Be\Pattern\LoanApplication\Reason\LoanPolicy;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
 

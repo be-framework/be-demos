@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Reason;
+namespace Be\Pattern\InsuranceClaim\Reason;
 
-use Be\Demo\InsuranceClaim\Moment\Potential\DamageValuation;
+use Be\Pattern\InsuranceClaim\Moment\Potential\DamageValuation;
 
 /**
  * Damage Appraiser - Reason (stateless gateway)

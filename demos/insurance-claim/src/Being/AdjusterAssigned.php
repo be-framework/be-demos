@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Being;
+namespace Be\Pattern\InsuranceClaim\Being;
 
 use Ray\InputQuery\Attribute\Input;
 use Ray\Di\Di\Inject;
-use Be\Demo\InsuranceClaim\Reason\AdjusterAllocatorInterface;
+use Be\Pattern\InsuranceClaim\Reason\AdjusterAllocatorInterface;
 
 /**
  * Adjuster Assigned - Being (3-way parallel, branch 2)

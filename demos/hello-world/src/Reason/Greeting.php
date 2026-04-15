@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\Hello\Reason;
+namespace Be\Pattern\Hello\Reason;
 
 /**
  * Greeting - Reason class

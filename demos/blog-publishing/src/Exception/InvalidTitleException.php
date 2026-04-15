@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\BlogPublishing\Exception;
+namespace Be\Pattern\BlogPublishing\Exception;
 
 use Be\Framework\Attribute\Message;
 use DomainException;

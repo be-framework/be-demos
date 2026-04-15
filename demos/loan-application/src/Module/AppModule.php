@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Module;
+namespace Be\Pattern\LoanApplication\Module;
 
-use Be\Demo\LoanApplication\Reason\CreditBureau;
-use Be\Demo\LoanApplication\Reason\CreditBureauInterface;
-use Be\Demo\LoanApplication\Reason\IdentityVerifier;
-use Be\Demo\LoanApplication\Reason\IdentityVerifierInterface;
-use Be\Demo\LoanApplication\Reason\IncomePolicy;
-use Be\Demo\LoanApplication\Reason\InsuranceQuoter;
-use Be\Demo\LoanApplication\Reason\InsuranceQuoterInterface;
-use Be\Demo\LoanApplication\Reason\LoanPolicy;
-use Be\Demo\LoanApplication\Reason\PropertyAppraisal;
-use Be\Demo\LoanApplication\Reason\PropertyAppraisalInterface;
+use Be\Pattern\LoanApplication\Reason\CreditBureau;
+use Be\Pattern\LoanApplication\Reason\CreditBureauInterface;
+use Be\Pattern\LoanApplication\Reason\IdentityVerifier;
+use Be\Pattern\LoanApplication\Reason\IdentityVerifierInterface;
+use Be\Pattern\LoanApplication\Reason\IncomePolicy;
+use Be\Pattern\LoanApplication\Reason\InsuranceQuoter;
+use Be\Pattern\LoanApplication\Reason\InsuranceQuoterInterface;
+use Be\Pattern\LoanApplication\Reason\LoanPolicy;
+use Be\Pattern\LoanApplication\Reason\PropertyAppraisal;
+use Be\Pattern\LoanApplication\Reason\PropertyAppraisalInterface;
 use Ray\Di\AbstractModule;
 
 final class AppModule extends AbstractModule

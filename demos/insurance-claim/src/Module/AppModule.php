@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\InsuranceClaim\Module;
+namespace Be\Pattern\InsuranceClaim\Module;
 
-use Be\Demo\InsuranceClaim\Reason\AdjusterAllocator;
-use Be\Demo\InsuranceClaim\Reason\AdjusterAllocatorInterface;
-use Be\Demo\InsuranceClaim\Reason\ClaimRegistrar;
-use Be\Demo\InsuranceClaim\Reason\CoverageValidator;
-use Be\Demo\InsuranceClaim\Reason\DamageAppraiser;
-use Be\Demo\InsuranceClaim\Reason\DamageAppraiserInterface;
-use Be\Demo\InsuranceClaim\Reason\FraudDetector;
-use Be\Demo\InsuranceClaim\Reason\FraudDetectorInterface;
-use Be\Demo\InsuranceClaim\Reason\PaymentProcessor;
-use Be\Demo\InsuranceClaim\Reason\PaymentProcessorInterface;
-use Be\Demo\InsuranceClaim\Reason\PolicyRegistry;
-use Be\Demo\InsuranceClaim\Reason\PolicyRegistryInterface;
-use Be\Demo\InsuranceClaim\Reason\SettlementPolicy;
+use Be\Pattern\InsuranceClaim\Reason\AdjusterAllocator;
+use Be\Pattern\InsuranceClaim\Reason\AdjusterAllocatorInterface;
+use Be\Pattern\InsuranceClaim\Reason\ClaimRegistrar;
+use Be\Pattern\InsuranceClaim\Reason\CoverageValidator;
+use Be\Pattern\InsuranceClaim\Reason\DamageAppraiser;
+use Be\Pattern\InsuranceClaim\Reason\DamageAppraiserInterface;
+use Be\Pattern\InsuranceClaim\Reason\FraudDetector;
+use Be\Pattern\InsuranceClaim\Reason\FraudDetectorInterface;
+use Be\Pattern\InsuranceClaim\Reason\PaymentProcessor;
+use Be\Pattern\InsuranceClaim\Reason\PaymentProcessorInterface;
+use Be\Pattern\InsuranceClaim\Reason\PolicyRegistry;
+use Be\Pattern\InsuranceClaim\Reason\PolicyRegistryInterface;
+use Be\Pattern\InsuranceClaim\Reason\SettlementPolicy;
 use Ray\Di\AbstractModule;
 
 final class AppModule extends AbstractModule

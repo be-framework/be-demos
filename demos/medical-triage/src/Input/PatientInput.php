@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\MedicalTriage\Input;
+namespace Be\Pattern\MedicalTriage\Input;
 
-use Be\Demo\MedicalTriage\Being\TriageLevelDetermined;
+use Be\Pattern\MedicalTriage\Being\TriageLevelDetermined;
 use Be\Framework\Attribute\Be;
 
 /**

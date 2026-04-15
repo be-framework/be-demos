@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Demo\LoanApplication\Exception;
+namespace Be\Pattern\LoanApplication\Exception;
 
 use Be\Framework\Attribute\Message;
 use DomainException;
