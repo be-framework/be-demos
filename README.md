@@ -79,16 +79,16 @@ ArticleInput → ContentPrepared → ArticlePrepared → MarkdownRendered → Me
 **Pattern:** Branching Metamorphosis
 **Flow:** `Input → Being → [Branch] → Final(A) | Final(B) | Final(C)`
 
-Emergency room triage implementing JTAS protocol. One input branches to three possible Finals based on severity assessment.
+Emergency room triage implementing JTAS protocol. One input branches to three possible Finals via a typed `$being` discriminator, with each branch's behavior carried by a Reason strategy class.
 
 ```text
-PatientInput → VitalsMeasured → TriageLevelDetermined
-                                        │
-              ┌─────────────────────────┼─────────────────────────┐
-              ↓                         ↓                         ↓
-        [immediate]               [urgent]                  [non-urgent]
-              ↓                         ↓                         ↓
-     EmergencyAdmitted           UrgentQueued           OutpatientReferred
+PatientInput → TriageLevelDetermined
+                      │
+       ┌──────────────┼──────────────┐
+       ↓              ↓              ↓
+  [ImmediateCase] [UrgentCase] [NonUrgentCase]
+       ↓              ↓              ↓
+EmergencyAdmitted  UrgentQueued  OutpatientReferred
 ```
 
 #### [loan-application](./demos/loan-application/)
@@ -126,7 +126,7 @@ PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAss
 | Sequential | user-registration | 1 | 3 | 0 | 1 |
 | Diamond | order-processing | 1 | 6 | 6 | 1 |
 | Sequential | blog-publishing | 1 | 3 | 2 | 1 |
-| Branching | medical-triage | 1 | 2 | 2-3 | 3 |
+| Branching | medical-triage | 1 | 1 | 0 | 3 |
 | Cascade | loan-application | 1 | 5 | 4 | 1 |
 | Complex | insurance-claim | 2 | 5 | 3 | 2 |
 

@@ -79,16 +79,16 @@ ArticleInput → ContentPrepared → ArticlePrepared → MarkdownRendered → Me
 **パターン:** 分岐メタモルフォーシス
 **フロー:** `Input → Being → [分岐] → Final(A) | Final(B) | Final(C)`
 
-JTASプロトコルを実装した救急トリアージ。1つの入力が重症度評価に基づき3つの異なるFinalに分岐します。
+JTASプロトコルを実装した救急トリアージ。1つの入力が型付き`$being`識別子を通じて3つの異なるFinalに分岐し、各分岐の振る舞いはReason戦略クラスが保持します。
 
 ```text
-TriageInput → VitalsMeasured → TriageLevelDetermined
-                                        │
-              ┌─────────────────────────┼─────────────────────────┐
-              ↓                         ↓                         ↓
-        [緊急]                     [準緊急]                    [非緊急]
-              ↓                         ↓                         ↓
-     EmergencyAdmitted           UrgentQueued           OutpatientReferred
+PatientInput → TriageLevelDetermined
+                      │
+       ┌──────────────┼──────────────┐
+       ↓              ↓              ↓
+  [ImmediateCase] [UrgentCase] [NonUrgentCase]
+       ↓              ↓              ↓
+EmergencyAdmitted  UrgentQueued  OutpatientReferred
 ```
 
 #### [loan-application](./demos/loan-application/)
@@ -126,7 +126,7 @@ PolicyInput ─┴→ PolicyVerified  ─┘                  ├→ AdjusterAss
 | 連鎖 | user-registration | 1 | 3 | 0 | 1 |
 | ダイヤモンド | order-processing | 1 | 6 | 6 | 1 |
 | 連鎖 | blog-publishing | 1 | 3 | 2 | 1 |
-| 分岐 | medical-triage | 1 | 2 | 2-3 | 3 |
+| 分岐 | medical-triage | 1 | 1 | 0 | 3 |
 | カスケード | loan-application | 1 | 5 | 4 | 1 |
 | 複合 | insurance-claim | 2 | 5 | 3 | 2 |
 
