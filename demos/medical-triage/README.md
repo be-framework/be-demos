@@ -17,12 +17,26 @@ PatientInput → VitalsMeasured(Being) → TriageLevelDetermined(Being)
 
 ### 1. Multiple Finals from One Input
 
-Unlike the order-processing demo (diamond metamorphosis with one Final), this demo shows that a single `PatientInput` can become one of three different Finals:
+Unlike the order-processing demo (diamond metamorphosis with one Final), this demo shows that a single `PatientInput` can become one of three different Finals. The branching happens on `TriageLevelDetermined`, whose `$being` discriminator (an `ImmediatePath|UrgentPath|NonUrgentPath` union) is used by the Be Framework's [type matcher](../../demos/medical-triage/vendor/be-framework/be/src/BecomingType.php) to pick the right Final:
 
 ```php
 #[Be([EmergencyAdmitted::class, UrgentQueued::class, OutpatientReferred::class])]
-final readonly class PatientInput { ... }
+final readonly class TriageLevelDetermined
+{
+    public ImmediatePath|UrgentPath|NonUrgentPath $being;
+    // ...
+}
+
+final readonly class EmergencyAdmitted
+{
+    public function __construct(
+        #[Input] public ImmediatePath $being,  // type match -> this Final wins
+        // ...
+    ) { ... }
+}
 ```
+
+This mirrors the `$being` type-matching pattern from the Be Framework's `BeGreeting` example.
 
 ### 2. Policy Reason (JTASProtocol)
 
@@ -65,10 +79,13 @@ The consciousness level uses the Japan Coma Scale:
 src/
 ├── Input/          PatientInput (entry point)
 ├── Being/          VitalsMeasured, TriageLevelDetermined
+│   └── Path/       ImmediatePath, UrgentPath, NonUrgentPath ($being discriminators)
 ├── Moment/         BedAssigned, TeamAlerted, QueuePositioned, ReferralCreated
 │   └── Potential/  BedReservation, TeamAlert
 ├── Final/          EmergencyAdmitted, UrgentQueued, OutpatientReferred
-├── Semantic/       Temperature, HeartRate, BloodPressure, ConsciousnessLevel, PatientId
+├── Semantic/       Temperature, HeartRate, BloodPressureSystolic, BloodPressureDiastolic,
+│                   ConsciousnessLevel, PatientId, ChiefComplaint, VitalsSeverity,
+│                   TriageLevel, TriageCode, Being
 ├── Reason/         VitalsAssessor, JTASProtocol, BedAllocator, TeamDispatcher, ReferralPolicy
 ├── Exception/      Domain exceptions with en/ja messages
 └── Module/         AppModule (DI configuration)

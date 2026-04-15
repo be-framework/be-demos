@@ -82,7 +82,7 @@ ArticleInput → ContentPrepared → ArticlePrepared → MarkdownRendered → Me
 Emergency room triage implementing JTAS protocol. One input branches to three possible Finals based on severity assessment.
 
 ```text
-TriageInput → VitalsMeasured → TriageLevelDetermined
+PatientInput → VitalsMeasured → TriageLevelDetermined
                                         │
               ┌─────────────────────────┼─────────────────────────┐
               ↓                         ↓                         ↓
