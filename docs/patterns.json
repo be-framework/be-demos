@@ -2,8 +2,14 @@
   "$schema": "https://json-schema.org/draft-07/schema#",
   "title": "BE Framework Demo Pattern Catalog",
   "description": "Machine-readable index of all demos in this repository. Class counts include only classes actively connected to the live transformation graph: Inputs and intermediate Beings linked via `#[Be]` transitions, Moments injected into Finals via `#[Inject]`, and the Finals themselves. Standalone exemplar classes that exist under `src/<Layer>/` but are never reached from the chain are excluded, as are `MomentInterface.php` and `Potential/` sub-namespaces. Paths are relative to the repository root.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "generatedFrom": "Direct enumeration of #[Be] attributes and Final constructor #[Inject] parameters",
+  "relatedSkill": {
+    "id": "be",
+    "repository": "be-framework/be-skills",
+    "url": "https://github.com/be-framework/be-skills",
+    "note": "The `be` skill in be-skills delegates to this repository for canonical examples. Agents running that skill should consume this catalog when asked to find a demo of a specific pattern."
+  },
   "patterns": [
     {
       "id": "minimal",

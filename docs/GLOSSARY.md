@@ -103,3 +103,8 @@ layer — the ground of the transformation.
 See [`CLAUDE.md`](../CLAUDE.md) for the recommended reading order and
 hard invariants, and [`patterns.json`](./patterns.json) for the full demo
 catalog in machine-readable form.
+
+If you arrived here via the `be` skill from
+[`be-framework/be-skills`](https://github.com/be-framework/be-skills),
+this glossary is the resolution layer between the philosophical vocabulary
+that skill uses and the concrete files in this repository.
