@@ -4,32 +4,33 @@ declare(strict_types=1);
 
 namespace Be\Demo\MedicalTriage\Final;
 
-use Be\Demo\MedicalTriage\Moment\QueuePositioned;
-use Ray\Di\Di\Inject;
+use Be\Demo\MedicalTriage\Reason\UrgentCase;
+use Ray\InputQuery\Attribute\Input;
 
 /**
  * Urgent Queued - Final (urgent triage path)
  *
- * Branching metamorphosis: PatientInput -> UrgentQueued
- * QueuePositioned is a pure data Moment with no Potential.
- * No be() call needed - just data assembly.
+ * Selected by the Be Framework when the preceding TriageLevelDetermined sets
+ * its $being discriminator to an {@see UrgentCase}. The Final delegates queue
+ * assignment to that strategy via `$being->queue(...)`.
  *
  * @link https://schema.org/MedicalClinic
  */
 final readonly class UrgentQueued
 {
     public string $queueId;
+    public int $queuePosition;
     public string $status;
+    public string $triageCode;
 
     public function __construct(
-        #[Inject] public QueuePositioned $queuePositioned,
+        #[Input] public UrgentCase $being,
+        #[Input] public string $patientId,
     ) {
-        // No be() - QueuePositioned has no Potential to realize
-        $this->queueId = sprintf(
-            'QUE-%s-%04d',
-            date('Ymd'),
-            $this->queuePositioned->queuePosition
-        );
-        $this->status = 'queued';
+        $result = $being->queue($patientId);
+        $this->queueId = $result['queueId'];
+        $this->queuePosition = $result['queuePosition'];
+        $this->status = $result['status'];
+        $this->triageCode = $being->triageCode;
     }
 }

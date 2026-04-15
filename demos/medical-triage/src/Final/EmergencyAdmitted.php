@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Be\Demo\MedicalTriage\Final;
 
-use Be\Demo\MedicalTriage\Moment\BedAssigned;
-use Be\Demo\MedicalTriage\Moment\TeamAlerted;
-use Ray\Di\Di\Inject;
+use Be\Demo\MedicalTriage\Reason\ImmediateCase;
+use Ray\InputQuery\Attribute\Input;
 
 /**
  * Emergency Admitted - Final (immediate triage path)
  *
- * Branching metamorphosis: PatientInput -> EmergencyAdmitted
- * Both Moments are realized here through self-completion.
- * BedAssigned and TeamAlerted each carry Potential that must be realized.
+ * Selected by the Be Framework when the preceding TriageLevelDetermined sets
+ * its $being discriminator to an {@see ImmediateCase}. The Final delegates all
+ * domain work to that strategy via `$being->admit(...)`, mirroring the
+ * FormalStyle/CasualStyle pattern from the BeGreeting example.
  *
  * @link https://schema.org/EmergencyService
  */
@@ -21,28 +21,15 @@ final readonly class EmergencyAdmitted
 {
     public string $admissionId;
     public string $status;
+    public string $triageCode;
 
     public function __construct(
-        #[Inject] public BedAssigned $bedAssigned,
-        #[Inject] public TeamAlerted $teamAlerted,
+        #[Input] public ImmediateCase $being,
+        #[Input] public string $patientId,
     ) {
-        // Self-completion: realize all Moments (parts of self)
-        $this->bedAssigned->be();
-        $this->teamAlerted->be();
-
-        $this->admissionId = $this->generateAdmissionId();
-        $this->status = 'admitted';
-    }
-
-    private function generateAdmissionId(): string
-    {
-        return sprintf(
-            'ADM-%s-%s',
-            date('Ymd'),
-            substr(md5(
-                $this->bedAssigned->reservation->reservationId .
-                $this->teamAlerted->alert->alertId
-            ), 0, 8)
-        );
+        $result = $being->admit($patientId);
+        $this->admissionId = $result['admissionId'];
+        $this->status = $result['status'];
+        $this->triageCode = $being->triageCode;
     }
 }

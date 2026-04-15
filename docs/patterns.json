@@ -65,15 +65,15 @@
       "id": "branching",
       "demo": "medical-triage",
       "level": "advanced",
-      "flow": "Input -> Final(A) | Final(B) | Final(C) (each Final injects its own Moments)",
-      "classes": { "input": 1, "being": 0, "moment": 4, "final": 3 },
+      "flow": "Input -> Being (sets $being discriminator) -> Final(A) | Final(B) | Final(C) (chosen by $being type matching)",
+      "classes": { "input": 1, "being": 1, "moment": 0, "final": 3 },
       "entryFiles": ["demos/medical-triage/src/Input/PatientInput.php"],
       "finalFiles": [
         "demos/medical-triage/src/Final/EmergencyAdmitted.php",
         "demos/medical-triage/src/Final/UrgentQueued.php",
         "demos/medical-triage/src/Final/OutpatientReferred.php"
       ],
-      "keyConcepts": ["runtime Final selection", "severity-based branching", "JTAS protocol"]
+      "keyConcepts": ["$being type matching", "Reason strategy classes", "JTAS protocol"]
     },
     {
       "id": "cascade-diamond",

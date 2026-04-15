@@ -4,28 +4,31 @@ declare(strict_types=1);
 
 namespace Be\Demo\MedicalTriage\Final;
 
-use Be\Demo\MedicalTriage\Moment\ReferralCreated;
-use Ray\Di\Di\Inject;
+use Be\Demo\MedicalTriage\Reason\NonUrgentCase;
+use Ray\InputQuery\Attribute\Input;
 
 /**
  * Outpatient Referred - Final (non-urgent triage path)
  *
- * Branching metamorphosis: PatientInput -> OutpatientReferred
- * ReferralCreated is a pure data Moment with no Potential.
- * No be() call needed - just data assembly.
+ * Selected by the Be Framework when the preceding TriageLevelDetermined sets
+ * its $being discriminator to a {@see NonUrgentCase}. The Final delegates
+ * referral creation to that strategy via `$being->refer(...)`.
  *
  * @link https://schema.org/MedicalClinic
  */
 final readonly class OutpatientReferred
 {
-    public string $referralNumber;
+    public string $referralId;
     public string $status;
+    public string $triageCode;
 
     public function __construct(
-        #[Inject] public ReferralCreated $referralCreated,
+        #[Input] public NonUrgentCase $being,
+        #[Input] public string $patientId,
     ) {
-        // No be() - ReferralCreated has no Potential to realize
-        $this->referralNumber = $this->referralCreated->referralId;
-        $this->status = 'referred';
+        $result = $being->refer($patientId);
+        $this->referralId = $result['referralId'];
+        $this->status = $result['status'];
+        $this->triageCode = $being->triageCode;
     }
 }
