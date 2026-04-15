@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Template; // TODO: replace with Be\Demo\<Name>\Input or Be\App\Input when copied
+namespace Be\Demo\Template\Input; // TODO: replace `Template` with the real demo name (or use Be\App\Input)
 
 use Be\Framework\Attribute\Be;
 

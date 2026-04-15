@@ -6,14 +6,15 @@ Framework flow. They live under `docs/templates/`, outside any
 not be executed; they exist purely as reference shapes for humans and AI
 assistants.
 
-> **Namespace rule.** Each template file uses the placeholder namespace
-> `Be\Template;` only because PHP requires the file to declare *some*
-> namespace. **When you copy a template into a real demo you MUST replace
-> it** with the per-demo pattern — `Be\Demo\<Name>\<Layer>\…` or
-> `Be\App\<Layer>\…` — to comply with the repository convention in
-> [`CLAUDE.md`](../../CLAUDE.md). Never leave `Be\Template` in committed
-> code. Each template marks the line you must change with a `TODO`
-> comment on the `namespace` declaration.
+> **Namespace rule.** Each template file uses a placeholder namespace of the
+> form `Be\Demo\Template\<Layer>;` so the file declares *some* namespace
+> while still mirroring the repo convention `Be\Demo\<Name>\<Layer>\…`.
+> **When you copy a template into a real demo you MUST replace `Template`
+> with the actual demo name** (e.g. `Be\Demo\OrderProcessing\Being\…`) or
+> use the alternate `Be\App\<Layer>\…` form, to comply with the rules in
+> [`CLAUDE.md`](../../CLAUDE.md). Never leave the literal `Template` segment
+> in committed code. Each template marks the line you must change with a
+> `TODO` comment on the `namespace` declaration.
 
 Each template:
 

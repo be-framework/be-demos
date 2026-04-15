@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Template; // TODO: replace with Be\Demo\<Name>\Semantic or Be\App\Semantic when copied
+namespace Be\Demo\Template\Semantic; // TODO: replace `Template` with the real demo name (or use Be\App\Semantic)
 
 use Be\Framework\Attribute\Validate;
 
