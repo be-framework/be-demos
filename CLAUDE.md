@@ -35,7 +35,7 @@ all eight demos and their flow shapes.
 
 This repository is the **canonical reference target** for the `be` skill in
 [`be-framework/be-skills`](https://github.com/be-framework/be-skills). When
-that skill instructs an agent to "see be-demos for examples" or "copy the
+that skill instructs an agent to "see be-patterns for examples" or "copy the
 skeleton verbatim," **this** is the repository it points at. If you are
 running with the `be` skill installed, you should treat the files under
 `demos/*/src/` as the ground truth for what idiomatic BE Framework code
