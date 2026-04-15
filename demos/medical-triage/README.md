@@ -17,7 +17,7 @@ PatientInput → VitalsMeasured(Being) → TriageLevelDetermined(Being)
 
 ### 1. Multiple Finals from One Input
 
-Unlike the order-processing demo (diamond metamorphosis with one Final), this demo shows that a single `PatientInput` can become one of three different Finals. The branching happens on `TriageLevelDetermined`, whose `$being` discriminator (an `ImmediatePath|UrgentPath|NonUrgentPath` union) is used by the Be Framework's [type matcher](../../demos/medical-triage/vendor/be-framework/be/src/BecomingType.php) to pick the right Final:
+Unlike the order-processing demo (diamond metamorphosis with one Final), this demo shows that a single `PatientInput` can become one of three different Finals. The branching happens on `TriageLevelDetermined`, whose `$being` discriminator (an `ImmediatePath|UrgentPath|NonUrgentPath` union) is used by the Be Framework's type matcher (`Be\Framework\BecomingType`) to pick the right Final:
 
 ```php
 #[Be([EmergencyAdmitted::class, UrgentQueued::class, OutpatientReferred::class])]

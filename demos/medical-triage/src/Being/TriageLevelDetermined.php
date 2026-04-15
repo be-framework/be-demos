@@ -14,6 +14,9 @@ use Be\Demo\MedicalTriage\Reason\JTASProtocol;
 use Be\Framework\Attribute\Be;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
+use UnexpectedValueException;
+
+use function sprintf;
 
 /**
  * Triage Level Determined - Branching Being
@@ -66,7 +69,10 @@ final readonly class TriageLevelDetermined
         $this->being = match ($this->triageLevel) {
             'immediate' => new ImmediatePath(),
             'urgent' => new UrgentPath(),
-            default => new NonUrgentPath(),
+            'non-urgent' => new NonUrgentPath(),
+            default => throw new UnexpectedValueException(
+                sprintf('Unsupported triage level: %s', $this->triageLevel),
+            ),
         };
     }
 }
