@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Reason;
+namespace Be\Pattern\OrderProcessing\Tests\Reason;
 
-use Be\App\Reason\CarrierSelector;
+use Be\Pattern\OrderProcessing\Reason\CarrierSelector;
 use PHPUnit\Framework\TestCase;
 
 class CarrierSelectorTest extends TestCase

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Moment;
+namespace Be\Pattern\OrderProcessing\Tests\Moment;
 
-use Be\App\Moment\ShippingArranged;
-use Be\App\Reason\ShippingArranger;
+use Be\Pattern\OrderProcessing\Moment\ShippingArranged;
+use Be\Pattern\OrderProcessing\Reason\ShippingArranger;
 use PHPUnit\Framework\TestCase;
 
 class ShippingArrangedTest extends TestCase

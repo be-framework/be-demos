@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Reason;
+namespace Be\Pattern\OrderProcessing\Tests\Reason;
 
-use Be\App\Reason\InventoryChecker;
+use Be\Pattern\OrderProcessing\Reason\InventoryChecker;
 use PHPUnit\Framework\TestCase;
 
 class InventoryCheckerTest extends TestCase

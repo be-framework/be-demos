@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Being\Payment;
+namespace Be\Pattern\OrderProcessing\Tests\Being\Payment;
 
-use Be\App\Being\Payment\PaymentAuthorized;
-use Be\App\Moment\Potential\PaymentCapture;
-use Be\App\Reason\PaymentGateway;
+use Be\Pattern\OrderProcessing\Being\Payment\PaymentAuthorized;
+use Be\Pattern\OrderProcessing\Moment\Potential\PaymentCapture;
+use Be\Pattern\OrderProcessing\Reason\PaymentGateway;
 use PHPUnit\Framework\TestCase;
 
 class PaymentAuthorizedTest extends TestCase

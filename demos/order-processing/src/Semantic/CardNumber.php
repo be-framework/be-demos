@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Semantic;
+namespace Be\Pattern\OrderProcessing\Semantic;
 
 use Be\Framework\Attribute\Validate;
-use Be\App\Exception\InvalidCardNumberException;
+use Be\Pattern\OrderProcessing\Exception\InvalidCardNumberException;
 
 /**
  * Card Number

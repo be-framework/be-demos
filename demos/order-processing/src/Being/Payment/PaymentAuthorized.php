@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Being\Payment;
+namespace Be\Pattern\OrderProcessing\Being\Payment;
 
-use Be\App\Moment\Potential\PaymentCapture;
-use Be\App\Reason\PaymentGateway;
+use Be\Pattern\OrderProcessing\Moment\Potential\PaymentCapture;
+use Be\Pattern\OrderProcessing\Reason\PaymentGateway;
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
 

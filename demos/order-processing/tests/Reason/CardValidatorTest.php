@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Reason;
+namespace Be\Pattern\OrderProcessing\Tests\Reason;
 
-use Be\App\Reason\CardValidator;
+use Be\Pattern\OrderProcessing\Reason\CardValidator;
 use PHPUnit\Framework\TestCase;
 
 class CardValidatorTest extends TestCase

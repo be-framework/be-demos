@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Final;
+namespace Be\Pattern\OrderProcessing\Tests\Final;
 
-use Be\App\Final\OrderConfirmed;
-use Be\App\Moment\InventoryReserved;
-use Be\App\Moment\PaymentCompleted;
-use Be\App\Moment\ShippingArranged;
-use Be\App\Reason\InventoryReserver;
-use Be\App\Reason\PaymentGateway;
-use Be\App\Reason\ShippingArranger;
+use Be\Pattern\OrderProcessing\Final\OrderConfirmed;
+use Be\Pattern\OrderProcessing\Moment\InventoryReserved;
+use Be\Pattern\OrderProcessing\Moment\PaymentCompleted;
+use Be\Pattern\OrderProcessing\Moment\ShippingArranged;
+use Be\Pattern\OrderProcessing\Reason\InventoryReserver;
+use Be\Pattern\OrderProcessing\Reason\PaymentGateway;
+use Be\Pattern\OrderProcessing\Reason\ShippingArranger;
 use PHPUnit\Framework\TestCase;
 
 class OrderConfirmedTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Reason;
+namespace Be\Pattern\OrderProcessing\Reason;
 
-use Be\App\Moment\Potential\ShippingDispatch;
+use Be\Pattern\OrderProcessing\Moment\Potential\ShippingDispatch;
 
 /**
  * Shipping Arranger - Reason (stateless gateway)

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Attribute;
+namespace Be\Pattern\OrderProcessing\Attribute;
 
 use Attribute;
 use Ray\Di\Di\Qualifier;

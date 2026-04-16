@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Reason;
+namespace Be\Pattern\OrderProcessing\Reason;
 
 /**
  * Card Validator - Reason for card validation

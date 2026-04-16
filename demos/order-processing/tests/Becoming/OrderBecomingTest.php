@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Becoming;
+namespace Be\Pattern\OrderProcessing\Tests\Becoming;
 
-use Be\App\Final\OrderConfirmed;
-use Be\App\Input\OrderInput;
-use Be\App\Module\AppModule;
+use Be\Pattern\OrderProcessing\Final\OrderConfirmed;
+use Be\Pattern\OrderProcessing\Input\OrderInput;
+use Be\Pattern\OrderProcessing\Module\AppModule;
 use Be\Framework\Becoming;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;

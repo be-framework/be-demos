@@ -10,11 +10,11 @@ assistants.
 > form `Be\Pattern\Template\<Layer>;` so the file declares *some* namespace
 > while still mirroring the repo convention `Be\Pattern\<Name>\<Layer>\…`.
 > **When you copy a template into a real demo you MUST replace `Template`
-> with the actual demo name** (e.g. `Be\Pattern\OrderProcessing\Being\…`) or
-> use the alternate `Be\App\<Layer>\…` form, to comply with the rules in
-> [`CLAUDE.md`](../../CLAUDE.md). Never leave the literal `Template` segment
-> in committed code. Each template marks the line you must change with a
-> `TODO` comment on the `namespace` declaration.
+> with the actual demo name** (e.g. `Be\Pattern\OrderProcessing\Being\…`),
+> to comply with the rules in [`CLAUDE.md`](../../CLAUDE.md). Never leave
+> the literal `Template` segment in committed code. Each template marks
+> the line you must change with a `TODO` comment on the `namespace`
+> declaration.
 
 Each template:
 

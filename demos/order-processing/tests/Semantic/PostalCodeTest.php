@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Semantic;
+namespace Be\Pattern\OrderProcessing\Tests\Semantic;
 
-use Be\App\Semantic\PostalCode;
-use Be\App\Exception\InvalidPostalCodeException;
+use Be\Pattern\OrderProcessing\Semantic\PostalCode;
+use Be\Pattern\OrderProcessing\Exception\InvalidPostalCodeException;
 use PHPUnit\Framework\TestCase;
 
 class PostalCodeTest extends TestCase

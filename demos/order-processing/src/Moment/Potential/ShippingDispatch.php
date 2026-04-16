@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Moment\Potential;
+namespace Be\Pattern\OrderProcessing\Moment\Potential;
 
-use Be\App\Moment\MomentInterface;
+use Be\Pattern\OrderProcessing\Moment\MomentInterface;
 
 /**
  * Shipping Dispatch - potential to dispatch shipment

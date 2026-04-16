@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Moment;
+namespace Be\Pattern\OrderProcessing\Moment;
 
-use Be\App\Attribute\Address;
-use Be\App\Attribute\CarrierId;
-use Be\App\Moment\Potential\ShippingDispatch;
-use Be\App\Reason\ShippingArrangerInterface;
+use Be\Pattern\OrderProcessing\Attribute\Address;
+use Be\Pattern\OrderProcessing\Attribute\CarrierId;
+use Be\Pattern\OrderProcessing\Moment\Potential\ShippingDispatch;
+use Be\Pattern\OrderProcessing\Reason\ShippingArrangerInterface;
 use Ray\Di\Di\Inject;
 
 /**

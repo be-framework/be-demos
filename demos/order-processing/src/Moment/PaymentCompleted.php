@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Moment;
+namespace Be\Pattern\OrderProcessing\Moment;
 
-use Be\App\Attribute\Amount;
-use Be\App\Attribute\CardNumber;
-use Be\App\Moment\Potential\PaymentCapture;
-use Be\App\Reason\PaymentGatewayInterface;
+use Be\Pattern\OrderProcessing\Attribute\Amount;
+use Be\Pattern\OrderProcessing\Attribute\CardNumber;
+use Be\Pattern\OrderProcessing\Moment\Potential\PaymentCapture;
+use Be\Pattern\OrderProcessing\Reason\PaymentGatewayInterface;
 use Ray\Di\Di\Inject;
 
 /**

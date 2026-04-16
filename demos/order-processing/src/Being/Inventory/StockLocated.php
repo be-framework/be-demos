@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Being\Inventory;
+namespace Be\Pattern\OrderProcessing\Being\Inventory;
 
 use Ray\InputQuery\Attribute\Input;
 use Ray\Di\Di\Inject;
-use Be\App\Reason\WarehouseLocator;
+use Be\Pattern\OrderProcessing\Reason\WarehouseLocator;
 
 final readonly class StockLocated
 {

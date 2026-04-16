@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Reason;
+namespace Be\Pattern\OrderProcessing\Reason;
 
 /**
  * Inventory Checker - Reason for quantity verification

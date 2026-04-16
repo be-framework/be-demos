@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Being\Shipping;
+namespace Be\Pattern\OrderProcessing\Being\Shipping;
 
 use Ray\InputQuery\Attribute\Input;
 use Ray\Di\Di\Inject;
-use Be\App\Reason\CarrierSelector;
+use Be\Pattern\OrderProcessing\Reason\CarrierSelector;
 
 final readonly class CarrierSelected
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Moment;
+namespace Be\Pattern\OrderProcessing\Moment;
 
-use Be\App\Attribute\ProductId;
-use Be\App\Attribute\Quantity;
-use Be\App\Attribute\WarehouseId;
-use Be\App\Moment\Potential\InventoryReservation;
-use Be\App\Reason\InventoryReserverInterface;
+use Be\Pattern\OrderProcessing\Attribute\ProductId;
+use Be\Pattern\OrderProcessing\Attribute\Quantity;
+use Be\Pattern\OrderProcessing\Attribute\WarehouseId;
+use Be\Pattern\OrderProcessing\Moment\Potential\InventoryReservation;
+use Be\Pattern\OrderProcessing\Reason\InventoryReserverInterface;
 use Ray\Di\Di\Inject;
 
 /**

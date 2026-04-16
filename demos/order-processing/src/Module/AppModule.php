@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Module;
+namespace Be\Pattern\OrderProcessing\Module;
 
-use Be\App\Attribute\Address;
-use Be\App\Attribute\Amount;
-use Be\App\Attribute\CardNumber;
-use Be\App\Attribute\CarrierId;
-use Be\App\Attribute\ProductId;
-use Be\App\Attribute\Quantity;
-use Be\App\Attribute\WarehouseId;
-use Be\App\Reason\AddressValidator;
-use Be\App\Reason\CardValidator;
-use Be\App\Reason\CarrierSelector;
-use Be\App\Reason\InventoryChecker;
-use Be\App\Reason\InventoryReserver;
-use Be\App\Reason\InventoryReserverInterface;
-use Be\App\Reason\PaymentGateway;
-use Be\App\Reason\PaymentGatewayInterface;
-use Be\App\Reason\ShippingArranger;
-use Be\App\Reason\ShippingArrangerInterface;
-use Be\App\Reason\WarehouseLocator;
+use Be\Pattern\OrderProcessing\Attribute\Address;
+use Be\Pattern\OrderProcessing\Attribute\Amount;
+use Be\Pattern\OrderProcessing\Attribute\CardNumber;
+use Be\Pattern\OrderProcessing\Attribute\CarrierId;
+use Be\Pattern\OrderProcessing\Attribute\ProductId;
+use Be\Pattern\OrderProcessing\Attribute\Quantity;
+use Be\Pattern\OrderProcessing\Attribute\WarehouseId;
+use Be\Pattern\OrderProcessing\Reason\AddressValidator;
+use Be\Pattern\OrderProcessing\Reason\CardValidator;
+use Be\Pattern\OrderProcessing\Reason\CarrierSelector;
+use Be\Pattern\OrderProcessing\Reason\InventoryChecker;
+use Be\Pattern\OrderProcessing\Reason\InventoryReserver;
+use Be\Pattern\OrderProcessing\Reason\InventoryReserverInterface;
+use Be\Pattern\OrderProcessing\Reason\PaymentGateway;
+use Be\Pattern\OrderProcessing\Reason\PaymentGatewayInterface;
+use Be\Pattern\OrderProcessing\Reason\ShippingArranger;
+use Be\Pattern\OrderProcessing\Reason\ShippingArrangerInterface;
+use Be\Pattern\OrderProcessing\Reason\WarehouseLocator;
 use Ray\Di\AbstractModule;
 
 final class AppModule extends AbstractModule
