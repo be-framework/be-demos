@@ -158,6 +158,20 @@ flowchart LR
 
 ---
 
+## Been — 存在証明
+
+一部のデモでは `Been` を実装しています。`Been`はFinalオブジェクトが「なぜ今の状態にあるか」を証明する不変キャリアです。Finalは`#[Inject]`で`Been`を受け取り、`with()`でドメインイベントを記録し、`assert`で自らの因果を検証できます — 証明をテストコードからプロダクションコードへ移動させます。
+
+| デモ | 証明する内容 |
+|---|---|
+| [contact-form](./demos/contact-form/) | レシートが正規化されたメールに対して生成された |
+| [user-registration](./demos/user-registration/) | ユーザーが入力メールで作成された（assert） |
+| [order-processing](./demos/order-processing/) | 全Momentがconfirmedステータスで完了した（assert） |
+
+概念の詳細は Be Framework ドキュメントの[意味的ログ](https://be-framework.github.io/manuals/1.0/ja/10-semantic-logging.html)を参照してください。
+
+---
+
 ## テスト実行
 
 ```bash

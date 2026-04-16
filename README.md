@@ -158,6 +158,20 @@ Insurance claim processing. `ClaimInput` and `PolicyInput` both declare `#[Be([C
 
 ---
 
+## Been — Proof of Existence
+
+Some demos demonstrate `Been`, an immutable carrier that a Final object uses to prove why it is what it is. The Final injects `Been` via `#[Inject]`, records domain events with `with()`, and can assert its own causal chain — moving proof from test code into production code.
+
+| Demo | What is proved |
+|---|---|
+| [contact-form](./demos/contact-form/) | Receipt was generated for the normalized email |
+| [user-registration](./demos/user-registration/) | User was created with the input email (assert) |
+| [order-processing](./demos/order-processing/) | All moments completed with confirmed status (assert) |
+
+See [Semantic Logging](https://be-framework.github.io/manuals/1.0/en/10-semantic-logging.html) in the Be Framework documentation for the full concept.
+
+---
+
 ## Running tests
 
 ```bash
