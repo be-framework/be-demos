@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Be\Pattern\OrderProcessing\Module;
 
+use Be\Framework\Module\BeModule;
 use Be\Pattern\OrderProcessing\Attribute\Address;
 use Be\Pattern\OrderProcessing\Attribute\Amount;
 use Be\Pattern\OrderProcessing\Attribute\CardNumber;
@@ -28,6 +29,8 @@ final class AppModule extends AbstractModule
 {
     protected function configure(): void
     {
+        $this->install(new BeModule('Be\Pattern\OrderProcessing\Semantic'));
+
         // Order processing - Reason bindings (via interfaces for testability)
         $this->bind(WarehouseLocator::class);
         $this->bind(InventoryChecker::class);
