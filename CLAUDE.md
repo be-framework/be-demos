@@ -118,9 +118,10 @@ will not run under Ray.Di or will break framework expectations.
 ## 5. Templates
 
 Copy-pasteable minimal skeletons for every layer live in
-[`docs/templates/`](./docs/templates/). They are intentionally outside any
-Composer autoload scope (`namespace Be\Template;`) so they do not pollute demo
-class maps.
+[`docs/templates/`](./docs/templates/). They are intentionally outside Composer
+autoload scope and use placeholder namespaces of the form
+`Be\Pattern\Template\<Layer>;` — mirror that shape when copying a template into
+a real demo (replace `Template` with the actual demo name).
 
 ---
 
