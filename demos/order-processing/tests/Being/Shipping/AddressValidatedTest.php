@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Being\Shipping;
+namespace Be\Pattern\OrderProcessing\Tests\Being\Shipping;
 
-use Be\App\Being\Shipping\AddressValidated;
-use Be\App\Reason\AddressValidator;
+use Be\Pattern\OrderProcessing\Being\Shipping\AddressValidated;
+use Be\Pattern\OrderProcessing\Reason\AddressValidator;
 use PHPUnit\Framework\TestCase;
 
 class AddressValidatedTest extends TestCase

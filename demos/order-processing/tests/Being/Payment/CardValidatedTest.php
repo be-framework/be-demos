@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Being\Payment;
+namespace Be\Pattern\OrderProcessing\Tests\Being\Payment;
 
-use Be\App\Being\Payment\CardValidated;
-use Be\App\Reason\CardValidator;
+use Be\Pattern\OrderProcessing\Being\Payment\CardValidated;
+use Be\Pattern\OrderProcessing\Reason\CardValidator;
 use PHPUnit\Framework\TestCase;
 
 class CardValidatedTest extends TestCase

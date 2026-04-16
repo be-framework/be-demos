@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Input;
+namespace Be\Pattern\OrderProcessing\Input;
 
-use Be\App\Final\OrderConfirmed;
+use Be\Pattern\OrderProcessing\Final\OrderConfirmed;
 use Be\Framework\Attribute\Be;
 
 /**

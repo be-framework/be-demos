@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Final;
+namespace Be\Pattern\OrderProcessing\Final;
 
-use Be\App\Moment\InventoryReserved;
-use Be\App\Moment\PaymentCompleted;
-use Be\App\Moment\ShippingArranged;
+use Be\Pattern\OrderProcessing\Moment\InventoryReserved;
+use Be\Pattern\OrderProcessing\Moment\PaymentCompleted;
+use Be\Pattern\OrderProcessing\Moment\ShippingArranged;
 use Ray\Di\Di\Inject;
 
 /**

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Being\Payment;
+namespace Be\Pattern\OrderProcessing\Being\Payment;
 
 use Ray\InputQuery\Attribute\Input;
 use Ray\Di\Di\Inject;
-use Be\App\Reason\CardValidator;
+use Be\Pattern\OrderProcessing\Reason\CardValidator;
 
 final readonly class CardValidated
 {

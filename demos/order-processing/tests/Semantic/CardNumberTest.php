@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Semantic;
+namespace Be\Pattern\OrderProcessing\Tests\Semantic;
 
-use Be\App\Semantic\CardNumber;
-use Be\App\Exception\InvalidCardNumberException;
+use Be\Pattern\OrderProcessing\Semantic\CardNumber;
+use Be\Pattern\OrderProcessing\Exception\InvalidCardNumberException;
 use PHPUnit\Framework\TestCase;
 
 class CardNumberTest extends TestCase

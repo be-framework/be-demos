@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Exception;
+namespace Be\Pattern\OrderProcessing\Exception;
 
 use Be\Framework\Attribute\Message;
 use DomainException;

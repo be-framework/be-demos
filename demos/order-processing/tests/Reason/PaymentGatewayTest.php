@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Reason;
+namespace Be\Pattern\OrderProcessing\Tests\Reason;
 
-use Be\App\Moment\Potential\PaymentCapture;
-use Be\App\Reason\PaymentGateway;
+use Be\Pattern\OrderProcessing\Moment\Potential\PaymentCapture;
+use Be\Pattern\OrderProcessing\Reason\PaymentGateway;
 use PHPUnit\Framework\TestCase;
 
 class PaymentGatewayTest extends TestCase

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Semantic;
+namespace Be\Pattern\OrderProcessing\Semantic;
 
 use Be\Framework\Attribute\Validate;
-use Be\App\Exception\EmptyNameException;
+use Be\Pattern\OrderProcessing\Exception\EmptyNameException;
 use function trim;
 
 /**

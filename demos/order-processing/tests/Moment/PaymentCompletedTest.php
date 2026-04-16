@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Moment;
+namespace Be\Pattern\OrderProcessing\Tests\Moment;
 
-use Be\App\Moment\PaymentCompleted;
-use Be\App\Reason\PaymentGateway;
+use Be\Pattern\OrderProcessing\Moment\PaymentCompleted;
+use Be\Pattern\OrderProcessing\Reason\PaymentGateway;
 use PHPUnit\Framework\TestCase;
 
 class PaymentCompletedTest extends TestCase

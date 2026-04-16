@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Being\Inventory;
+namespace Be\Pattern\OrderProcessing\Being\Inventory;
 
 use Ray\InputQuery\Attribute\Input;
 use Ray\Di\Di\Inject;
-use Be\App\Reason\InventoryChecker;
+use Be\Pattern\OrderProcessing\Reason\InventoryChecker;
 
 final readonly class QuantityChecked
 {

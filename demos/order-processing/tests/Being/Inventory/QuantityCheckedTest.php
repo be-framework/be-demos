@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Being\Inventory;
+namespace Be\Pattern\OrderProcessing\Tests\Being\Inventory;
 
-use Be\App\Being\Inventory\QuantityChecked;
-use Be\App\Reason\InventoryChecker;
+use Be\Pattern\OrderProcessing\Being\Inventory\QuantityChecked;
+use Be\Pattern\OrderProcessing\Reason\InventoryChecker;
 use PHPUnit\Framework\TestCase;
 
 class QuantityCheckedTest extends TestCase

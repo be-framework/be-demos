@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Pattern\Template\Moment; // TODO: replace `Template` with the real demo name (or use Be\App\Moment)
+namespace Be\Pattern\Template\Moment; // TODO: replace `Template` with the real demo name
 
 use Ray\Di\Di\Inject;
 use Ray\InputQuery\Attribute\Input;
@@ -21,8 +21,8 @@ use Ray\InputQuery\Attribute\Input;
  * Canonical example: demos/order-processing/src/Moment/InventoryReserved.php
  *
  * NOTE: MomentInterface is defined per-demo under its own namespace (e.g.
- * `Be\App\Moment\MomentInterface`). Re-declare or import the appropriate
- * one when you copy this template into a real demo.
+ * `Be\Pattern\OrderProcessing\Moment\MomentInterface`). Re-declare or import
+ * the appropriate one when you copy this template into a real demo.
  */
 final readonly class MomentTemplate /* implements MomentInterface */
 {

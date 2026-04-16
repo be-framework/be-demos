@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Moment;
+namespace Be\Pattern\OrderProcessing\Moment;
 
 /**
  * Moment - Potential waiting to be realized

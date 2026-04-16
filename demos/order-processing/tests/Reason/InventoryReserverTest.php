@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Reason;
+namespace Be\Pattern\OrderProcessing\Tests\Reason;
 
-use Be\App\Moment\Potential\InventoryReservation;
-use Be\App\Reason\InventoryReserver;
+use Be\Pattern\OrderProcessing\Moment\Potential\InventoryReservation;
+use Be\Pattern\OrderProcessing\Reason\InventoryReserver;
 use PHPUnit\Framework\TestCase;
 
 class InventoryReserverTest extends TestCase

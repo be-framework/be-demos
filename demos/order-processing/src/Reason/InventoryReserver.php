@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Reason;
+namespace Be\Pattern\OrderProcessing\Reason;
 
-use Be\App\Moment\Potential\InventoryReservation;
+use Be\Pattern\OrderProcessing\Moment\Potential\InventoryReservation;
 
 /**
  * Inventory Reserver - Reason (stateless gateway)

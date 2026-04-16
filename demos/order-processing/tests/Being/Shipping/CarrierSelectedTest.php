@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Being\Shipping;
+namespace Be\Pattern\OrderProcessing\Tests\Being\Shipping;
 
-use Be\App\Being\Shipping\CarrierSelected;
-use Be\App\Reason\CarrierSelector;
+use Be\Pattern\OrderProcessing\Being\Shipping\CarrierSelected;
+use Be\Pattern\OrderProcessing\Reason\CarrierSelector;
 use PHPUnit\Framework\TestCase;
 
 class CarrierSelectedTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Semantic;
+namespace Be\Pattern\OrderProcessing\Semantic;
 
-use Be\App\Exception\InvalidCardExpiryException;
+use Be\Pattern\OrderProcessing\Exception\InvalidCardExpiryException;
 use Be\Framework\Attribute\Validate;
 
 /**

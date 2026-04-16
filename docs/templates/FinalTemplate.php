@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Pattern\Template\Final; // TODO: replace `Template` with the real demo name (or use Be\App\Final)
+namespace Be\Pattern\Template\Final; // TODO: replace `Template` with the real demo name
 
 use Ray\Di\Di\Inject;
 

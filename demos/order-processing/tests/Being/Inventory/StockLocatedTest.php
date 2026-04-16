@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Being\Inventory;
+namespace Be\Pattern\OrderProcessing\Tests\Being\Inventory;
 
-use Be\App\Being\Inventory\StockLocated;
-use Be\App\Reason\WarehouseLocator;
+use Be\Pattern\OrderProcessing\Being\Inventory\StockLocated;
+use Be\Pattern\OrderProcessing\Reason\WarehouseLocator;
 use PHPUnit\Framework\TestCase;
 
 class StockLocatedTest extends TestCase

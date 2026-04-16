@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Be\App;
+namespace Be\Pattern\OrderProcessing;
 
 // ═══════════════════════════════════════════════════════════════════════════
 // INPUT - The starting point (Aristotle's Dynamis - Potentiality)

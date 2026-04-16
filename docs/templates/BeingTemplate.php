@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Pattern\Template\Being; // TODO: replace `Template` with the real demo name (or use Be\App\Being)
+namespace Be\Pattern\Template\Being; // TODO: replace `Template` with the real demo name
 
 use Be\Framework\Attribute\Be;
 use Ray\Di\Di\Inject;

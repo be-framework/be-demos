@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Be\Pattern\Template\Input; // TODO: replace `Template` with the real demo name (or use Be\App\Input)
+namespace Be\Pattern\Template\Input; // TODO: replace `Template` with the real demo name
 
 use Be\Framework\Attribute\Be;
 

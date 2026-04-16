@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Tests\Semantic;
+namespace Be\Pattern\OrderProcessing\Tests\Semantic;
 
-use Be\App\Semantic\Quantity;
-use Be\App\Exception\InvalidQuantityException;
+use Be\Pattern\OrderProcessing\Semantic\Quantity;
+use Be\Pattern\OrderProcessing\Exception\InvalidQuantityException;
 use PHPUnit\Framework\TestCase;
 
 class QuantityTest extends TestCase

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Be\App;
+namespace Be\Pattern\OrderProcessing;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use Be\App\Input\OrderInput;
-use Be\App\Module\AppModule;
+use Be\Pattern\OrderProcessing\Input\OrderInput;
+use Be\Pattern\OrderProcessing\Module\AppModule;
 use Be\Framework\Becoming;
 use Be\Framework\Exception\SemanticVariableException;
 use Ray\Di\Injector;

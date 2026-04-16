@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Be\App\Reason;
+namespace Be\Pattern\OrderProcessing\Reason;
 
-use Be\App\Moment\Potential\PaymentCapture;
+use Be\Pattern\OrderProcessing\Moment\Potential\PaymentCapture;
 
 /**
  * Payment Gateway - Reason (stateless gateway)
