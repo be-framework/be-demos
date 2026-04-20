@@ -6,15 +6,20 @@ namespace Be\Pattern\OrderProcessing;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use Be\Pattern\OrderProcessing\Input\OrderInput;
-use Be\Pattern\OrderProcessing\Module\AppModule;
-use Be\Framework\Becoming;
+use Be\Framework\BecomingInterface;
 use Be\Framework\Exception\SemanticVariableException;
+use Be\Pattern\OrderProcessing\Final\OrderConfirmed;
+use Be\Pattern\OrderProcessing\Input\OrderInput;
+use Be\Pattern\OrderProcessing\Module\DevModule;
 use Ray\Di\Injector;
-use function dirname;
 
-$injector = new Injector(new AppModule());
-$becoming = new Becoming($injector, __NAMESPACE__ . '\\Semantic');
+use function assert;
+use function dirname;
+use function escapeshellarg;
+use function passthru;
+
+$injector = new Injector(new DevModule());
+$becoming = $injector->getInstance(BecomingInterface::class);
 
 $input = new OrderInput(
     cartId: 'CART-001',
@@ -27,7 +32,7 @@ $input = new OrderInput(
 );
 try {
     $order = $becoming($input);
-    assert($order instanceof Final\OrderConfirmed);
+    assert($order instanceof OrderConfirmed);
     echo "Order confirmed: {$order->orderId}" . PHP_EOL;
 } catch (SemanticVariableException $e) {
     $messages = $e->getErrors()->getMessages('ja');
@@ -35,3 +40,5 @@ try {
     echo $errorMessage . PHP_EOL;
 }
 
+echo "\n--- stree ---\n";
+passthru('vendor/bin/stree ' . escapeshellarg(dirname(__DIR__) . '/var/log/order-processing.json'));

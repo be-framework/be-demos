@@ -1,0 +1,166 @@
+{
+    "$schema": "https://koriym.github.io/Koriym.SemanticLogger/schemas/combined.json",
+    "open": {
+        "id": "becoming_open_4",
+        "type": "becoming_open",
+        "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
+        "context": {
+            "from": "Be\\Pattern\\UserRegistration\\Being\\ProfileEnriched",
+            "be": "Be\\Pattern\\UserRegistration\\Final\\UserRegistered",
+            "input": {
+                "email": "Be\\Pattern\\UserRegistration\\Being\\ProfileEnriched::email",
+                "displayName": "Be\\Pattern\\UserRegistration\\Being\\ProfileEnriched::displayName",
+                "hashedPassword": "Be\\Pattern\\UserRegistration\\Being\\ProfileEnriched::hashedPassword",
+                "avatarUrl": "Be\\Pattern\\UserRegistration\\Being\\ProfileEnriched::avatarUrl"
+            },
+            "inject": {
+                "idGen": "Be\\Pattern\\UserRegistration\\Reason\\UserIdGenerator",
+                "tokenGen": "Be\\Pattern\\UserRegistration\\Reason\\WelcomeTokenGenerator",
+                "been": "Be\\Framework\\SemanticLog\\Been"
+            }
+        },
+        "open": {
+            "id": "becoming_open_3",
+            "type": "becoming_open",
+            "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
+            "context": {
+                "from": "Be\\Pattern\\UserRegistration\\Being\\PasswordHashed",
+                "be": "Be\\Pattern\\UserRegistration\\Being\\ProfileEnriched",
+                "input": {
+                    "email": "Be\\Pattern\\UserRegistration\\Being\\PasswordHashed::email",
+                    "displayName": "Be\\Pattern\\UserRegistration\\Being\\PasswordHashed::displayName",
+                    "hashedPassword": "Be\\Pattern\\UserRegistration\\Being\\PasswordHashed::hashedPassword"
+                },
+                "inject": {
+                    "resolver": "Be\\Pattern\\UserRegistration\\Reason\\GravatarResolver"
+                }
+            },
+            "open": {
+                "id": "becoming_open_2",
+                "type": "becoming_open",
+                "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
+                "context": {
+                    "from": "Be\\Pattern\\UserRegistration\\Being\\EmailVerified",
+                    "be": "Be\\Pattern\\UserRegistration\\Being\\PasswordHashed",
+                    "input": {
+                        "email": "Be\\Pattern\\UserRegistration\\Being\\EmailVerified::email",
+                        "password": "Be\\Pattern\\UserRegistration\\Being\\EmailVerified::password",
+                        "displayName": "Be\\Pattern\\UserRegistration\\Being\\EmailVerified::displayName"
+                    },
+                    "inject": {
+                        "hasher": "Be\\Pattern\\UserRegistration\\Reason\\PasswordHasher"
+                    }
+                },
+                "open": {
+                    "id": "becoming_open_1",
+                    "type": "becoming_open",
+                    "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
+                    "context": {
+                        "from": "Be\\Pattern\\UserRegistration\\Input\\RegistrationInput",
+                        "be": "Be\\Pattern\\UserRegistration\\Being\\EmailVerified",
+                        "input": {
+                            "email": "Be\\Pattern\\UserRegistration\\Input\\RegistrationInput::email",
+                            "password": "Be\\Pattern\\UserRegistration\\Input\\RegistrationInput::password",
+                            "displayName": "Be\\Pattern\\UserRegistration\\Input\\RegistrationInput::displayName"
+                        },
+                        "inject": {
+                            "verifier": "Be\\Pattern\\UserRegistration\\Reason\\EmailVerifier"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "events": [
+        {
+            "id": "user_created_1",
+            "type": "user_created",
+            "schemaUrl": "https://be-framework.github.io/schemas/user-registration/user-created.json",
+            "context": {
+                "userId": "USR-20260420-fb66ef83c08236b2",
+                "email": "alice@example.com"
+            },
+            "openId": "becoming_open_4"
+        }
+    ],
+    "close": {
+        "id": "becoming_final_1",
+        "type": "becoming_final",
+        "schemaUrl": "https://be-framework.org/schemas/becoming-final.json",
+        "context": {
+            "final": "Be\\Pattern\\UserRegistration\\Final\\UserRegistered",
+            "prop": {
+                "userId": "USR-20260420-fb66ef83c08236b2",
+                "welcomeToken": "870dc0778580246f38d7248c24085eed34828ba07ee29540919c4f9e79156b30",
+                "email": "alice@example.com",
+                "displayName": "Alice",
+                "hashedPassword": "$2y$12$ypkeDoTNzeS8BYm/.HsG0uAYXsOsCraLvKseZ6kiR2jIml0rBSE8e",
+                "avatarUrl": "https://www.gravatar.com/avatar/c160f8cc69a4f0bf2b0362752353d060"
+            }
+        },
+        "openId": "becoming_open_4",
+        "profile": {
+            "wallTime": 0.0009059906005859375,
+            "xdebug": [],
+            "xhprof": []
+        },
+        "close": {
+            "id": "becoming_being_3",
+            "type": "becoming_being",
+            "schemaUrl": "https://be-framework.org/schemas/becoming-being.json",
+            "context": {
+                "being": "Be\\Pattern\\UserRegistration\\Being\\ProfileEnriched",
+                "prop": {
+                    "avatarUrl": "https://www.gravatar.com/avatar/c160f8cc69a4f0bf2b0362752353d060",
+                    "email": "alice@example.com",
+                    "displayName": "Alice",
+                    "hashedPassword": "$2y$12$ypkeDoTNzeS8BYm/.HsG0uAYXsOsCraLvKseZ6kiR2jIml0rBSE8e"
+                }
+            },
+            "openId": "becoming_open_3",
+            "profile": {
+                "wallTime": 0.00021505355834960938,
+                "xdebug": [],
+                "xhprof": []
+            },
+            "close": {
+                "id": "becoming_being_2",
+                "type": "becoming_being",
+                "schemaUrl": "https://be-framework.org/schemas/becoming-being.json",
+                "context": {
+                    "being": "Be\\Pattern\\UserRegistration\\Being\\PasswordHashed",
+                    "prop": {
+                        "hashedPassword": "$2y$12$ypkeDoTNzeS8BYm/.HsG0uAYXsOsCraLvKseZ6kiR2jIml0rBSE8e",
+                        "email": "alice@example.com",
+                        "displayName": "Alice"
+                    }
+                },
+                "openId": "becoming_open_2",
+                "profile": {
+                    "wallTime": 0.23204898834228516,
+                    "xdebug": [],
+                    "xhprof": []
+                },
+                "close": {
+                    "id": "becoming_being_1",
+                    "type": "becoming_being",
+                    "schemaUrl": "https://be-framework.org/schemas/becoming-being.json",
+                    "context": {
+                        "being": "Be\\Pattern\\UserRegistration\\Being\\EmailVerified",
+                        "prop": {
+                            "email": "alice@example.com",
+                            "password": "Str0ngP@ss",
+                            "displayName": "Alice"
+                        }
+                    },
+                    "openId": "becoming_open_1",
+                    "profile": {
+                        "wallTime": 0.0007009506225585938,
+                        "xdebug": [],
+                        "xhprof": []
+                    }
+                }
+            }
+        }
+    }
+}
