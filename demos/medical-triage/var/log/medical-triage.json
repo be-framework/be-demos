@@ -49,7 +49,7 @@
         },
         "openId": "becoming_open_2",
         "profile": {
-            "wallTime": 0.00016999244689941406,
+            "wallTime": 0.0006999969482421875,
             "xdebug": [],
             "xhprof": []
         },
@@ -70,7 +70,7 @@
             },
             "openId": "becoming_open_1",
             "profile": {
-                "wallTime": 0.0005319118499755859,
+                "wallTime": 0.001873016357421875,
                 "xdebug": [],
                 "xhprof": []
             }

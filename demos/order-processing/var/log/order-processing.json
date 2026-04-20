@@ -22,7 +22,7 @@
             "type": "order_finalized",
             "schemaUrl": "https://be-framework.github.io/schemas/order-processing/order-finalized.json",
             "context": {
-                "orderId": "ORD-20260420-c4a4a63f",
+                "orderId": "ORD-20260420-f239e28a",
                 "status": "confirmed"
             },
             "openId": "becoming_open_1"
@@ -35,11 +35,11 @@
         "context": {
             "final": "Be\\Pattern\\OrderProcessing\\Final\\OrderConfirmed",
             "prop": {
-                "orderId": "ORD-20260420-c4a4a63f",
+                "orderId": "ORD-20260420-f239e28a",
                 "status": "confirmed",
                 "inventory": {
                     "reservation": {
-                        "reservationId": "RSV-TOKYO-20260420121532-6023"
+                        "reservationId": "RSV-TOKYO-20260420122626-7948"
                     },
                     "productId": "PROD-001",
                     "quantity": 1,
@@ -47,7 +47,7 @@
                 },
                 "payment": {
                     "capture": {
-                        "authorizationCode": "AUTH-10000-94924765",
+                        "authorizationCode": "AUTH-10000-08e6ef82",
                         "amount": 10000
                     },
                     "cardNumber": "4111111111111111",
@@ -55,7 +55,7 @@
                 },
                 "shipping": {
                     "dispatch": {
-                        "trackingNumber": "YAMATO-202604201215326160",
+                        "trackingNumber": "YAMATO-202604201226261461",
                         "shippingRate": 800
                     },
                     "carrierId": "YAMATO",
@@ -65,7 +65,7 @@
         },
         "openId": "becoming_open_1",
         "profile": {
-            "wallTime": 0.0006489753723144531,
+            "wallTime": 0.0006608963012695312,
             "xdebug": [],
             "xhprof": []
         }
