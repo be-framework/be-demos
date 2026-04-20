@@ -1,0 +1,73 @@
+{
+    "$schema": "https://koriym.github.io/Koriym.SemanticLogger/schemas/combined.json",
+    "open": {
+        "id": "becoming_open_1",
+        "type": "becoming_open",
+        "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
+        "context": {
+            "from": "Be\\Pattern\\OrderProcessing\\Input\\OrderInput",
+            "be": "Be\\Pattern\\OrderProcessing\\Final\\OrderConfirmed",
+            "input": {},
+            "inject": {
+                "inventory": "Be\\Pattern\\OrderProcessing\\Moment\\InventoryReserved",
+                "payment": "Be\\Pattern\\OrderProcessing\\Moment\\PaymentCompleted",
+                "shipping": "Be\\Pattern\\OrderProcessing\\Moment\\ShippingArranged",
+                "been": "Be\\Framework\\SemanticLog\\Been"
+            }
+        }
+    },
+    "events": [
+        {
+            "id": "order_finalized_1",
+            "type": "order_finalized",
+            "schemaUrl": "https://be-framework.github.io/schemas/order-processing/order-finalized.json",
+            "context": {
+                "orderId": "ORD-20260420-c4a4a63f",
+                "status": "confirmed"
+            },
+            "openId": "becoming_open_1"
+        }
+    ],
+    "close": {
+        "id": "becoming_final_1",
+        "type": "becoming_final",
+        "schemaUrl": "https://be-framework.org/schemas/becoming-final.json",
+        "context": {
+            "final": "Be\\Pattern\\OrderProcessing\\Final\\OrderConfirmed",
+            "prop": {
+                "orderId": "ORD-20260420-c4a4a63f",
+                "status": "confirmed",
+                "inventory": {
+                    "reservation": {
+                        "reservationId": "RSV-TOKYO-20260420121532-6023"
+                    },
+                    "productId": "PROD-001",
+                    "quantity": 1,
+                    "warehouseId": "WH-TOKYO-01"
+                },
+                "payment": {
+                    "capture": {
+                        "authorizationCode": "AUTH-10000-94924765",
+                        "amount": 10000
+                    },
+                    "cardNumber": "4111111111111111",
+                    "amount": 10000
+                },
+                "shipping": {
+                    "dispatch": {
+                        "trackingNumber": "YAMATO-202604201215326160",
+                        "shippingRate": 800
+                    },
+                    "carrierId": "YAMATO",
+                    "address": "Tokyo, Japan"
+                }
+            }
+        },
+        "openId": "becoming_open_1",
+        "profile": {
+            "wallTime": 0.0006489753723144531,
+            "xdebug": [],
+            "xhprof": []
+        }
+    }
+}

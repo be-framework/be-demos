@@ -1,0 +1,35 @@
+{
+    "$schema": "https://koriym.github.io/Koriym.SemanticLogger/schemas/combined.json",
+    "open": {
+        "id": "becoming_open_1",
+        "type": "becoming_open",
+        "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
+        "context": {
+            "from": "Be\\Pattern\\Hello\\Input\\HelloInput",
+            "be": "Be\\Pattern\\Hello\\Final\\Hello",
+            "input": {
+                "name": "Be\\Pattern\\Hello\\Input\\HelloInput::name"
+            },
+            "inject": {
+                "greeting": "Be\\Pattern\\Hello\\Reason\\Greeting"
+            }
+        }
+    },
+    "close": {
+        "id": "becoming_final_1",
+        "type": "becoming_final",
+        "schemaUrl": "https://be-framework.org/schemas/becoming-final.json",
+        "context": {
+            "final": "Be\\Pattern\\Hello\\Final\\Hello",
+            "prop": {
+                "greeting": "Hello World"
+            }
+        },
+        "openId": "becoming_open_1",
+        "profile": {
+            "wallTime": 0.0012128353118896484,
+            "xdebug": [],
+            "xhprof": []
+        }
+    }
+}
