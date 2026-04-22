@@ -1,73 +1,103 @@
 {
     "$schema": "https://koriym.github.io/Koriym.SemanticLogger/schemas/combined.json",
-    "open": {
-        "id": "becoming_open_1",
-        "type": "becoming_open",
-        "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
-        "context": {
-            "from": "Be\\Pattern\\OrderProcessing\\Input\\OrderInput",
-            "be": "Be\\Pattern\\OrderProcessing\\Final\\OrderConfirmed",
-            "input": {},
-            "inject": {
-                "inventory": "Be\\Pattern\\OrderProcessing\\Moment\\InventoryReserved",
-                "payment": "Be\\Pattern\\OrderProcessing\\Moment\\PaymentCompleted",
-                "shipping": "Be\\Pattern\\OrderProcessing\\Moment\\ShippingArranged",
-                "been": "Be\\Framework\\SemanticLog\\Been"
-            }
-        }
-    },
-    "events": [
+    "open": [
         {
-            "id": "order_finalized_1",
-            "type": "order_finalized",
-            "schemaUrl": "https://be-framework.github.io/schemas/order-processing/order-finalized.json",
+            "id": "becoming_open_1",
+            "type": "becoming_open",
+            "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
             "context": {
-                "orderId": "ORD-20260420-f239e28a",
-                "status": "confirmed"
-            },
-            "openId": "becoming_open_1"
-        }
-    ],
-    "close": {
-        "id": "becoming_final_1",
-        "type": "becoming_final",
-        "schemaUrl": "https://be-framework.org/schemas/becoming-final.json",
-        "context": {
-            "final": "Be\\Pattern\\OrderProcessing\\Final\\OrderConfirmed",
-            "prop": {
-                "orderId": "ORD-20260420-f239e28a",
-                "status": "confirmed",
-                "inventory": {
-                    "reservation": {
-                        "reservationId": "RSV-TOKYO-20260420122626-7948"
-                    },
-                    "productId": "PROD-001",
-                    "quantity": 1,
-                    "warehouseId": "WH-TOKYO-01"
-                },
-                "payment": {
-                    "capture": {
-                        "authorizationCode": "AUTH-10000-08e6ef82",
-                        "amount": 10000
-                    },
+                "input": "Be\\Pattern\\OrderProcessing\\Input\\OrderInput",
+                "prop": {
+                    "cartId": "CART-001",
+                    "customerId": "CUST-001",
                     "cardNumber": "4111111111111111",
-                    "amount": 10000
-                },
-                "shipping": {
-                    "dispatch": {
-                        "trackingNumber": "YAMATO-202604201226261461",
-                        "shippingRate": 800
+                    "cardExpiry": "12/25",
+                    "cardCvv": "123",
+                    "postalCode": "150-0001",
+                    "streetAddress": "渋谷区神宮前1-1-1"
+                }
+            },
+            "open": [
+                {
+                    "id": "being_final_open_1",
+                    "type": "being_final_open",
+                    "schemaUrl": "https://be-framework.org/schemas/being-final-open.json",
+                    "context": {
+                        "from": "Be\\Pattern\\OrderProcessing\\Input\\OrderInput",
+                        "final": "Be\\Pattern\\OrderProcessing\\Final\\OrderConfirmed",
+                        "input": {},
+                        "inject": {
+                            "inventory": "Be\\Pattern\\OrderProcessing\\Moment\\InventoryReserved",
+                            "payment": "Be\\Pattern\\OrderProcessing\\Moment\\PaymentCompleted",
+                            "shipping": "Be\\Pattern\\OrderProcessing\\Moment\\ShippingArranged",
+                            "been": "Be\\Framework\\SemanticLog\\Been"
+                        }
                     },
-                    "carrierId": "YAMATO",
-                    "address": "Tokyo, Japan"
+                    "events": [
+                        {
+                            "id": "order_finalized_1",
+                            "type": "order_finalized",
+                            "schemaUrl": "https://be-framework.github.io/schemas/order-processing/order-finalized.json",
+                            "context": {
+                                "orderId": "ORD-20260422-67163ba8",
+                                "status": "confirmed"
+                            },
+                            "openId": "being_final_open_1"
+                        }
+                    ],
+                    "close": {
+                        "id": "being_final_close_1",
+                        "type": "being_final_close",
+                        "schemaUrl": "https://be-framework.org/schemas/being-final-close.json",
+                        "context": {
+                            "final": "Be\\Pattern\\OrderProcessing\\Final\\OrderConfirmed",
+                            "prop": {
+                                "orderId": "ORD-20260422-67163ba8",
+                                "status": "confirmed",
+                                "inventory": {
+                                    "reservation": {
+                                        "reservationId": "RSV-TOKYO-20260422032619-2893"
+                                    },
+                                    "productId": "PROD-001",
+                                    "quantity": 1,
+                                    "warehouseId": "WH-TOKYO-01"
+                                },
+                                "payment": {
+                                    "capture": {
+                                        "authorizationCode": "AUTH-10000-4cb8d550",
+                                        "amount": 10000
+                                    },
+                                    "cardNumber": "4111111111111111",
+                                    "amount": 10000
+                                },
+                                "shipping": {
+                                    "dispatch": {
+                                        "trackingNumber": "YAMATO-202604220326199860",
+                                        "shippingRate": 800
+                                    },
+                                    "carrierId": "YAMATO",
+                                    "address": "Tokyo, Japan"
+                                }
+                            },
+                            "been": [
+                                {
+                                    "orderId": "ORD-20260422-67163ba8",
+                                    "status": "confirmed"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "close": {
+                "id": "becoming_close_1",
+                "type": "becoming_close",
+                "schemaUrl": "https://be-framework.org/schemas/becoming-close.json",
+                "context": {
+                    "exit": "success",
+                    "final": "Be\\Pattern\\OrderProcessing\\Final\\OrderConfirmed"
                 }
             }
-        },
-        "openId": "becoming_open_1",
-        "profile": {
-            "wallTime": 0.0006608963012695312,
-            "xdebug": [],
-            "xhprof": []
         }
-    }
+    ]
 }

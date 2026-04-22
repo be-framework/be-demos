@@ -40,7 +40,7 @@ final class DevBecoming implements BecomingInterface
 
             file_put_contents(
                 $dir . '/order-processing.json',
-                json_encode($this->logger->flush(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . PHP_EOL,
+                json_encode($this->logger->flush()->toTreeArray(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . PHP_EOL,
             );
         }
     }

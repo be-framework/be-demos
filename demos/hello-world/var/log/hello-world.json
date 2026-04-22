@@ -1,35 +1,53 @@
 {
     "$schema": "https://koriym.github.io/Koriym.SemanticLogger/schemas/combined.json",
-    "open": {
-        "id": "becoming_open_1",
-        "type": "becoming_open",
-        "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
-        "context": {
-            "from": "Be\\Pattern\\Hello\\Input\\HelloInput",
-            "be": "Be\\Pattern\\Hello\\Final\\Hello",
-            "input": {
-                "name": "Be\\Pattern\\Hello\\Input\\HelloInput::name"
+    "open": [
+        {
+            "id": "becoming_open_1",
+            "type": "becoming_open",
+            "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
+            "context": {
+                "input": "Be\\Pattern\\Hello\\Input\\HelloInput",
+                "prop": {
+                    "name": "World"
+                }
             },
-            "inject": {
-                "greeting": "Be\\Pattern\\Hello\\Reason\\Greeting"
+            "open": [
+                {
+                    "id": "being_final_open_1",
+                    "type": "being_final_open",
+                    "schemaUrl": "https://be-framework.org/schemas/being-final-open.json",
+                    "context": {
+                        "from": "Be\\Pattern\\Hello\\Input\\HelloInput",
+                        "final": "Be\\Pattern\\Hello\\Final\\Hello",
+                        "input": {
+                            "name": "Be\\Pattern\\Hello\\Input\\HelloInput::name"
+                        },
+                        "inject": {
+                            "greeting": "Be\\Pattern\\Hello\\Reason\\Greeting"
+                        }
+                    },
+                    "close": {
+                        "id": "being_final_close_1",
+                        "type": "being_final_close",
+                        "schemaUrl": "https://be-framework.org/schemas/being-final-close.json",
+                        "context": {
+                            "final": "Be\\Pattern\\Hello\\Final\\Hello",
+                            "prop": {
+                                "greeting": "Hello World"
+                            }
+                        }
+                    }
+                }
+            ],
+            "close": {
+                "id": "becoming_close_1",
+                "type": "becoming_close",
+                "schemaUrl": "https://be-framework.org/schemas/becoming-close.json",
+                "context": {
+                    "exit": "success",
+                    "final": "Be\\Pattern\\Hello\\Final\\Hello"
+                }
             }
         }
-    },
-    "close": {
-        "id": "becoming_final_1",
-        "type": "becoming_final",
-        "schemaUrl": "https://be-framework.org/schemas/becoming-final.json",
-        "context": {
-            "final": "Be\\Pattern\\Hello\\Final\\Hello",
-            "prop": {
-                "greeting": "Hello World"
-            }
-        },
-        "openId": "becoming_open_1",
-        "profile": {
-            "wallTime": 0.0008828639984130859,
-            "xdebug": [],
-            "xhprof": []
-        }
-    }
+    ]
 }

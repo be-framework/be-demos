@@ -1,79 +1,93 @@
 {
     "$schema": "https://koriym.github.io/Koriym.SemanticLogger/schemas/combined.json",
-    "open": {
-        "id": "becoming_open_2",
-        "type": "becoming_open",
-        "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
-        "context": {
-            "from": "Be\\Pattern\\MedicalTriage\\Being\\TriageLevelDetermined",
-            "be": "Be\\Pattern\\MedicalTriage\\Final\\EmergencyAdmitted",
-            "input": {
-                "being": "Be\\Pattern\\MedicalTriage\\Being\\TriageLevelDetermined::being",
-                "patientId": "Be\\Pattern\\MedicalTriage\\Being\\TriageLevelDetermined::patientId"
-            },
-            "inject": {}
-        },
-        "open": {
+    "open": [
+        {
             "id": "becoming_open_1",
             "type": "becoming_open",
             "schemaUrl": "https://be-framework.org/schemas/becoming-open.json",
             "context": {
-                "from": "Be\\Pattern\\MedicalTriage\\Input\\PatientInput",
-                "be": "Be\\Pattern\\MedicalTriage\\Being\\TriageLevelDetermined",
-                "input": {
-                    "patientId": "Be\\Pattern\\MedicalTriage\\Input\\PatientInput::patientId",
-                    "chiefComplaint": "Be\\Pattern\\MedicalTriage\\Input\\PatientInput::chiefComplaint",
-                    "consciousnessLevel": "Be\\Pattern\\MedicalTriage\\Input\\PatientInput::consciousnessLevel"
-                },
-                "inject": {
-                    "protocol": "Be\\Pattern\\MedicalTriage\\Reason\\JTASProtocol"
-                }
-            }
-        }
-    },
-    "close": {
-        "id": "becoming_final_1",
-        "type": "becoming_final",
-        "schemaUrl": "https://be-framework.org/schemas/becoming-final.json",
-        "context": {
-            "final": "Be\\Pattern\\MedicalTriage\\Final\\EmergencyAdmitted",
-            "prop": {
-                "admissionId": "ADM-20260420-9b8b8250",
-                "status": "admitted",
-                "triageCode": "RED",
-                "being": {
-                    "triageCode": "RED"
-                },
-                "patientId": "PT-10001"
-            }
-        },
-        "openId": "becoming_open_2",
-        "profile": {
-            "wallTime": 0.0006999969482421875,
-            "xdebug": [],
-            "xhprof": []
-        },
-        "close": {
-            "id": "becoming_being_1",
-            "type": "becoming_being",
-            "schemaUrl": "https://be-framework.org/schemas/becoming-being.json",
-            "context": {
-                "being": "Be\\Pattern\\MedicalTriage\\Being\\TriageLevelDetermined",
+                "input": "Be\\Pattern\\MedicalTriage\\Input\\PatientInput",
                 "prop": {
-                    "being": {
-                        "triageCode": "RED"
-                    },
                     "patientId": "PT-10001",
                     "chiefComplaint": "severe chest pain",
                     "consciousnessLevel": 0
                 }
             },
-            "openId": "becoming_open_1",
-            "profile": {
-                "wallTime": 0.001873016357421875,
-                "xdebug": [],
-                "xhprof": []
+            "open": [
+                {
+                    "id": "being_open_1",
+                    "type": "being_open",
+                    "schemaUrl": "https://be-framework.org/schemas/being-open.json",
+                    "context": {
+                        "from": "Be\\Pattern\\MedicalTriage\\Input\\PatientInput",
+                        "be": "Be\\Pattern\\MedicalTriage\\Being\\TriageLevelDetermined",
+                        "input": {
+                            "patientId": "Be\\Pattern\\MedicalTriage\\Input\\PatientInput::patientId",
+                            "chiefComplaint": "Be\\Pattern\\MedicalTriage\\Input\\PatientInput::chiefComplaint",
+                            "consciousnessLevel": "Be\\Pattern\\MedicalTriage\\Input\\PatientInput::consciousnessLevel"
+                        },
+                        "inject": {
+                            "protocol": "Be\\Pattern\\MedicalTriage\\Reason\\JTASProtocol"
+                        }
+                    },
+                    "close": {
+                        "id": "being_close_1",
+                        "type": "being_close",
+                        "schemaUrl": "https://be-framework.org/schemas/being-close.json",
+                        "context": {
+                            "being": "Be\\Pattern\\MedicalTriage\\Being\\TriageLevelDetermined",
+                            "prop": {
+                                "being": {
+                                    "triageCode": "RED"
+                                },
+                                "patientId": "PT-10001",
+                                "chiefComplaint": "severe chest pain",
+                                "consciousnessLevel": 0
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "being_final_open_1",
+                    "type": "being_final_open",
+                    "schemaUrl": "https://be-framework.org/schemas/being-final-open.json",
+                    "context": {
+                        "from": "Be\\Pattern\\MedicalTriage\\Being\\TriageLevelDetermined",
+                        "final": "Be\\Pattern\\MedicalTriage\\Final\\EmergencyAdmitted",
+                        "input": {
+                            "being": "Be\\Pattern\\MedicalTriage\\Being\\TriageLevelDetermined::being",
+                            "patientId": "Be\\Pattern\\MedicalTriage\\Being\\TriageLevelDetermined::patientId"
+                        },
+                        "inject": {}
+                    },
+                    "close": {
+                        "id": "being_final_close_1",
+                        "type": "being_final_close",
+                        "schemaUrl": "https://be-framework.org/schemas/being-final-close.json",
+                        "context": {
+                            "final": "Be\\Pattern\\MedicalTriage\\Final\\EmergencyAdmitted",
+                            "prop": {
+                                "admissionId": "ADM-20260422-9b8b8250",
+                                "status": "admitted",
+                                "triageCode": "RED",
+                                "being": {
+                                    "triageCode": "RED"
+                                },
+                                "patientId": "PT-10001"
+                            }
+                        }
+                    }
+                }
+            ],
+            "close": {
+                "id": "becoming_close_1",
+                "type": "becoming_close",
+                "schemaUrl": "https://be-framework.org/schemas/becoming-close.json",
+                "context": {
+                    "exit": "success",
+                    "final": "Be\\Pattern\\MedicalTriage\\Final\\EmergencyAdmitted"
+                }
             }
         }
-    }
+    ]
 }
