@@ -1,0 +1,8 @@
+becoming HelloInput
+├── name: World
+├── being_final Hello input=[name] inject=[greeting]
+│   ├── inject.greeting: Be\Pattern\Hello\Reason\Greeting
+│   └── close
+│       └── greeting: Hello World
+└── close
+    └── exit: success

@@ -1,0 +1,41 @@
+becoming RegistrationInput
+├── email: alice@example.com
+├── password: Str0ngP@ss
+├── displayName: Alice
+├── being EmailVerified input=[email, password, displayName] inject=[verifier]
+│   ├── inject.verifier: Be\Pattern\UserRegistration\Reason\EmailVerifier
+│   └── close
+│       ├── email: alice@example.com
+│       ├── password: Str0ngP@ss
+│       └── displayName: Alice
+├── being PasswordHashed input=[email, password, displayName] inject=[hasher]
+│   ├── inject.hasher: Be\Pattern\UserRegistration\Reason\PasswordHasher
+│   └── close
+│       ├── hashedPassword: $2y$12$6FqPq/JWd4QgJ9vGgUMtb.hHIz2bavynhdUGttlwJxSgK7GsWbYya
+│       ├── email: alice@example.com
+│       └── displayName: Alice
+├── being ProfileEnriched input=[email, displayName, hashedPassword] inject=[resolver]
+│   ├── inject.resolver: Be\Pattern\UserRegistration\Reason\GravatarResolver
+│   └── close
+│       ├── avatarUrl: https://www.gravatar.com/avatar/c160f8cc69a4f0bf2b0362752353d060
+│       ├── email: alice@example.com
+│       ├── displayName: Alice
+│       └── hashedPassword: $2y$12$6FqPq/JWd4QgJ9vGgUMtb.hHIz2bavynhdUGttlwJxSgK7GsWbYya
+├── being_final UserRegistered input=[email, displayName, hashedPassword +1 items] inject=[idGen, tokenGen, been]
+│   ├── inject.idGen: Be\Pattern\UserRegistration\Reason\UserIdGenerator
+│   ├── inject.tokenGen: Be\Pattern\UserRegistration\Reason\WelcomeTokenGenerator
+│   ├── inject.been: Be\Framework\SemanticLog\Been
+│   ├── user_created userId=USR-20260422-13e3e4ef35a36429 email=alice@example.com [event]
+│   │   ├── userId: USR-20260422-13e3e4ef35a36429
+│   │   └── email: alice@example.com
+│   └── close
+│       ├── userId: USR-20260422-13e3e4ef35a36429
+│       ├── welcomeToken: 0f1acca67431022f22ab5cb09ed9a341246eba5d5d24c520d1037919a8a41ef5
+│       ├── email: alice@example.com
+│       ├── displayName: Alice
+│       ├── hashedPassword: $2y$12$6FqPq/JWd4QgJ9vGgUMtb.hHIz2bavynhdUGttlwJxSgK7GsWbYya
+│       ├── avatarUrl: https://www.gravatar.com/avatar/c160f8cc69a4f0bf2b0362752353d060
+│       ├── been[0].userId: USR-20260422-13e3e4ef35a36429
+│       └── been[0].email: alice@example.com
+└── close
+    └── exit: success

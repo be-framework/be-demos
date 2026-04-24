@@ -1,0 +1,35 @@
+becoming OrderInput
+├── cartId: CART-001
+├── customerId: CUST-001
+├── cardNumber: 4111111111111111
+├── cardExpiry: 12/25
+├── cardCvv: 123
+├── postalCode: 150-0001
+├── streetAddress: 渋谷区神宮前1-1-1
+├── being_final OrderConfirmed inject=[inventory, payment, shipping, been]
+│   ├── inject.inventory: Be\Pattern\OrderProcessing\Moment\InventoryReserved
+│   ├── inject.payment: Be\Pattern\OrderProcessing\Moment\PaymentCompleted
+│   ├── inject.shipping: Be\Pattern\OrderProcessing\Moment\ShippingArranged
+│   ├── inject.been: Be\Framework\SemanticLog\Been
+│   ├── order_finalized orderId=ORD-20260422-67163ba8 status=confirmed [event]
+│   │   ├── orderId: ORD-20260422-67163ba8
+│   │   └── status: confirmed
+│   └── close
+│       ├── orderId: ORD-20260422-67163ba8
+│       ├── status: confirmed
+│       ├── inventory.reservation.reservationId: RSV-TOKYO-20260422032619-2893
+│       ├── inventory.productId: PROD-001
+│       ├── inventory.quantity: 1
+│       ├── inventory.warehouseId: WH-TOKYO-01
+│       ├── payment.capture.authorizationCode: AUTH-10000-4cb8d550
+│       ├── payment.capture.amount: 10000
+│       ├── payment.cardNumber: 4111111111111111
+│       ├── payment.amount: 10000
+│       ├── shipping.dispatch.trackingNumber: YAMATO-202604220326199860
+│       ├── shipping.dispatch.shippingRate: 800
+│       ├── shipping.carrierId: YAMATO
+│       ├── shipping.address: Tokyo, Japan
+│       ├── been[0].orderId: ORD-20260422-67163ba8
+│       └── been[0].status: confirmed
+└── close
+    └── exit: success

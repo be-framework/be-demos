@@ -1,0 +1,6 @@
+becoming PatientInput
+├── being TriageLevelDetermined input=[patientId, chiefComplaint +1 items] inject=[protocol]
+│   └── being=TriageLevelDetermined prop=[being, patientId, chiefComplaint +1 items]
+├── being_final EmergencyAdmitted input=[being, patientId]
+│   └── prop=[admissionId, status, triageCode, being +1 items]
+└── exit=success

@@ -1,0 +1,4 @@
+becoming HelloInput
+├── being_final Hello input=[name] inject=[greeting]
+│   └── prop=[greeting]
+└── exit=success

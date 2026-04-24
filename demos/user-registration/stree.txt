@@ -1,0 +1,11 @@
+becoming RegistrationInput
+├── being EmailVerified input=[email, password, displayName] inject=[verifier]
+│   └── being=EmailVerified prop=[email, password, displayName]
+├── being PasswordHashed input=[email, password, displayName] inject=[hasher]
+│   └── being=PasswordHashed prop=[hashedPassword, email, displayName]
+├── being ProfileEnriched input=[email, displayName, hashedPassword] inject=[resolver]
+│   └── being=ProfileEnriched prop=[avatarUrl, email, displayName +1 items]
+├── being_final UserRegistered input=[email, displayName, hashedPassword +1 items] inject=[idGen, tokenGen, been]
+│   ├── user_created userId=USR-20260422-13e3e4ef35a36429 email=alice@example.com [event]
+│   └── prop=[userId, welcomeToken, email, displayName +2 items] been=[1 items]
+└── exit=success

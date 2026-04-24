@@ -1,0 +1,20 @@
+becoming PatientInput
+├── patientId: PT-10001
+├── chiefComplaint: severe chest pain
+├── consciousnessLevel: 0
+├── being TriageLevelDetermined input=[patientId, chiefComplaint +1 items] inject=[protocol]
+│   ├── inject.protocol: Be\Pattern\MedicalTriage\Reason\JTASProtocol
+│   └── close
+│       ├── being.triageCode: RED
+│       ├── patientId: PT-10001
+│       ├── chiefComplaint: severe chest pain
+│       └── consciousnessLevel: 0
+├── being_final EmergencyAdmitted input=[being, patientId]
+│   └── close
+│       ├── admissionId: ADM-20260422-9b8b8250
+│       ├── status: admitted
+│       ├── triageCode: RED
+│       ├── being.triageCode: RED
+│       └── patientId: PT-10001
+└── close
+    └── exit: success
