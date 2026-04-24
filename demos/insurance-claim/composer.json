@@ -17,6 +17,6 @@
         "ray/di": "^2.18"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.0"
+        "phpunit/phpunit": "^12"
     }
 }

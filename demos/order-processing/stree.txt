@@ -1,0 +1,5 @@
+becoming OrderInput
+├── being_final OrderConfirmed inject=[inventory, payment, shipping, been]
+│   ├── order_finalized orderId=ORD-20260422-67163ba8 status=confirmed [event]
+│   └── prop=[orderId, status, inventory, payment +1 items] been=[1 items]
+└── exit=success
