@@ -19,5 +19,13 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^12"
+    },
+    "scripts": {
+        "stree": "vendor/bin/stree $(ls -t var/log/*.json | head -1)",
+        "stree:full": "vendor/bin/stree --full $(ls -t var/log/*.json | head -1)"
+    },
+    "scripts-descriptions": {
+        "stree": "Render the latest var/log/*.json as a compact tree.",
+        "stree:full": "Render the latest var/log/*.json as a semantic full tree with full props and close.profile details."
     }
 }
