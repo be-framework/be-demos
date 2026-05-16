@@ -18,7 +18,7 @@
         "ray/di": "^2.18"
     },
     "require-dev": {
-        "be-framework/psalm-plugin": "dev-main",
+        "be-framework/psalm-plugin": "1.x-dev",
         "phpunit/phpunit": "^12"
     },
     "scripts": {
