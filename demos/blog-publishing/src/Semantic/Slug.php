@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Be\Pattern\BlogPublishing\Semantic;
 
 use Be\Framework\Attribute\Validate;
-use InvalidArgumentException;
+use Be\Pattern\BlogPublishing\Exception\InvalidSlugException;
 
 /**
  * Slug - Semantic validation
@@ -18,7 +18,7 @@ final class Slug
     public function validate(string $slug): void
     {
         if (!preg_match('/^[a-z0-9-]+$/', $slug)) {
-            throw new InvalidArgumentException('Invalid slug format');
+            throw new InvalidSlugException();
         }
     }
 }

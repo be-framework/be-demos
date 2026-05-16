@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Be\Pattern\BlogPublishing\Semantic;
 
 use Be\Framework\Attribute\Validate;
-use InvalidArgumentException;
+use Be\Pattern\BlogPublishing\Exception\InvalidAuthorNameException;
 
 /**
  * AuthorName - Semantic validation
@@ -20,7 +20,7 @@ final class AuthorName
     public function validate(string $authorName): void
     {
         if (empty(trim($authorName))) {
-            throw new InvalidArgumentException('Author name cannot be empty');
+            throw new InvalidAuthorNameException();
         }
     }
 }

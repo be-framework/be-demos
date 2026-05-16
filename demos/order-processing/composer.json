@@ -17,17 +17,20 @@
         "ray/di": "^2.18"
     },
     "require-dev": {
+        "be-framework/psalm-plugin": "1.x-dev",
         "phpunit/phpunit": "^12"
     },
     "scripts": {
         "dev": "php bin/be.php",
         "profile": "XDEBUG_MODE=trace php -d xdebug.use_compression=0 -d extension=xhprof.so bin/be.php",
+        "psalm": "psalm --show-info=false",
         "stree": "vendor/bin/stree $(ls -t var/log/*.json | head -1)",
         "stree:full": "vendor/bin/stree --full $(ls -t var/log/*.json | head -1)"
     },
     "scripts-descriptions": {
         "dev": "Run the Order Processing demo in dev mode; writes a semantic log to var/log/*.json without Xdebug/XHProf profiling.",
         "profile": "Run the Order Processing demo with semantic profiling; writes a semantic log to var/log/*.json with uncompressed Xdebug trace and xhprof enabled.",
+        "psalm": "Run static analysis with Psalm + Be Framework plugin.",
         "stree": "Render the latest var/log/*.json as a compact tree.",
         "stree:full": "Render the latest var/log/*.json as a semantic full tree with full props and close.profile details."
     }
