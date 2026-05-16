@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Be\Pattern\BlogPublishing\Semantic;
 
 use Be\Framework\Attribute\Validate;
-use InvalidArgumentException;
+use Be\Pattern\BlogPublishing\Exception\InvalidExcerptException;
 
 /**
  * Excerpt - Semantic validation
@@ -18,7 +18,7 @@ final class Excerpt
     public function validate(string $excerpt): void
     {
         if (mb_strlen($excerpt) > 250) {
-            throw new InvalidArgumentException('Excerpt too long');
+            throw new InvalidExcerptException();
         }
     }
 }

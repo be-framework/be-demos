@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Be\Pattern\BlogPublishing\Semantic;
 
 use Be\Framework\Attribute\Validate;
-use InvalidArgumentException;
+use Be\Pattern\BlogPublishing\Exception\InvalidHtmlBodyException;
 
 /**
  * HtmlBody - Semantic validation
@@ -18,7 +18,7 @@ final class HtmlBody
     public function validate(string $htmlBody): void
     {
         if (empty(trim(strip_tags($htmlBody)))) {
-            throw new InvalidArgumentException('HTML body cannot be empty');
+            throw new InvalidHtmlBodyException();
         }
     }
 }

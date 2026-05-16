@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Be\Pattern\UserRegistration\Semantic;
 
 use Be\Framework\Attribute\Validate;
-use InvalidArgumentException;
+use Be\Pattern\UserRegistration\Exception\InvalidAvatarUrlException;
 
 /**
  * AvatarUrl - Semantic validation
@@ -20,7 +20,7 @@ final class AvatarUrl
     public function validate(string $avatarUrl): void
     {
         if (filter_var($avatarUrl, FILTER_VALIDATE_URL) === false) {
-            throw new InvalidArgumentException('Invalid avatar URL');
+            throw new InvalidAvatarUrlException();
         }
     }
 }
