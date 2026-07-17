@@ -84,7 +84,10 @@ will not run under Ray.Di or will break framework expectations.
 5. **Moments**: implement `MomentInterface`; create the Potential object in
    the constructor; commit it in `be()`. Do NOT call `be()` from the
    constructor. The owning Final calls `be()` on its Moments during self-
-   completion.
+   completion. Exception: a **pure-data Moment** (a part of the whole that
+   carries no Potential and performs no side effect) MAY omit
+   `MomentInterface` and `be()` entirely — state this explicitly in the
+   class docblock (see `demos/insurance-claim/src/Moment/FraudCleared.php`).
 6. **Finals that converge Moments**: take each Moment via `#[Inject]` and call
    `$this->foo->be()` in the constructor body, then derive the actualized
    fields. See `demos/order-processing/src/Final/OrderConfirmed.php` for the
