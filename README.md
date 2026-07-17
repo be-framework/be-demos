@@ -152,7 +152,7 @@ flowchart LR
     M3([Moment]) -.-> F1 & F2
 ```
 
-Insurance claim processing. `ClaimInput` and `PolicyInput` both declare `#[Be([ClaimSettled, ClaimEscalated])]`, so each Input resolves to exactly one of the two Finals by `$being` type matching. Moments such as `DamageValued`, `AdjustmentReviewed` and `FraudCleared` are injected into both Finals, so the same self-completion logic is shared regardless of which branch is taken.
+Insurance claim processing. `ClaimInput` and `PolicyInput` both declare `#[Be([ClaimSettled, ClaimEscalated])]`, naming the two Finals as possible outcomes. Moments such as `DamageValued`, `AdjustmentReviewed` and `FraudCleared` are injected into both Finals, so the same self-completion logic is shared regardless of which branch is taken.
 
 > Concrete: `ClaimInput` + `PolicyInput` → `ClaimSettled` | `ClaimEscalated`, with shared Moments injected into each Final.
 

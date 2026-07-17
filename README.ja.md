@@ -152,7 +152,7 @@ flowchart LR
     M3([Moment]) -.-> F1 & F2
 ```
 
-保険請求処理デモ。`ClaimInput` と `PolicyInput` はどちらも `#[Be([ClaimSettled, ClaimEscalated])]` を宣言しており、`$being` の型マッチングによって各 Input がちょうど1つの Final に解決されます。`DamageValued`、`AdjustmentReviewed`、`FraudCleared` などの Moment は両方の Final に注入されるため、どちらの分岐を辿っても同じ自己完結ロジックが共有されます。
+保険請求処理デモ。`ClaimInput` と `PolicyInput` はどちらも `#[Be([ClaimSettled, ClaimEscalated])]` を宣言しており、2つの Final を可能な帰結として名指しします。`DamageValued`、`AdjustmentReviewed`、`FraudCleared` などの Moment は両方の Final に注入されるため、どちらの分岐を辿っても同じ自己完結ロジックが共有されます。
 
 > 具体: `ClaimInput` + `PolicyInput` → `ClaimSettled` または `ClaimEscalated`（各 Final に共有 Moment を注入）
 
