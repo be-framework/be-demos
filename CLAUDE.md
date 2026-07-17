@@ -92,14 +92,15 @@ will not run under Ray.Di or will break framework expectations.
 7. **Semantic validators**: one class per concept, one `#[Validate]` method,
    throw a domain exception from `src/Exception/`. Link to schema.org in the
    docblock when a standard term exists (`@link https://schema.org/…`).
-8. **Reason services**: Reasons sitting at an **external I/O boundary**
-   (HTTP, DB, payment gateway, third-party API, filesystem, clock, randomness)
+8. **Reason services**: Reasons that model an **external system**
+   (HTTP, DB, payment gateway, credit bureau, third-party API, filesystem)
    MUST define an `…Interface`; consumers depend on the interface and Ray.Di
    binds the implementation — so tests can swap in a Fake. Reasons that are
-   **pure in-process policies or calculators** (rule-book classes with no
-   I/O) MAY be injected as concrete classes; no interface is required.
-   Examples: `PaymentGatewayInterface` and `CreditBureauInterface` (boundary);
-   `IncomePolicy` and `JTASProtocol` (pure policy).
+   **in-process policies, calculators, or generators** (rule-book classes,
+   ID/token/timestamp generators with no out-of-process dependency) MAY be
+   injected as concrete classes; no interface is required.
+   Examples: `PaymentGatewayInterface` and `CreditBureauInterface` (external
+   system); `IncomePolicy`, `JTASProtocol`, and `UserIdGenerator` (in-process).
 9. **Namespaces**: follow the existing per-demo pattern
    `Be\Pattern\<Name>\<Layer>\…`. Never invent a new root namespace.
 10. **No side effects in Beings.** A Being transforms data; external I/O
