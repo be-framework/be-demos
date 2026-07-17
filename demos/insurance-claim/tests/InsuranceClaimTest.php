@@ -32,7 +32,7 @@ use Be\Pattern\InsuranceClaim\Reason\PaymentProcessorInterface;
 use Be\Pattern\InsuranceClaim\Reason\PolicyRegistry;
 use Be\Pattern\InsuranceClaim\Reason\PolicyRegistryInterface;
 use Be\Pattern\InsuranceClaim\Reason\SettlementPolicy;
-use Be\Pattern\InsuranceClaim\Semantic\ClaimAmount;
+use Be\Pattern\InsuranceClaim\Semantic\EstimatedAmount;
 use Be\Pattern\InsuranceClaim\Semantic\ClaimantId;
 use Be\Pattern\InsuranceClaim\Semantic\CoverageType;
 use Be\Pattern\InsuranceClaim\Semantic\IncidentDate;
@@ -99,7 +99,7 @@ class InsuranceClaimTest extends TestCase
 
     public function testValidClaimAmount(): void
     {
-        $semantic = new ClaimAmount();
+        $semantic = new EstimatedAmount();
         $semantic->validate(500_000);
         $this->addToAssertionCount(1);
     }
@@ -107,13 +107,13 @@ class InsuranceClaimTest extends TestCase
     public function testInvalidClaimAmountZero(): void
     {
         $this->expectException(InvalidClaimAmountException::class);
-        (new ClaimAmount())->validate(0);
+        (new EstimatedAmount())->validate(0);
     }
 
     public function testInvalidClaimAmountExceedsMax(): void
     {
         $this->expectException(InvalidClaimAmountException::class);
-        (new ClaimAmount())->validate(100_000_001);
+        (new EstimatedAmount())->validate(100_000_001);
     }
 
     public function testValidCoverageType(): void

@@ -12,8 +12,8 @@ namespace Be\Pattern\LoanApplication\Reason;
  */
 final class IncomePolicy
 {
-    private float $lastDti = 0.0;
-    private string $lastStability = '';
+    private ?float $lastDti = null;
+    private ?string $lastStability = null;
 
     /**
      * Calculate debt-to-income ratio
@@ -53,8 +53,8 @@ final class IncomePolicy
     public function getAssessmentResult(): array
     {
         return [
-            'dti' => $this->lastDti ?: 0.25,
-            'stability' => $this->lastStability ?: 'good',
+            'dti' => $this->lastDti ?? 0.25,
+            'stability' => $this->lastStability ?? 'good',
         ];
     }
 }

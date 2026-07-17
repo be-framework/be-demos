@@ -8,11 +8,11 @@ use Be\Pattern\LoanApplication\Exception\InvalidLoanAmountException;
 use Be\Framework\Attribute\Validate;
 
 /**
- * Loan Amount
+ * Requested Amount
  *
  * @link https://schema.org/loanAmount
  */
-final class LoanAmount
+final class RequestedAmount
 {
     #[Validate]
     public function validate(int $requestedAmount): void
