@@ -18,7 +18,8 @@
     },
     "require-dev": {
         "be-framework/psalm-plugin": "1.x-dev",
-        "phpunit/phpunit": "^12"
+        "phpunit/phpunit": "^12",
+        "vimeo/psalm": "^7.0@beta"
     },
     "scripts": {
         "dev": "php bin/be.php",
