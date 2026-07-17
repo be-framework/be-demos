@@ -183,7 +183,7 @@ cd demos/hello-world && composer install && vendor/bin/phpunit
 
 ## 要件
 
-- PHP 8.2+
+- PHP 8.3+
 - [Ray.Di](https://ray-di.github.io/)（依存性注入）
 
 ## 背景

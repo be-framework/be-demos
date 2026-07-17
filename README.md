@@ -183,7 +183,7 @@ Every demo ships with happy-path integration tests, Semantic validation unit tes
 
 ## Requirements
 
-- PHP 8.2+
+- PHP 8.3+
 - [Ray.Di](https://ray-di.github.io/) (dependency injection)
 
 ## Background
