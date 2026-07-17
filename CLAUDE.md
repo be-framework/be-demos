@@ -133,9 +133,15 @@ a real demo (replace `Template` with the actual demo name).
 
 ## 6. Running tests
 
+Each demo is a standalone Composer project — there is no root `composer.json`.
+Install dependencies and run PHPUnit inside the demo directory:
+
 ```bash
-composer test                                     # all demos
-./demos/vendor/bin/phpunit demos/medical-triage/tests/   # one demo
+# one demo
+cd demos/medical-triage && composer install && ./vendor/bin/phpunit
+
+# all demos
+for d in demos/*/; do (cd "$d" && composer install -q && ./vendor/bin/phpunit); done
 ```
 
 If you modify a demo, always run its tests before concluding the task.
