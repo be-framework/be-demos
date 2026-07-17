@@ -13,12 +13,6 @@ final class PasswordHasher
 {
     public function hash(string $password): string
     {
-        $hash = password_hash($password, PASSWORD_BCRYPT);
-
-        if ($hash === false) {
-            throw new \RuntimeException('Password hashing failed');
-        }
-
-        return $hash;
+        return password_hash($password, PASSWORD_BCRYPT);
     }
 }
