@@ -16,6 +16,7 @@ namespace Be\Pattern\OrderProcessing;
 // ═══════════════════════════════════════════════════════════════════════════
 
 use Be\Framework\Attribute\Be;
+use Ray\Di\Di\Inject;
 
 #[Be([Final\OrderConfirmed::class])]
 final readonly class Input\OrderInput
@@ -164,9 +165,9 @@ final readonly class Final\OrderConfirmed
     public string $status;
 
     public function __construct(
-        #[Moment] public Moment\InventoryReserved $inventory,
-        #[Moment] public Moment\PaymentCompleted $payment,
-        #[Moment] public Moment\ShippingArranged $shipping,
+        #[Inject] public Moment\InventoryReserved $inventory,
+        #[Inject] public Moment\PaymentCompleted $payment,
+        #[Inject] public Moment\ShippingArranged $shipping,
     ) {
         $this->orderId = 'ORD-' . date('Ymd') . '-' . bin2hex(random_bytes(4));
         $this->status = 'confirmed';
@@ -231,7 +232,7 @@ $order = $becoming($input);
 //    - Adding a 4th pipeline (e.g., FraudChecked Moment):
 //      - Create Being\Fraud\* classes
 //      - Create Moment\FraudCleared class
-//      - Add #[Moment] to OrderConfirmed constructor
+//      - Add an #[Inject] Moment parameter to OrderConfirmed
 //      - Done. No changes to existing code.
 //
 // LINES OF CODE: ~150 (spread across focused classes)
