@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Be\Pattern\Hello\Tests;
 
+use Be\Pattern\Hello\Exception\InvalidNameException;
 use Be\Pattern\Hello\Final\Hello;
 use Be\Pattern\Hello\Input\HelloInput;
 use Be\Pattern\Hello\Module\AppModule;
+use Be\Pattern\Hello\Semantic\Name;
 use Be\Framework\Becoming;
+use Be\Framework\Exception\SemanticVariableException;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
@@ -40,5 +43,26 @@ class HelloTest extends TestCase
         $final = ($this->becoming)($input);
 
         $this->assertSame('Hello Be Framework', $final->greeting);
+    }
+
+    public function testBecomingFlowRejectsEmptyName(): void
+    {
+        $this->expectException(SemanticVariableException::class);
+
+        ($this->becoming)(new HelloInput(name: '   '));
+    }
+
+    public function testValidName(): void
+    {
+        $semantic = new Name();
+        $semantic->validate('World');
+        $this->addToAssertionCount(1);
+    }
+
+    public function testEmptyNameThrowsException(): void
+    {
+        $this->expectException(InvalidNameException::class);
+        $semantic = new Name();
+        $semantic->validate('');
     }
 }
