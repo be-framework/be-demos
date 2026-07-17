@@ -267,11 +267,11 @@ class LoanApplicationTest extends TestCase
         $loanPolicy = new LoanPolicy();
 
         $final = new LoanApproved(
-            $collateral,
-            $insurance,
-            'ELIG-20260101-abc12345',
-            50000000,
-            $loanPolicy,
+            eligibilityId: 'ELIG-20260101-abc12345',
+            requestedAmount: 50000000,
+            collateral: $collateral,
+            insurance: $insurance,
+            policy: $loanPolicy,
         );
 
         $this->assertStringStartsWith('LOAN-', $final->loanId);
@@ -324,11 +324,11 @@ class LoanApplicationTest extends TestCase
         // Stage 2 Convergence = Final
         $loanPolicy = new LoanPolicy();
         $final = new LoanApproved(
-            $collateral,
-            $insurance,
-            $eligibility->eligibilityId,
-            50000000,
-            $loanPolicy,
+            eligibilityId: $eligibility->eligibilityId,
+            requestedAmount: 50000000,
+            collateral: $collateral,
+            insurance: $insurance,
+            policy: $loanPolicy,
         );
 
         // Verify final state
