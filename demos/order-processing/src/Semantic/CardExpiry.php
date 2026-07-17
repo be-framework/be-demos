@@ -18,15 +18,14 @@ final class CardExpiry
     public function validate(string $cardExpiry): void
     {
         // Format: MM/YY
-        if (!preg_match('/^(0[1-9]|1[0-2])\/\d{2}$/', $cardExpiry)) {
+        if (!preg_match('/^(0[1-9]|1[0-2])\/(\d{2})$/', $cardExpiry, $matches)) {
             throw new InvalidCardExpiryException();
         }
 
-        // Check if not expired
-        $expiryDate = \DateTime::createFromFormat('m/y', $cardExpiry);
-        $expiryDate->modify('last day of this month');
+        // Valid through the last day of the expiry month: compare month to month
+        $expiry = \DateTimeImmutable::createFromFormat('!Y-m', sprintf('20%s-%s', $matches[2], $matches[1]));
 
-        if ($expiryDate < new \DateTime()) {
+        if ($expiry < new \DateTimeImmutable('first day of this month 00:00:00')) {
             throw new InvalidCardExpiryException();
         }
     }
