@@ -1,5 +1,7 @@
 {
     "name": "be-framework/demo-loan-application",
+    "description": "Be Framework Loan Application Demo - Cascade diamond with staged Moment realization",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {

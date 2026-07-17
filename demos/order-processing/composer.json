@@ -1,5 +1,7 @@
 {
     "name": "be-framework/demo-order-processing",
+    "description": "Be Framework Order Processing Demo - Diamond metamorphosis with three converging Moments",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {

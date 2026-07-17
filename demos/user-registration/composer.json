@@ -1,6 +1,7 @@
 {
     "name": "be-framework/demo-user-registration",
     "description": "Be Framework User Registration Demo - Being chain (sequential) pattern",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {

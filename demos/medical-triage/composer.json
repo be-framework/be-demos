@@ -1,5 +1,7 @@
 {
     "name": "be-framework/demo-medical-triage",
+    "description": "Be Framework Medical Triage Demo - Branching to one of three Finals by $being type matching",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {

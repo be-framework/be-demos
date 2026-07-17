@@ -1,6 +1,7 @@
 {
     "name": "be-framework/demo-hello-world",
     "description": "Be Framework Hello World Demo - The simplest transformation",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {

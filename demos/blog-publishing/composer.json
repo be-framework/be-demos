@@ -1,6 +1,7 @@
 {
     "name": "be-framework/demo-blog-publishing",
     "description": "Be Framework Blog Publishing Demo - Moment without Potential (pure data Moment) and mini-diamond merge",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {

@@ -1,6 +1,7 @@
 {
     "name": "be-framework/demo-contact-form",
     "description": "Be Framework Contact Form Demo - Semantic validation and Being transformation",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {
