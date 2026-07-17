@@ -179,7 +179,7 @@ See [Semantic Logging](https://be-framework.github.io/manuals/1.0/en/10-semantic
 cd demos/hello-world && composer install && vendor/bin/phpunit
 ```
 
-Every demo ships with happy-path integration tests, Semantic validation unit tests, Reason layer logic tests, and (where applicable) Potential idempotency tests.
+Every demo ships with happy-path tests and Semantic validation unit tests; the advanced demos add Reason layer logic tests and (where applicable) Potential idempotency tests.
 
 ## Requirements
 

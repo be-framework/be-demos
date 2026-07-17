@@ -179,7 +179,7 @@ flowchart LR
 cd demos/hello-world && composer install && vendor/bin/phpunit
 ```
 
-各デモには正常系統合テスト、Semantic検証単体テスト、Reasonレイヤーロジックテスト、そして該当する場合はPotential冪等性テストが含まれます。
+各デモには正常系テストとSemantic検証単体テストが含まれます。上級デモにはさらにReasonレイヤーロジックテスト、該当する場合はPotential冪等性テストが含まれます。
 
 ## 要件
 
