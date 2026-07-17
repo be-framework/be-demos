@@ -152,7 +152,7 @@ flowchart LR
     M3([Moment]) -.-> F1 & F2
 ```
 
-Insurance claim processing. `ClaimInput` and `PolicyInput` both declare `#[Be([ClaimSettled, ClaimEscalated])]`, so each Input resolves to exactly one of the two Finals by `$being` type matching. Moments such as `DamageValued`, `AdjustmentReviewed` and `FraudCleared` are injected into both Finals, so the same self-completion logic is shared regardless of which branch is taken.
+Insurance claim processing. `ClaimInput` and `PolicyInput` both declare `#[Be([ClaimSettled, ClaimEscalated])]`, naming the two Finals as possible outcomes. Moments such as `DamageValued`, `AdjustmentReviewed` and `FraudCleared` are injected into both Finals, so the same self-completion logic is shared regardless of which branch is taken.
 
 > Concrete: `ClaimInput` + `PolicyInput` → `ClaimSettled` | `ClaimEscalated`, with shared Moments injected into each Final.
 
@@ -179,11 +179,11 @@ See [Semantic Logging](https://be-framework.github.io/manuals/1.0/en/10-semantic
 cd demos/hello-world && composer install && vendor/bin/phpunit
 ```
 
-Every demo ships with happy-path integration tests, Semantic validation unit tests, Reason layer logic tests, and (where applicable) Potential idempotency tests.
+Every demo ships with happy-path tests and Semantic validation unit tests; the advanced demos add Reason layer logic tests and (where applicable) Potential idempotency tests.
 
 ## Requirements
 
-- PHP 8.2+
+- PHP 8.3+
 - [Ray.Di](https://ray-di.github.io/) (dependency injection)
 
 ## Background

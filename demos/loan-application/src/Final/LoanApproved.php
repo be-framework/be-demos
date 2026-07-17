@@ -27,10 +27,10 @@ final readonly class LoanApproved
     public string $approvedAt;
 
     public function __construct(
-        #[Inject] public CollateralValued $collateral,
-        #[Inject] public InsurancePrepared $insurance,
         #[Input] public string $eligibilityId,
         #[Input] public int $requestedAmount,
+        #[Inject] public CollateralValued $collateral,
+        #[Inject] public InsurancePrepared $insurance,
         #[Inject] LoanPolicy $policy,
     ) {
         // Stage 2 convergence: realize all Stage 2 Moments

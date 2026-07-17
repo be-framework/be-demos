@@ -1,5 +1,7 @@
 {
     "name": "be-framework/demo-insurance-claim",
+    "description": "Be Framework Insurance Claim Demo - Complex convergence with shared Moments across branching Finals",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {
@@ -18,7 +20,8 @@
     },
     "require-dev": {
         "be-framework/psalm-plugin": "1.x-dev",
-        "phpunit/phpunit": "^12"
+        "phpunit/phpunit": "^12",
+        "vimeo/psalm": "^7.0@beta"
     },
     "scripts": {
         "psalm": "psalm --show-info=false",

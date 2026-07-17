@@ -66,9 +66,9 @@ A Moment is complete within its pipeline but incomplete in the larger context. J
 ```php
 final readonly class OrderConfirmed {
     public function __construct(
-        #[Moment] InventoryReserved $inventory,
-        #[Moment] PaymentCompleted $payment,
-        #[Moment] ShippingArranged $shipping,
+        #[Inject] InventoryReserved $inventory,
+        #[Inject] PaymentCompleted $payment,
+        #[Inject] ShippingArranged $shipping,
     ) { ... }
 }
 ```

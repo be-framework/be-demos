@@ -8,11 +8,11 @@ use Be\Framework\Attribute\Validate;
 use Be\Pattern\InsuranceClaim\Exception\InvalidClaimAmountException;
 
 /**
- * Claim Amount
+ * Estimated Amount
  *
  * Must be a positive integer, maximum 100,000,000.
  */
-final class ClaimAmount
+final class EstimatedAmount
 {
     #[Validate]
     public function validate(int $estimatedAmount): void

@@ -30,6 +30,10 @@ final readonly class MomentTemplate /* implements MomentInterface */
     public object $potential;
 
     public function __construct(
+        // NOTE: the canonical example binds its scalar fields with per-demo
+        // qualifier attributes (#[ProductId], #[Quantity], ... bound in
+        // AppModule) rather than #[Input]. Use #[Input] only when the value
+        // flows from the predecessor state's properties.
         #[Input] public string $someField, // TODO: replace
         #[Inject] /* TODO: SomeReasonInterface */ object $reason,
     ) {

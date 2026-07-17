@@ -84,7 +84,10 @@ will not run under Ray.Di or will break framework expectations.
 5. **Moments**: implement `MomentInterface`; create the Potential object in
    the constructor; commit it in `be()`. Do NOT call `be()` from the
    constructor. The owning Final calls `be()` on its Moments during self-
-   completion.
+   completion. Exception: a **pure-data Moment** (a part of the whole that
+   carries no Potential and performs no side effect) MAY omit
+   `MomentInterface` and `be()` entirely — state this explicitly in the
+   class docblock (see `demos/insurance-claim/src/Moment/FraudCleared.php`).
 6. **Finals that converge Moments**: take each Moment via `#[Inject]` and call
    `$this->foo->be()` in the constructor body, then derive the actualized
    fields. See `demos/order-processing/src/Final/OrderConfirmed.php` for the
@@ -92,14 +95,15 @@ will not run under Ray.Di or will break framework expectations.
 7. **Semantic validators**: one class per concept, one `#[Validate]` method,
    throw a domain exception from `src/Exception/`. Link to schema.org in the
    docblock when a standard term exists (`@link https://schema.org/…`).
-8. **Reason services**: Reasons sitting at an **external I/O boundary**
-   (HTTP, DB, payment gateway, third-party API, filesystem, clock, randomness)
+8. **Reason services**: Reasons that model an **external system**
+   (HTTP, DB, payment gateway, credit bureau, third-party API, filesystem)
    MUST define an `…Interface`; consumers depend on the interface and Ray.Di
    binds the implementation — so tests can swap in a Fake. Reasons that are
-   **pure in-process policies or calculators** (rule-book classes with no
-   I/O) MAY be injected as concrete classes; no interface is required.
-   Examples: `PaymentGatewayInterface` and `CreditBureauInterface` (boundary);
-   `IncomePolicy` and `JTASProtocol` (pure policy).
+   **in-process policies, calculators, or generators** (rule-book classes,
+   ID/token/timestamp generators with no out-of-process dependency) MAY be
+   injected as concrete classes; no interface is required.
+   Examples: `PaymentGatewayInterface` and `CreditBureauInterface` (external
+   system); `IncomePolicy`, `JTASProtocol`, and `UserIdGenerator` (in-process).
 9. **Namespaces**: follow the existing per-demo pattern
    `Be\Pattern\<Name>\<Layer>\…`. Never invent a new root namespace.
 10. **No side effects in Beings.** A Being transforms data; external I/O
@@ -133,9 +137,15 @@ a real demo (replace `Template` with the actual demo name).
 
 ## 6. Running tests
 
+Each demo is a standalone Composer project — there is no root `composer.json`.
+Install dependencies and run PHPUnit inside the demo directory:
+
 ```bash
-composer test                                     # all demos
-./demos/vendor/bin/phpunit demos/medical-triage/tests/   # one demo
+# one demo
+cd demos/medical-triage && composer install && ./vendor/bin/phpunit
+
+# all demos
+for d in demos/*/; do (cd "$d" && composer install -q && ./vendor/bin/phpunit); done
 ```
 
 If you modify a demo, always run its tests before concluding the task.

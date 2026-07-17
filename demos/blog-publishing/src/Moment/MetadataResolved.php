@@ -26,9 +26,9 @@ final readonly class MetadataResolved
     public string $slug;
 
     public function __construct(
-        #[Inject] SlugGenerated $slugGenerated,
         #[Input] public string $authorId,
         #[Input] public array $tags,
+        #[Inject] SlugGenerated $slugGenerated,
         #[Inject] AuthorResolverInterface $resolver,
     ) {
         $this->slug = $slugGenerated->slug;

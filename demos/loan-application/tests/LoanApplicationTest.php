@@ -29,7 +29,7 @@ use Be\Pattern\LoanApplication\Reason\LoanPolicy;
 use Be\Pattern\LoanApplication\Reason\PropertyAppraisal;
 use Be\Pattern\LoanApplication\Semantic\AnnualIncome;
 use Be\Pattern\LoanApplication\Semantic\ApplicantId;
-use Be\Pattern\LoanApplication\Semantic\LoanAmount;
+use Be\Pattern\LoanApplication\Semantic\RequestedAmount;
 use Be\Pattern\LoanApplication\Semantic\PropertyAddress;
 use Be\Pattern\LoanApplication\Semantic\EmploymentYears;
 use Be\Pattern\LoanApplication\Exception\InvalidPropertyAddressException;
@@ -70,7 +70,7 @@ class LoanApplicationTest extends TestCase
 
     public function testLoanAmountWithinRange(): void
     {
-        $validator = new LoanAmount();
+        $validator = new RequestedAmount();
         $validator->validate(50000000);
         $this->addToAssertionCount(1);
     }
@@ -78,14 +78,14 @@ class LoanApplicationTest extends TestCase
     public function testLoanAmountTooLow(): void
     {
         $this->expectException(InvalidLoanAmountException::class);
-        $validator = new LoanAmount();
+        $validator = new RequestedAmount();
         $validator->validate(100);
     }
 
     public function testLoanAmountTooHigh(): void
     {
         $this->expectException(InvalidLoanAmountException::class);
-        $validator = new LoanAmount();
+        $validator = new RequestedAmount();
         $validator->validate(999999999);
     }
 
@@ -127,6 +127,15 @@ class LoanApplicationTest extends TestCase
         $dti = $policy->calculateDti(6000000, 50000000);
         $this->assertGreaterThan(0.0, $dti);
         $this->assertLessThan(1.0, $dti);
+    }
+
+    public function testIncomePolicyPreservesZeroDti(): void
+    {
+        // Huge income + minimal loan legitimately rounds to a DTI of 0.0;
+        // the fallback must not overwrite a computed value
+        $policy = new IncomePolicy();
+        $policy->calculateDti(700000000, 1000000);
+        $this->assertSame(0.0, $policy->getAssessmentResult()['dti']);
     }
 
     public function testIncomePolicyStability(): void
@@ -267,11 +276,11 @@ class LoanApplicationTest extends TestCase
         $loanPolicy = new LoanPolicy();
 
         $final = new LoanApproved(
-            $collateral,
-            $insurance,
-            'ELIG-20260101-abc12345',
-            50000000,
-            $loanPolicy,
+            eligibilityId: 'ELIG-20260101-abc12345',
+            requestedAmount: 50000000,
+            collateral: $collateral,
+            insurance: $insurance,
+            policy: $loanPolicy,
         );
 
         $this->assertStringStartsWith('LOAN-', $final->loanId);
@@ -324,11 +333,11 @@ class LoanApplicationTest extends TestCase
         // Stage 2 Convergence = Final
         $loanPolicy = new LoanPolicy();
         $final = new LoanApproved(
-            $collateral,
-            $insurance,
-            $eligibility->eligibilityId,
-            50000000,
-            $loanPolicy,
+            eligibilityId: $eligibility->eligibilityId,
+            requestedAmount: 50000000,
+            collateral: $collateral,
+            insurance: $insurance,
+            policy: $loanPolicy,
         );
 
         // Verify final state

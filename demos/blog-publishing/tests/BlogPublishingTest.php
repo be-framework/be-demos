@@ -11,10 +11,10 @@ use Be\Pattern\BlogPublishing\Exception\InvalidTitleException;
 use Be\Pattern\BlogPublishing\Final\ArticlePublished;
 use Be\Pattern\BlogPublishing\Input\ArticleInput;
 use Be\Pattern\BlogPublishing\Module\AppModule;
-use Be\Pattern\BlogPublishing\Semantic\ArticleTitle;
 use Be\Pattern\BlogPublishing\Semantic\AuthorId;
 use Be\Pattern\BlogPublishing\Semantic\MarkdownBody;
-use Be\Pattern\BlogPublishing\Semantic\Tag;
+use Be\Pattern\BlogPublishing\Semantic\Tags;
+use Be\Pattern\BlogPublishing\Semantic\Title;
 use Be\Framework\Becoming;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
@@ -102,9 +102,9 @@ class BlogPublishingTest extends TestCase
     // Semantic Validation Tests
     // ──────────────────────────────────────────────
 
-    public function testValidArticleTitle(): void
+    public function testValidTitle(): void
     {
-        $semantic = new ArticleTitle();
+        $semantic = new Title();
         $semantic->validate('Understanding the BE Framework');
         $this->addToAssertionCount(1);
     }
@@ -112,14 +112,14 @@ class BlogPublishingTest extends TestCase
     public function testEmptyTitleThrowsException(): void
     {
         $this->expectException(InvalidTitleException::class);
-        $semantic = new ArticleTitle();
+        $semantic = new Title();
         $semantic->validate('');
     }
 
     public function testTitleTooLongThrowsException(): void
     {
         $this->expectException(InvalidTitleException::class);
-        $semantic = new ArticleTitle();
+        $semantic = new Title();
         $semantic->validate(str_repeat('a', 201));
     }
 
@@ -158,24 +158,31 @@ class BlogPublishingTest extends TestCase
         $semantic->validate('not-a-valid-uuid');
     }
 
-    public function testValidTag(): void
+    public function testValidTags(): void
     {
-        $semantic = new Tag();
-        $semantic->validate('philosophy');
+        $semantic = new Tags();
+        $semantic->validate(['philosophy', 'framework', 'php']);
         $this->addToAssertionCount(1);
+    }
+
+    public function testEmptyTagsThrowsException(): void
+    {
+        $this->expectException(InvalidTagException::class);
+        $semantic = new Tags();
+        $semantic->validate([]);
     }
 
     public function testInvalidTagFormatThrowsException(): void
     {
         $this->expectException(InvalidTagException::class);
-        $semantic = new Tag();
-        $semantic->validate('INVALID_TAG');
+        $semantic = new Tags();
+        $semantic->validate(['INVALID_TAG']);
     }
 
     public function testTagTooLongThrowsException(): void
     {
         $this->expectException(InvalidTagException::class);
-        $semantic = new Tag();
-        $semantic->validate(str_repeat('a', 31));
+        $semantic = new Tags();
+        $semantic->validate([str_repeat('a', 31)]);
     }
 }

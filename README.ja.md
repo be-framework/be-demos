@@ -152,7 +152,7 @@ flowchart LR
     M3([Moment]) -.-> F1 & F2
 ```
 
-保険請求処理デモ。`ClaimInput` と `PolicyInput` はどちらも `#[Be([ClaimSettled, ClaimEscalated])]` を宣言しており、`$being` の型マッチングによって各 Input がちょうど1つの Final に解決されます。`DamageValued`、`AdjustmentReviewed`、`FraudCleared` などの Moment は両方の Final に注入されるため、どちらの分岐を辿っても同じ自己完結ロジックが共有されます。
+保険請求処理デモ。`ClaimInput` と `PolicyInput` はどちらも `#[Be([ClaimSettled, ClaimEscalated])]` を宣言しており、2つの Final を可能な帰結として名指しします。`DamageValued`、`AdjustmentReviewed`、`FraudCleared` などの Moment は両方の Final に注入されるため、どちらの分岐を辿っても同じ自己完結ロジックが共有されます。
 
 > 具体: `ClaimInput` + `PolicyInput` → `ClaimSettled` または `ClaimEscalated`（各 Final に共有 Moment を注入）
 
@@ -179,11 +179,11 @@ flowchart LR
 cd demos/hello-world && composer install && vendor/bin/phpunit
 ```
 
-各デモには正常系統合テスト、Semantic検証単体テスト、Reasonレイヤーロジックテスト、そして該当する場合はPotential冪等性テストが含まれます。
+各デモには正常系テストとSemantic検証単体テストが含まれます。上級デモにはさらにReasonレイヤーロジックテスト、該当する場合はPotential冪等性テストが含まれます。
 
 ## 要件
 
-- PHP 8.2+
+- PHP 8.3+
 - [Ray.Di](https://ray-di.github.io/)（依存性注入）
 
 ## 背景

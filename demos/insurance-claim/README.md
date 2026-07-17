@@ -73,7 +73,7 @@ the order-processing demo.
 | **Moment** | `DamageValued`, `AdjustmentReviewed`, `FraudCleared`, `PaymentDispatched`, `EscalationQueued` |
 | **Potential** | `DamageValuation`, `PaymentExecution` |
 | **Final**  | `ClaimSettled`, `ClaimEscalated` |
-| **Semantic** | `PolicyNumber`, `IncidentDate`, `IncidentType`, `ClaimAmount`, `CoverageType`, `ClaimantId` |
+| **Semantic** | `PolicyNumber`, `IncidentDate`, `IncidentType`, `EstimatedAmount`, `CoverageType`, `ClaimantId` |
 | **Reason** | `ClaimRegistrar`, `PolicyRegistry`, `CoverageValidator`, `DamageAppraiser`, `AdjusterAllocator`, `FraudDetector`, `PaymentProcessor`, `SettlementPolicy` |
 | **Exception** | `InvalidPolicyNumberException`, `InvalidIncidentDateException`, `InvalidIncidentTypeException`, `InvalidClaimAmountException`, `InvalidCoverageTypeException`, `InvalidClaimantIdException` |
 

@@ -71,7 +71,7 @@ All Potential classes (`CreditInquiry`, `CollateralRegistration`, `InsuranceCont
 | **Moment** | Parts with potential | `CreditApproved`, `IncomeApproved`, `CollateralValued`, `InsurancePrepared` |
 | **Potential** | Deferred side effects | `CreditInquiry`, `CollateralRegistration`, `InsuranceContract` |
 | **Final** | Terminal convergence | `LoanApproved` |
-| **Semantic** | Input validation | `ApplicantId`, `AnnualIncome`, `EmploymentYears`, `LoanAmount`, `PropertyAddress` |
+| **Semantic** | Input validation | `ApplicantId`, `AnnualIncome`, `EmploymentYears`, `RequestedAmount`, `PropertyAddress` |
 | **Reason** | Domain logic & gateways | `IdentityVerifier`, `CreditBureau`, `IncomePolicy`, `PropertyAppraisal`, `InsuranceQuoter`, `LoanPolicy` |
 | **Exception** | Domain exceptions with i18n | 5 exception classes with en/ja messages |
 
